@@ -1,0 +1,5 @@
+El reporte del genetista se comparte por medio
+de correo electronico o de la plataforma, para
+esto el genetista debe poder acceder facilmente
+a sus analisis y ver quien es cliente, debe ser
+posible comunicarse con el etc.

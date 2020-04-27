@@ -1,0 +1,9 @@
+INICIADOR: Ocurre un cambio en la información de una o
+más entidades del sistema.
+
+
+1. Buscar el o los objetos.
+	1.1. Si es uno solo usar el ID.
+2. Iterar por cada uno de estos.	
+	2.1. Si es uno solo, cambiar la info de este.
+3. Guardar los cambios.

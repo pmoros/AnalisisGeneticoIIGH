@@ -1,0 +1,13 @@
+Las quejas las envian los usuarios para dar feedback a la
+compañia.
+
+Disparador: El cliente inicia la queja.
+
+1. El cliente especifica el tipo de reclamo.
+2. El reclamo se asocia con un analisis.
+	2.1. Puede suceder que no se asocie con un 
+	analisis, se debe poder especificar algo 
+	asi como un tipo de reclamo general.
+3. El cliente da una descripción de su queja.
+4. El cliente envia la queja al sistema.
+

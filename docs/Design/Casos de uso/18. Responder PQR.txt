@@ -1,0 +1,25 @@
+Nota: Cuando se genera una petición del usuario debemos
+tener en cuenta que esto dara origen a la creación de 
+un objeto de tipo solicitud o petición o lo que sea.
+
+1. El admin responde la solicitud.
+2. El admin da una descripción de lo que se hizo etc.
+3. Si la solicitud es un analisis.
+	3.1. El admin da un nivel de complejidad al anali-
+	sis.
+	3.2. Según el nivel de complejidad lo asigna a unos
+	genetistas.
+4. Si la solicitud es comercial.
+Nota: Deberia ser posible que el admin enviara este tipo
+de solicitudes a la ramas más importantes de la compañia.
+	4.1. El admin responde y hace los cambios en lo
+	relacionado con el analisis.
+	4.2. El admin llama al proceso de respuesta.
+	4.3. El proceso de respuesta llena la cola de
+	respuestas del usuario que realizó la petición.
+5. Si la solicitud es relaciona a un analisis.
+	5.1. El admin da la respuesta y hace los cambios
+	que sean necesarios.
+	5.2. El admin hace commit de la solicitud.
+	5.3. El sistema envia la respuesta a la cola
+	de respuestas del usuario.

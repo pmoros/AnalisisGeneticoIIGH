@@ -1,0 +1,20 @@
+El iniciador de este caso es una petición del sistema.
+Una petición de almacenar un perfil.
+
+1. El sistema recibe el perfil que se va almacenar.
+2. Verifica los datos del perfil. (lo hicimos antes
+   necesitamos un log que se encargue de esto, veri-
+   ficar la validez de los distintos datos que se
+   ingresen al sistema).
+
+3.Se asigna un codigo según el tipo de perfil y se va
+  a enviar una petición de almacenamiento.
+
+Nota: Necesitamos algo que se encargue de unicamente
+almacenar las cosas, solo va a almacenar, eso es todo.
+
+4. El proceso encargado de almacenar, debe tener en 
+cuenta que se va a almacenar, podriamos pasar una lista
+de perfiles o un unico perfil.
+
+

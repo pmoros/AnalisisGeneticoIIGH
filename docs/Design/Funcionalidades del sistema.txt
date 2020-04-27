@@ -1,0 +1,33 @@
+A. Gestion de cuentas de usuario:
+
+Necesitamos almacenar la información de los usuarios del
+sistema, en distintos tipos de perfiles, debe ser posi -
+ble crear una cuenta e iniciar sesión, el inicio de sesión.
+debe ser diferente para cada usuario.
+
+B. Manejo general de datos y visualización:
+
+Necesitamos realizar operaciones CRUD sobre nuestros
+datos, tambien es necesario leer los datos desde un
+archivo .csv o .txt.
+
+C. Busquedas de información:
+
+Necesitamos buscar distintos tipos de entidades, se
+debe disponer una forma de encontrar registros con
+id o caracteristicas.
+
+D. Creación del arbol genealogico:
+
+Necesitamos crear el arbol genealogico de cada animal,
+tener cada generación agrupada y la información de sus
+antecesores.
+
+E. Reporte de resultados:
+
+Cuando se realiza un analisis es necesario mostrar al 
+cliente de alguna forma los resultados, además el ge-
+netista debe contar las herramientas para hacer un 
+informe y compartirlo.
+
+F. Gestión de peticiones de clientes:

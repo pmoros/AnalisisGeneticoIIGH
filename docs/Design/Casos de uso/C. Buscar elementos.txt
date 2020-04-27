@@ -1,0 +1,2 @@
+La busqueda se delega a las estructuras en las que se
+va a almacenar la información.

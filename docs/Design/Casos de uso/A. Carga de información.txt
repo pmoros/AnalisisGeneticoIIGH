@@ -1,0 +1,8 @@
+METODO DE CLASE, USO GENERAL EN EL SISTEMA PARA CARGAR
+INFORMACIÓN QUE ESTÁ SERIALIZADA EN LA UNIDAD DE ALMACE-
+NAMIENTO PERSISTENTE
+
+1. Recibe la ruta donde se encuentra lo que se carga.
+2. Verifica que la ruta sea valida. (que exista el archivo)
+3. Por metodos de serializado carga los archivos.
+4. Retorna la estructura.

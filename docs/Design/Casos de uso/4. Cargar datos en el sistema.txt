@@ -1,0 +1,25 @@
+El iniciador es una solicitud del usuario con una ruta
+del archivo a cargar.
+
+1. El sistema lee el archivo desde la ruta.
+Nota: Usaremos el respectivo separador para csv o txt.	  
+	1.1. Leemos una linea del archivo.
+	1.2. Cargamos el contenido de la linea.
+	1.3. Separamos los valores leidos. (obtenemos cada dato)
+	1.4. Construimos un objeto asociado al tipo de datos que
+             estamos cargando.
+	1.5. Obtenemos un serial unico con un generador.
+	1.6. Colocamos el ID al objeto.
+	1.5. Almacenamos el objeto en una lista.
+	1.6. Volvemos al paso 1, mientras no hayan mas lineas.
+
+2. Llamamos al proceso encargado de serializar archivos
+para nuestra base de datos, y pasamos nuestra lista como
+parametro para el guardado este debe asociar nuestros
+datos con el archivo o estructura correcto (nos toca
+tener cuidado de no colocar un caballo donde van los
+usuarios [luego miramos como verificar eso, si no
+simplemente colocamos dos objetos BD con rutas distin-
+tas]).
+
+

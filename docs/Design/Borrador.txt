@@ -1,0 +1,10 @@
+#Para obtener un atributo
+1. Verificar que el enum funcione, si no retornar y mostrar
+error, si funciona, retornar el atributo.
+
+#Para obtener todos los atributos
+1. Retornar el contenedor completo.
+
+#Para la comparación
+1. Verificar que los de cada clase sean iguales.
+2. Llamar al .equals().

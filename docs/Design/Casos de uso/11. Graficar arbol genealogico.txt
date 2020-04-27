@@ -1,0 +1,19 @@
+Recibimos por parametro la lista con la familia.
+
+1. Extraemos la casilla que contiene cada genera-
+ción.
+
+2. Leemos la data de cada uno de los elementos guardados
+en cada generación.
+
+3. Graficamos una bola con el codigo, nombre y raza.
+
+Nota: Si se da click en la bola, se despliega toda la 
+info del caballo.
+
+OPCIONAL:
+
+4. Podriamos desplegar cosas interesantes a un lado como
+la cantidad de victorias de toda la familia, puesto prom
+edio, raza más común en la familia...
+

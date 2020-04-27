@@ -1,0 +1,15 @@
+Los PQR han sido cargados a las colas de peticiones y de
+reclamos del sistema de quejas.
+
+1. El sistema revisa (cada cierto tiempo en el futuro) que
+la cola de peticiones esté vacia.
+2. Si la cola de peticiones no está vacía, toma la peticion.
+3. El sistema llama el proceso de clasificación de petici -
+ones.
+	A. 
+	  3.1. Es una solicitud de analisis.
+	  3.2. Se distribuye entre los admin. (usamos el modulo)
+	B.
+	  3.1. Es una solicitud asociada a un analisis.
+	  3.2. El sistema asigna la solicitud al admin 
+	  asociado con dicho analisis.		  

@@ -1,0 +1,23 @@
+Disparador: el genetista termina su analisis
+
+1. El genetista registra sus resultados en un cuadro de
+texto.
+
+2. Los resultados deben estar asociados a un analisis 
+especifico que está asociado a un cliente.
+
+3. Al generar el reporte, se envia a un administrador
+que el analisis ha terminado y  se borra de la lista
+de analisis en proceso.
+
+OPCIONAL:
+
+El genetista cuenta con un framework completo para sus 
+analisis, bibliotecas de visualizacion de datos como 
+Pandas.
+
+El genetista genera sus propios archivos y son enviados
+por medio de la plataforma o correo electronico al cliente.
+
+
+ 

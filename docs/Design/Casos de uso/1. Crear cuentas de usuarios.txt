@@ -1,0 +1,27 @@
+El usuario inicia el registro en el sistema.
+Para iniciar el registro, se supone que se hace en las
+respectivas categorias, probablemente los registros de
+los administradores no se hacen a traves de la interfaz
+grafica que vamos a desplegar, es decir la que se mos -
+trara a los clientes, luego miramos si implementamos una
+nueva interfaz o simplemente lo hacemos por consola para
+estos (requiere API´s [no lo hemos visto]).
+
+#1. Se despliega un formulario. (Esto lo despliega la interfaz, )
+2. El usuario ingresa los datos:
+	2.1. El usuario ingresa el nombre. (validar tamaño)
+	2.2. El usuario ingresa el apellido. (validar tamaño)
+	2.3. El usuario ingresa el correo electrionico. (validar el correo)
+	2.4. El usuario ingresa una entidad. (Para validar la entidad
+	debemos revisar que esta exista [proveer un catalogo]).
+	2.5. El usuario ingresa un nombre de usuario. (Verificar que el usuario
+	no se encuentre ya registrado en el sistema).
+	2.6. El usuario ingresa una contraseña. (verificar la complejidad)
+3. El usuario confirma la acción.
+4. El sistema realiza las validaciones de la info.
+      A.
+	4.1. Muestra que el registro fue exitoso.
+      B. 
+	4.1. Muestra que el registro no fue exitoso.
+	4.2. Borra los campos con errores.
+	4.3. Solicita al usuario corregir la info.

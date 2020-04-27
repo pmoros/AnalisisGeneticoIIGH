@@ -1,0 +1,10 @@
+INICIADOR: Se solicita al sistema la eliminación de uno
+o más objetos deel sistema.
+
+1. Buscar el o los objetos.
+	1.1. Si es uno solo usar el ID.
+2. Iterar por cada uno de estos.	
+	2.1. Si es uno solo, no iterar.
+3. Si eran varios, en la iteración borrarlos. 
+Nota: Cada vez que se borre de la estructura, mantener
+el orden en el que se encontraban.

@@ -1,0 +1,28 @@
+El usuario inicia el proceso de log in
+
+Para iniciar sesion se supone que se hace en las respec
+tivas categorias, cada tipo de usuario por medio de su
+interfaz.
+
+#1. Se despliega el formulario. (Lo despliega la interfaz)
+2. El usuario ingresa los datos:
+      A.
+	2.1. El usuario ingresa su nombre de usuario.
+	2.2. El usuario ingresa su clave.
+      B.
+	- Puede que el usuario no recuerde sus datos. (opcional)
+	2.1. El usuario coloca un correo.
+	2.2. El usuario solicita restablecer clave.
+	2.3. Un codigo es enviado al usuario.
+	2.4. El usuario usa ese codigo para cambiar
+	     su clave.
+3. El sistema valida la información.
+      A.
+	3.1. Muestra que la información es correcta.
+	3.2. Carga el perfil en el sistema.
+	3.3. Carga la respectiva interfaz.
+      B.
+	3.1. Muestra que la info es invalida.
+	3.2. Borra la información escrita en los campos. 
+	
+

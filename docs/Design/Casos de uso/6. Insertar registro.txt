@@ -1,0 +1,12 @@
+Nota: Cuando insertamos un registro (objeto), por ejemplo
+un caballo, lo estamos insertando en una estructura que 
+ya ha sido cargada en el sistema.
+
+1. Insertamos el objeto.
+Nota: cualquier proceso que interactue con la BD distinto
+de la lectura, conlleva a que se escriba la BD.
+2. Se verifica que se mantenga el orden.
+	-- Si no se mantiene el orden
+	2.1. Se ordena la estructura.
+3.Se llama el metodo de Almacenamiento asociado.
+

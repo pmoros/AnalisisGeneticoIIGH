@@ -1,0 +1,12 @@
+IMPORTANTE: ESTE SE ENCARGA DE GUARDAR LA DATA EN GENERAL
+
+INICIADOR: Un proceso interno en el sistema llama al pro-
+ceso de guardado (serializador de archivos).
+
+1. Recibe una estructura para ser almacenada.
+2. Recibe la ruta donde se va a almacenar la estructura.
+3. Crea una instancia de archivo binario.
+4. Serializa el archivo.
+5. Lo carga a la instancia de archivo binario.
+6. Guarda el archivo de forma persistente.
+7. Cierra la instancia de archivo binario.

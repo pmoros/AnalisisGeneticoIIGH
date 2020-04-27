@@ -1,0 +1,151 @@
+Note: We will take all the classes, methods ands 
+attributes related to a feature and we place it
+in that section, this way is gonna be easier to
+develop all the use cases; we'll notice which cla-
+sess should we use easily.
+
+A. Gestion de cuentas de usuario:
+
+-Classes:
+	Formulario (?, esto lo haria la GUI) 
+	|- Usuario (Abstraccion de cliente, admin...)
+	|- Datos
+	Registro
+	BD (Base de datos)
+
+-Methods:
+	ingresar (?, esto lo haria el usuario no el sistema)
+	validar
+	borrar
+	solicitar (display message, could be based on levels)
+	restablecer_clave (Opcional)
+	enviar_codigo	  (Opcional)
+	cargar_perfil
+	almacenar
+
+-Attributes:
+	ID	(Este ID puede variar segun el tipo de user)
+	nombre
+	apellido
+	correo_electronico
+	numero_telefono
+	institucion
+	nombre_usuario
+	contrasena
+	tipo
+
+B. Manejo general de datos y visualización:
+#Necesitamos un generador de id identificador unico
+
+
+-Classes:
+	Archivo
+	BD
+
+-Methods:
+	leer	
+	separar	
+	guardar
+	cargar
+	serializar (?)
+	cerrar (?)
+	ordenar
+	guardar_cambios (?)
+	borrar
+
+-Attributes:
+	estructura (not at all, solo 
+	indica que se guarda todo en estructuras)
+	id
+	ruta
+	formato (?)
+	valores		
+
+C. Busquedas de información:
+
+#LAS ESTRUCTURAS EN LAS QUE ALMACENAMOS SE ENCARGAN
+DE LAS BUSQUEDAS
+
+Classes:
+Methods:
+Attributes:
+
+D. Creación del arbol genealogico:
+
+-Classes:
+	Entidad
+	Animal
+	Caballo
+	
+-Methods:
+	buscar	
+	leer
+	almacenar
+	validar
+	agregar
+	extraer
+
+-Attributes:
+	id
+	nombre
+	raza	
+	casilla
+	victorias (?)
+	puesto_prom (?)
+	raza_prom (?)	
+	generacion
+	familia
+	lista (?)
+	antecesores
+	edad
+	registrado	
+		
+
+E. Reporte de resultados:
+
+-Classes:
+	Reporte
+	Resultados
+	Genetista	
+	Cliente
+	Analisis
+	Administrador
+
+-Methods:
+	compartir
+	acceder
+	comunicar
+	registrar
+
+-Attributes:
+	especialidad
+	salario
+	correo_electronico
+		
+
+F. Gestión de peticiones de clientes:
+
+Classes:
+	Solicitud
+	Peticion
+	Queja
+	Analisis
+
+Methods:
+	solicitar
+	requerimientos
+	enviar
+	clasificar
+	distribuir
+	cancelar
+	pausar
+	cancelar
+	responder
+
+Attributes:	
+	colas (estructura que almacena peticiones)
+	precio
+	descripcion
+	tipo
+	fecha_inicio
+	fecha_fin

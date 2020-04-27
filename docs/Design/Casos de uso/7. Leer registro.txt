@@ -1,0 +1,6 @@
+Un proceso interno debe llamar a este proceso, de prefe
+rencia debe estar relacionado con una instancia de clase.
+
+7.1. Usa la ruta provista por algun atributo del objeto.
+7.2. Llama al metodo que carga información.
+7.3. Retorna la estructura que se cargó.

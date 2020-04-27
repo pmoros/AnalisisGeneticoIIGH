@@ -1,0 +1,14 @@
+Nota: Todos los PQR se deben organizar segun su tipo y
+ser distribuidos de la manera correcta.
+
+1. El PQR se  envia a un proceso del sistema de peticiones.
+2. El sistema de peticiones lo clasifica.
+3. El sistema de peticiones distribuye las peticiones entre
+los admin.
+4. El sistema de peticiones manda las quejas a la cola de
+quejas.
+5. La cola de quejas va al departamento de quejas y recla-
+mos.
+6. Los admin de quejas y reclamos toman las quejas de la 
+cola.
+
