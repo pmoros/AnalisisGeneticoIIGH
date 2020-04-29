@@ -7,54 +7,63 @@ package DataStructures;
 
 /**
  *
- * @author pmoro
- * @param <T>
- */
-public class DoublyLinkedList<T> implements List {
 
-    @Override
-    public void show_content() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    // Returns an element at a required position    
+    public T get(Node pointer)
+    {
+    	if (pointer==null)
+        { 
+            System.out.println("Given node doesn't point anything"); 
+            return null; 
+        } 
+    	else
+    	{
+    		return pointer.next.key;
+    	}
     }
-
-    @Override
-    public void append(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void push_front(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void insert(int index, Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int find(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete_at(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int get_size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  
+    // Print the list
+    public void show_content() 
+    { 
+    	Node tmp=head;
+    	 
+        while (tmp!=null)
+        {
+        	System.out.print(tmp.key+" ");
+        	tmp=tmp.next;
+        	
+        }        
+    } 
+    
+    public int get_size() 
+    {
+    	return size;    	
     }
     
+    // Delete the first element
+    public void deleteFirst()
+    {
+        if (size==0) 
+        	System.out.print("There are no items in the list");
+        
+        head = head.next;
+        head.prev = null;
+        size--;
+    }
+     
+    // Delete the last element
+    public void deleteLast()
+    {
+    	Node last=head; 
+    	
+    	if (size==0) 
+        	System.out.print("There are no items in the list");
+    	
+    	while(last.next!=null)
+        	last=last.next;
+    	
+    	last.prev.next=null;
+        size--;
+    }  
 }
