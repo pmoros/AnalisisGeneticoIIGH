@@ -10,7 +10,7 @@ package DataStructures;
  * @author pmoro
  * @param <T>
  */
-public class DynamicArray<T> {
+public class DynamicArray<T> implements List<T>{
     T []array;
     int len = 10;
     int pointer = 0;
@@ -93,4 +93,19 @@ public class DynamicArray<T> {
             System.out.println("Index out of range");
         }
     }    
+
+    @Override
+    public void push_front(T element) {
+        if (this.pointer < (this.len - 1)){
+            for(int i = 0; i < (this.pointer - 1); i++){
+                this.array[i + 1] = this.array[this.pointer];
+            }
+            this.array[0] = element;
+            this.pointer++;
+        }
+        else{
+            System.out.println("Index out of range");
+        }        
+    }
+
 }
