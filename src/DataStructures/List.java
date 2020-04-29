@@ -36,4 +36,6 @@ public interface List<T> {
     //Elimina un elemento en una poscion
     public void delete_at(int index);
     
+    public int get_size();
+    
 }
