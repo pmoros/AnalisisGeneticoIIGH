@@ -20,6 +20,7 @@ public class DynamicArray<T> implements List<T>{
     }
     
     //TEST METHOD
+    @Override
     public void show_content(){
         for (int i = 0; i < this.pointer; i++){
             System.out.print(Integer.toString((Integer)this.array[i]) + " ");
@@ -36,8 +37,9 @@ public class DynamicArray<T> implements List<T>{
         this.array = array2;        
     }
     
+    @Override
     public T get(int index){
-        if (index < this.pointer){
+        if (index < this.len){
             return this.array[index];
         }
         else{
@@ -46,20 +48,23 @@ public class DynamicArray<T> implements List<T>{
         }
     }
     
+    @Override
     public void append(T data){
         if (this.pointer > (this.len - 1)) this.resize();
         this.array[this.pointer] = data;        
         this.pointer++;
     }
     
+    @Override
     public void insert(int index, T data){
-        if (index > this.pointer){
+        if (index > this.len){
             this.append(data);
             System.out.println("Added at last position.");
         }
         this.array[index] = data;
     }
     
+    @Override
     public int find(T element){
         for(int i =0; i < this.pointer; i++){
             T aux = this.array[i];
@@ -70,6 +75,7 @@ public class DynamicArray<T> implements List<T>{
         return -1;
     }
     
+    @Override
     public void delete(T data){
     //This delete an element that is equal
         int result = this.find(data);
@@ -81,6 +87,7 @@ public class DynamicArray<T> implements List<T>{
         }
     }
     
+    @Override
     public void delete_at(int index){
         if(index > this.pointer){
             for(int i = index; i < (this.pointer - 1); i++){
@@ -106,6 +113,11 @@ public class DynamicArray<T> implements List<T>{
         else{
             System.out.println("Index out of range");
         }        
+    }
+
+    @Override
+    public int get_size() {
+        return this.len;
     }
 
 }
