@@ -10,14 +10,15 @@ import java.io.Serializable;
  * @author pmoro
  * @param <T>
  */
-public class BDManager<T> implements Serializable {
+public abstract class BDManager<T> implements Serializable {
     public static String path = System.getProperty("user.dir");   
-    BDManager(){
     
-    }
-    
-    public static void read_file(){
+    public void read_file(){
         
     }
         
+    public void write_file(String path, T obj){
+        
+    
+    }
 }
