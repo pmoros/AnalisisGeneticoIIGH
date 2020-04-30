@@ -18,7 +18,7 @@ public interface List<T> {
     //Adds an element at last position
     public void append(T element);
     
-    //Adds an element at front
+    //Adds an element at the start
     public void push_front(T element);
     
     //Insert an element at a required position 
