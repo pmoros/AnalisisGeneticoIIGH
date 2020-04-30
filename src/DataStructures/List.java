@@ -10,7 +10,7 @@ package DataStructures;
  * @author pmoro
  * @param <T>
  */
-public interface List<T> {
+public interface List<T> extends java.io.Serializable{
     
     //Metodo de prueba 
     public void show_content();
@@ -35,5 +35,7 @@ public interface List<T> {
     
     //Elimina un elemento en una poscion
     public void delete_at(int index);
+    
+    public int get_size();
     
 }

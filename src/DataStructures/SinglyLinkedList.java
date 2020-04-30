@@ -206,5 +206,9 @@ public class SinglyLinkedList<T> implements List<T> {
 		p.next = p.next.next;
 		this.size--;
 	}
-    
+
+	@Override
+	public int get_size() {
+		return this.getSize();
+	}
 }
