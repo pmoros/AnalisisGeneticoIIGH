@@ -9,6 +9,11 @@ package Business;
  *
  * @author pmoro
  */
-public interface User {
-    
+public abstract class User implements java.io.Serializable{
+    public String id;
+    public String user_name;
+    private String password;
+    public String name;
+    public String last_name;
+    private String email;    
 }

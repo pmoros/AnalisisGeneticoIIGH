@@ -9,6 +9,10 @@ package Business;
  *
  * @author pmoro
  */
-public class Client {
-    
+public class Client extends  User{
+    public Client(String user, String name_user, String lastname_user){
+        this.user_name = user;
+        this.name = name_user;        
+        this.last_name = lastname_user;        
+    }
 }
