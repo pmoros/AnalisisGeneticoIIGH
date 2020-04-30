@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package analisisgeneticoiigh;
-import DataStructures.DynamicArray;
-import DataStructures.QueueArray;
+import DataStructures.*;
+import DataManagement.BDManager;
 /**
  *
  * @author pmoro
@@ -18,7 +18,8 @@ public class AnalisisGeneticoIIGH {
     
     
     public static void main(String[] args) {
-        // TODO code application logic here        
+        // TODO code application logic here 
+
     }
     
 }

@@ -10,13 +10,15 @@ public class DoublyLinkedList<T> implements List<T> {
     @Override
     public void show_content() {
         Node<T> auxH = this.head;
-        while(auxH.next != null){
-            System.out.println(auxH.data);
-            auxH = auxH.next;
+        
+        while(auxH.next != null){            
+            System.out.print(auxH.data);
+            auxH = auxH.next;            
         }
+        System.out.println();
     }
 
-public class Node<T> {
+public class Node<T> implements java.io.Serializable{
     public T data;
     public Node<T> prev;
     public Node<T> next;

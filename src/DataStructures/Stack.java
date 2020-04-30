@@ -10,7 +10,7 @@ package DataStructures;
  * @author pmoro
  * @param <T>
  */
-public interface Stack<T> {
+public interface Stack<T> extends java.io.Serializable{
 
     /**
      *

@@ -10,7 +10,7 @@ package DataStructures;
  * @author pmoro
  * @param <T>
  */
-public interface List<T> {
+public interface List<T> extends java.io.Serializable{
     
     //Metodo de prueba 
     public void show_content();
