@@ -20,65 +20,71 @@ public class BDStructure<T> implements java.io.Serializable{
     
     */
     int index = 0;
-    EntityType type;
-    DynamicArray<T> structures;
-    String path;
-    String identifier;
+    public EntityType type;
+    private DynamicArray<T> elements;
+    public String path;
+    public String identifier;
     public BDStructure(String path, String identifier){
         //Implementar luego con otras estructuras
-        this.structures = new DynamicArray<>();
+        this.elements = new DynamicArray<>();
         this.identifier = identifier;
         this.path = path + this.identifier;           
     }
     
-    public void add_user(User obj){                
+    public String add_user(User obj){                
         index++;
         obj.id = EntityType.USER.name();
         obj.id = obj.id + Integer.toString(index);
-        this.structures.append((T)obj);
+        this.elements.append((T)obj);
+        return obj.id;
     }
     
-    public void add_entity(User obj){                
+    public String add_horse(Entity obj){ 
+        //This method adds 
         index++;
-        obj.id = EntityType.USER.name();
+        obj.id = EntityType.ENTITY.name();
         obj.id = obj.id + Integer.toString(index);
-        this.structures.append((T)obj);
+        this.elements.append((T)obj);
+        return obj.id;
     }    
     
     public void remove_user(String id){                
-        for (int i = 0; i < this.structures.len; i++){
-            User aux = (User) this.structures.get(i);
-            if (aux.id.equals(id)) this.structures.delete_at(i);
+        for (int i = 0; i < this.elements.len; i++){
+            User aux = (User) this.elements.get(i);
+            if (aux.id.equals(id)){
+                this.elements.delete_at(i);
+                return;
+            }
         }
     }
     
     public void remove_entity(String id){                
-        for (int i = 0; i < this.structures.len; i++){
-            Entity aux = (Entity) this.structures.get(i);
-            if (aux.id.equals(id)) this.structures.delete_at(i);
+        for (int i = 0; i < this.elements.len; i++){
+            Entity aux = (Entity) this.elements.get(i);
+            if (aux.id.equals(id)) this.elements.delete_at(i);
         }
     } 
     
     public void remove_based_on(EntitySpec specs){        
         //Only works with Entities
-        for(int i = 0; i < this.structures.len; i++){
-            Entity aux = (Entity) this.structures.get(i);
+        for(int i = 0; i < this.elements.len; i++){
+            Entity aux = (Entity) this.elements.get(i);
             EntitySpec others = aux.specs;
-            if (others.equals(specs)) this.structures.delete_at(i);
+            if (others.equals(specs)) this.elements.delete_at(i);
         }
     }
     
-    public boolean find_user(String id){
-       for (int i = 0; i < this.structures.len; i++){
-           User aux = (User) this.structures.get(i);
-           if(aux.id.equals(id)) return true;
+    public User find_user(String id){
+       for (int i = 0; i < this.elements.len; i++){
+           User aux = (User) this.elements.get(i);
+           if(aux.id.equals(id)) return aux;
        }
-       return false;
+       return null;
     }
     
     public Entity find_entity(String id){
-       for (int i = 0; i < this.structures.len; i++){
-           Entity aux = (Entity) this.structures.get(i);
+       for (int i = 0; i < this.elements.len; i++){
+           Entity aux = (Entity) this.elements.get(i);
            if(aux.id.equals(id)) return aux;
        }
        return null;    
@@ -87,8 +93,8 @@ public class BDStructure<T> implements java.io.Serializable{
     public DynamicArray<Entity> match_properties(EntitySpec searched){
         
        DynamicArray<Entity> results = new DynamicArray<>();
-       for (int i = 0; i < this.structures.len; i++){
-           Entity aux = (Entity) this.structures.get(i);
+       for (int i = 0; i < this.elements.len; i++){
+           Entity aux = (Entity) this.elements.get(i);
            if(aux.specs.matches(searched)){
                results.append(aux);
            }
@@ -96,16 +102,35 @@ public class BDStructure<T> implements java.io.Serializable{
        return results;
     }
     
-    public void order_entities(String id){
-        int n = this.structures.len; 
+    public void order_entities(){
+        int n = this.elements.len; 
         for (int i = 0; i < n-1; i++) 
             for (int j = 0; j < n-i-1; j++) 
-                if (( (((Entity)this.structures.get(j)).id).compareTo(((Entity)this.structures.get(j)).id)) > 0)
+                if (( (((Entity)this.elements.get(j)).id).compareTo(((Entity)this.elements.get(j)).id)) > 0)
                 { 
                     // swap arr[j+1] and arr[i] 
-                    T temp = this.structures.get(j); 
-                    this.structures.insert(j,this.structures.get(j+1)); 
-                    this.structures.insert((j+1),temp); 
+                    T temp = this.elements.get(j); 
+                    this.elements.insert(j,this.elements.get(j+1)); 
+                    this.elements.insert((j+1),temp); 
                 }         
     }
+    
+    public DynamicArray<T> get_horses(){
+        return this.elements;
+    }
+    
+    public DynamicArray<T> get_users(){
+        return this.elements;
+    }
+    
+    public void show_users(){
+        for(int i = 0; i < this.elements.pointer; i++){
+            User aux = (User) this.elements.get(i);
+            System.out.println(aux.id);
+            System.out.println(aux.user_name);
+        }
+        
+    }
+    
+    
 }
