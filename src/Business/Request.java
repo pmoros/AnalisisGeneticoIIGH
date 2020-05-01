@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Business;
 
-/**
- *
- * @author pmoro
- */
 public class Request {
-    
+	public Client client;
+	public RequestType type;
+	public String desciption;
+	public String state;
+	
+	public void answer(Administrator admin, String s) {
+		// TODO
+	}
+	
+	public void reject(Administrator admin, String s) {
+		// TODO
+	}
 }

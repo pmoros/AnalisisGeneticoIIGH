@@ -5,18 +5,12 @@
  */
 package DataStructures;
 
-public class DoublyLinkedList<T> implements List<T> {
 
-    @Override
-    public void show_content() {
-        Node<T> auxH = this.head;
-        
-        while(auxH.next != null){            
-            System.out.print(auxH.data);
-            auxH = auxH.next;            
-        }
-        System.out.println();
-    }
+
+public class DoublyLinkedList<T> implements List<T> implements java.io.Serializable {
+    
+    int size = 0;
+    
 
 public class Node<T> implements java.io.Serializable{
     public T data;
@@ -33,6 +27,18 @@ public class Node<T> implements java.io.Serializable{
     Node<T> head;
     Node<T> tail;
     
+    
+    @Override
+    public void show_content() {
+        Node<T> auxH = this.head;
+        
+        while(auxH.next != null){            
+            System.out.print(auxH.data);
+            auxH = auxH.next;            
+        }
+        System.out.println();
+    }
+    
     public void DoubleLinkedList(){
         head = null;
         tail = null;
@@ -44,11 +50,13 @@ public class Node<T> implements java.io.Serializable{
         if (this.head == null){
             this.head = node;
             this.tail = node;
+            this.size++;
         }
         else{
             node.next = head;                 
             this.head.prev = node;
-            this.head = node;  
+            this.head = node; 
+            this.size++;
         }
     }
 
@@ -57,11 +65,13 @@ public class Node<T> implements java.io.Serializable{
         return this.head.data;
     }
 
+
     
     public void pop_front() {
         Node aux = this.head;
         this.head = aux.next;        
         this.head.prev = null;
+        this.size--;
     }
 
     
@@ -71,11 +81,13 @@ public class Node<T> implements java.io.Serializable{
        if (this.head == null) {
            this.head = node;
            this.tail = node;
+           this.size++;
        }
        Node aux = this.tail;       
        this.tail = node;
        aux.next = this.tail;
        this.tail.prev = aux;       
+       this.size++;
     }
 
     
@@ -89,20 +101,21 @@ public class Node<T> implements java.io.Serializable{
         this.tail = aux.prev;
         this.tail.next = null;
         aux.prev = null;
+        this.size--;
     }
 
     @Override
-    public int find(T key) {
+    public boolean find(T key) {
 	int k = 0;
         Node auxH = this.head;
         Node auxT = this.tail;
         while((auxH != null) && (auxT != null)){
-            if ((auxH.data == key) || (auxT.data == key)) return k;
+            if ((auxH.data == key) || (auxT.data == key)) return true;
             auxH = auxH.next;
             auxT = auxT.prev;
 	    k++;
         }
-        return -1;
+        return false;
     }
 
     @Override
@@ -118,21 +131,24 @@ public class Node<T> implements java.io.Serializable{
             if ((auxH.data == key) || (auxT.data == key)){
                 if(auxH.data == key){                    
                     if(auxH == this.head) {
-                        this.pop_front();                    
+                        this.pop_front();
+                        this.size--;
                         return;
                     }
                     auxH.prev.next = auxH.next;
                     auxH.next.prev = auxH.prev;
+                    this.size--;
                 }
                 else{
                     if(auxT == this.tail) {
                         this.pop_back();
+                        this.size--;
                         return;
                     }
                     auxT.prev.next = auxT.next;
                     auxT.next.prev = auxT.prev;
-                }
-                return;
+                    this.size--;
+                }                
             }
             auxH = auxH.next;
             auxT = auxT.prev;
@@ -143,7 +159,7 @@ public class Node<T> implements java.io.Serializable{
     public int get_size() {
         //Fix later 
         if (this.head == null) return 0;
-        return -1;
+        return this.size++;
     }
     
     
@@ -158,7 +174,8 @@ public class Node<T> implements java.io.Serializable{
       auxH.prev.next = node;
       node.prev = auxH.prev;
       auxH.prev = node;
-      node.next = auxH;      
+      node.next = auxH;   
+      this.size++;
     }
     
     @Override
@@ -177,6 +194,8 @@ public class Node<T> implements java.io.Serializable{
           auxH = auxH.next;
       }
       auxH.prev.next = auxH.next;      
+      auxH.next.prev = auxH.prev;
+      this.size--;
     }    
     
 }
