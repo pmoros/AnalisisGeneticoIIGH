@@ -33,6 +33,36 @@ public class AnalisisGeneticoIIGH {
     }
     
     public static void main(String[] args) {
+        // TODO code application logic here         
+        //PRUEBAS     
+        
+        
+        //create_database();
+        //load_database();
+        //database.load(EntityType.USER);
+        
+        
+        /* HAY UN FALLO CON LA CARGA DE LOS DATOS DESDE AFUERA       
+        */
+        
+        
+        //PRUEBAS
+        
+        BDStructure BD = new BDStructure("", "");
+        
+        Client user1 = new Client("sito","Paul","Moros");
+        BD.add_user(user1);
+        Client user2 = new Client("acid","Santi","Diaz");
+        BD.add_user(user2);
+        BD.show_users();        
+        DynamicArray<User> usuarios  = BD.get_users();
+        
+        for(int i = 0; i < usuarios.pointer; i++){
+        User aux = usuarios.get(i);
+        System.out.print(aux.name + " " + aux.last_name);
+        System.out.println();
+        }
+                
 
     }
     

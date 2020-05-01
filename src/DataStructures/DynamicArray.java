@@ -13,7 +13,7 @@ package DataStructures;
 public class DynamicArray<T> implements List<T>{
     T []array;
     public int len = 10;
-    int pointer = 0;
+    public int pointer = 0;
     public DynamicArray(){
         this.array = (T[]) new Object[len];                        
         this.len = 10;
@@ -22,10 +22,7 @@ public class DynamicArray<T> implements List<T>{
     //TEST METHOD
     @Override
     public void show_content(){
-        for (int i = 0; i < this.pointer; i++){
-            System.out.print(Integer.toString((Integer)this.array[i]) + " ");
-        }        
-        System.out.println();
+        //Gotta implement it
     }    
     //FINISHED TEST METHOD
     
@@ -89,9 +86,9 @@ public class DynamicArray<T> implements List<T>{
     
     @Override
     public void delete_at(int index){
-        if(index > this.pointer){
+        if(index < this.len){
             for(int i = index; i < (this.pointer - 1); i++){
-                this.array[i] = this.array[this.pointer + 1];
+                this.array[i] = this.array[i + 1];
             }
             this.array[this.pointer - 1] = null;
             this.pointer--;

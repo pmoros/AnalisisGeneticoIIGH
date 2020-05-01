@@ -53,13 +53,11 @@ public class BDManager<T> implements Serializable {
     public void write_file(String path, T obj){
         //Gotta remember to introduce an obj that implements Serializable
         try{
-            //Saving the object in a file
-            FileOutputStream file = new FileOutputStream(path);
-            ObjectOutputStream out = new ObjectOutputStream(file);            
-            //Serializing the object
-            out.writeObject(obj);
-            out.close();
-            file.close();
+            try ( //Saving the object in a file
+                    FileOutputStream file = new FileOutputStream(path); ObjectOutputStream out = new ObjectOutputStream(file)) {
+                //Serializing the object
+                out.writeObject(obj);
+            }
             
         }
         catch(IOException ex){
@@ -71,13 +69,11 @@ public class BDManager<T> implements Serializable {
     public T read_file(String path){
         T obj = null;
         try{
-            FileInputStream file = new FileInputStream(path);
-            ObjectInputStream in = new ObjectInputStream(file);
-            
-            //deserialization
-            obj = (T) in.readObject();
-            in.close();
-            file.close();
+            try (FileInputStream file = new FileInputStream(path); ObjectInputStream in = new ObjectInputStream(file)) {
+                
+                //deserialization
+                obj = (T) in.readObject();
+            }
             return obj;
         }
         catch(IOException | ClassNotFoundException ex){
