@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Business;
 
-/**
- *
- * @author pmoro
- */
+import DataStructures.DynamicArray;
+
 public class Analysis {
-    
+	public float price;
+	public String description;
+	public DynamicArray data;
+
+	public String finish() {
+		// TODO
+		return null;
+	}
+	
+	public String ask() {
+		// TODO
+		return null;
+	}
 }

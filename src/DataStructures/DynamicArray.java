@@ -12,7 +12,7 @@ package DataStructures;
  */
 public class DynamicArray<T> implements List<T>{
     T []array;
-    int len = 10;
+    public int len = 10;
     int pointer = 0;
     public DynamicArray(){
         this.array = (T[]) new Object[len];                        

@@ -10,7 +10,7 @@ package DataStructures;
  * @author pmoro
  * @param <T>
  */
-public interface Queue<T> {
+public interface Queue<T> extends java.io.Serializable {
     
     //Adds an element to the queue
     public void enqueue(T item);

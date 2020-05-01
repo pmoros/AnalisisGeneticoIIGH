@@ -5,145 +5,199 @@
  */
 package DataStructures;
 
-/**
- *
- * @author judgonzalezmu
- */
-public class DoublyLinkedList<T>
-{
-	class Node
-	{ 
-        T key; 
-        Node prev; 
-        Node next; 
-  
-        // Constructor 
-        // next y prev son null 
-        Node(T k)
-        { 
-        	key = k;
-        } 
-    } 
-	
-	Node head;
-	int size;
-  
-	//Adds an element at front 
-    public void push_front(T element) 
-    { 
-        Node newNode = new Node(element); 
-        
-        newNode.next=head;
-        newNode.prev=null;
-        
-        if (head != null)
-        	head.prev=newNode;
-        
-        head=newNode; 
-        size+=1;
-    } 
-  
-    // Given a node, insert a new node after the given node 
-    public void insert(Node prevNode, T element) 
-    { 
-        if (prevNode==null)
-        { 
-            System.out.println("Given node can't be null"); 
-            return; 
-        } 
-        
-        Node newNode=new Node(element);
-        
-        newNode.next=prevNode.next;
-        prevNode.next=newNode;
-        newNode.prev=prevNode;
-  
-        if(newNode.next!=null)
-        {
-        	newNode.next.prev=newNode;
-        	size+=1;
-        }
-    } 
-  
-    //Adds an element at last position 
-    public void append(T element) 
-    { 
-        Node newNode=new Node(element);   
-        Node last=head; 
-  
-        newNode.next=null; 
-        
-        if(head==null)
-        {
-        	newNode.prev=null;
-        	head=newNode;
-        	size+=1;
-        	return;        	
-        }
-        
-        while(last.next!=null)
-        	last=last.next;
-        
-        last.next=newNode;
-        newNode.prev=last; 
-        size+=1;
-    } 
+
+
+public class DoublyLinkedList<T> implements List<T> implements java.io.Serializable {
     
-    // Returns an element at a required position    
-    public T get(Node pointer)
-    {
-    	if (pointer==null)
-        { 
-            System.out.println("Given node doesn't point anything"); 
-            return null; 
-        } 
-    	else
-    	{
-    		return pointer.next.key;
-    	}
-    }
-  
-    // Print the list
-    public void show_content() 
-    { 
-    	Node tmp=head;
-    	 
-        while (tmp!=null)
-        {
-        	System.out.print(tmp.key+" ");
-        	tmp=tmp.next;
-        	
-        }        
-    } 
+    int size = 0;
     
-    public int get_size() 
-    {
-    	return size;    	
-    }
+
+public class Node<T> implements java.io.Serializable{
+    public T data;
+    public Node<T> prev;
+    public Node<T> next;
     
-    // Delete the first element
-    public void deleteFirst()
-    {
-        if (size==0) 
-        	System.out.print("There are no items in the list");
-        
-        head = head.next;
-        head.prev = null;
-        size--;
+    Node(T data){
+        this.data = data;
+        prev = null;
+        next = null;
     }
-     
-    // Delete the last element
-    public void deleteLast()
-    {
-    	Node last=head; 
-    	
-    	if (size==0) 
-        	System.out.print("There are no items in the list");
-    	
-    	while(last.next!=null)
-        	last=last.next;
-    	
-    	last.prev.next=null;
-        size--;
-    }  
 }
+
+    Node<T> head;
+    Node<T> tail;
+    
+    
+    @Override
+    public void show_content() {
+        Node<T> auxH = this.head;
+        
+        while(auxH.next != null){            
+            System.out.print(auxH.data);
+            auxH = auxH.next;            
+        }
+        System.out.println();
+    }
+    
+    public void DoubleLinkedList(){
+        head = null;
+        tail = null;
+    }
+    
+    @Override
+    public void push_front(T key) {
+        Node<T> node = new Node<>(key);
+        if (this.head == null){
+            this.head = node;
+            this.tail = node;
+            this.size++;
+        }
+        else{
+            node.next = head;                 
+            this.head.prev = node;
+            this.head = node; 
+            this.size++;
+        }
+    }
+
+    
+    public T top_front() {
+        return this.head.data;
+    }
+
+
+    
+    public void pop_front() {
+        Node aux = this.head;
+        this.head = aux.next;        
+        this.head.prev = null;
+        this.size--;
+    }
+
+    
+@Override
+    public void append(T key) {
+       Node<T> node = new Node<>(key);
+       if (this.head == null) {
+           this.head = node;
+           this.tail = node;
+           this.size++;
+       }
+       Node aux = this.tail;       
+       this.tail = node;
+       aux.next = this.tail;
+       this.tail.prev = aux;       
+       this.size++;
+    }
+
+    
+    public T top_back() {
+        return this.tail.data;
+    }
+    
+    
+    public void pop_back() {
+        Node aux = this.tail;
+        this.tail = aux.prev;
+        this.tail.next = null;
+        aux.prev = null;
+        this.size--;
+    }
+
+    @Override
+    public boolean find(T key) {
+	int k = 0;
+        Node auxH = this.head;
+        Node auxT = this.tail;
+        while((auxH != null) && (auxT != null)){
+            if ((auxH.data == key) || (auxT.data == key)) return true;
+            auxH = auxH.next;
+            auxT = auxT.prev;
+	    k++;
+        }
+        return false;
+    }
+
+    @Override
+    public void delete(T key) {
+        /*
+        Gotta check this method, 'cause it's necessary to
+        repeat the code that we wrote at find method.
+        */        
+        Node auxH = this.head;
+        Node auxT = this.tail;                
+        
+        while((auxH != null) && (auxT != null)){
+            if ((auxH.data == key) || (auxT.data == key)){
+                if(auxH.data == key){                    
+                    if(auxH == this.head) {
+                        this.pop_front();
+                        this.size--;
+                        return;
+                    }
+                    auxH.prev.next = auxH.next;
+                    auxH.next.prev = auxH.prev;
+                    this.size--;
+                }
+                else{
+                    if(auxT == this.tail) {
+                        this.pop_back();
+                        this.size--;
+                        return;
+                    }
+                    auxT.prev.next = auxT.next;
+                    auxT.next.prev = auxT.prev;
+                    this.size--;
+                }                
+            }
+            auxH = auxH.next;
+            auxT = auxT.prev;
+        }                       
+    }
+
+    @Override
+    public int get_size() {
+        //Fix later 
+        if (this.head == null) return 0;
+        return this.size++;
+    }
+    
+    
+    
+    @Override
+    public void insert(int index, T element){
+      Node<T> node = new Node<>(element);   
+      Node auxH = this.head;
+      for (int i = 0; i < index; i++){
+          auxH = auxH.next;
+      }
+      auxH.prev.next = node;
+      node.prev = auxH.prev;
+      auxH.prev = node;
+      node.next = auxH;   
+      this.size++;
+    }
+    
+    @Override
+    public T get(int index){
+      Node<T> auxH = this.head;   
+      for (int i = 0; i < index; i++){
+          auxH = auxH.next;
+      }        
+      return auxH.data;
+    }
+    
+    @Override
+    public void delete_at(int index) {
+      Node<T> auxH = this.head;   
+      for (int i = 0; i < index; i++){
+          auxH = auxH.next;
+      }
+      auxH.prev.next = auxH.next;      
+      auxH.next.prev = auxH.prev;
+      this.size--;
+    }    
+    
+}
+
+
