@@ -1,5 +1,6 @@
 package Business;
 
+
 import DataStructures.DynamicArray;
 import DataStructures.QueueArray;
 
@@ -31,4 +32,5 @@ public class Client extends User {
 		
 	}
 	
+
 }

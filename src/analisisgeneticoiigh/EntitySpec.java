@@ -9,6 +9,9 @@ package analisisgeneticoiigh;
  *
  * @author pmoro
  */
-public class EntitySpec {
+public abstract class EntitySpec implements java.io.Serializable{
     
+    public boolean matches(EntitySpec searched){
+        return false;
+    }
 }

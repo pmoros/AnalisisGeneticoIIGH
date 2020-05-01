@@ -14,11 +14,42 @@ import DataStructures.*;
 
 //THIS HAS TO BE AN ABSTRACT CLASS
 public class BDManager<T> implements Serializable {
+    //PRUEBA
+    public int index = 0;
     public String path = System.getProperty("user.dir");   
-    public String identifier = "\\BDManager";
+    public String path2;
+    public String identifier = "\\BDManager";    
+    public DynamicArray<String> indices;
+    public DynamicArray<String> structures;
+    public BDStructure current;
     
+    public BDManager(){
+        this.indices = new DynamicArray<>();
+        this.structures = new DynamicArray<>();
+        this.path2 = this.path + this.identifier;
+    }
     
-            
+    public void add(EntityType type){        
+        String id_structure = type.name();        
+        //esto lo guardamos en indices
+        String ruta_tabla = this.path + "\\" + id_structure;
+        this.indices.append(id_structure);
+        this.structures.append(ruta_tabla);
+        BDStructure aux = new BDStructure<>(ruta_tabla, id_structure);
+        //this.write_file(ruta_tabla, (T) aux);
+    }
+    
+    public void load(EntityType type){
+        int indice_aux = this.indices.find(type.name());        
+        String ruta =  this.structures.get(index);
+        this.current = (BDStructure) this.read_file(ruta);
+        
+    }    
+    
+    public void save_changes(){
+        this.write_file(this.current.path, (T)this.current);
+    }
+    
     public void write_file(String path, T obj){
         //Gotta remember to introduce an obj that implements Serializable
         try{

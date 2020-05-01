@@ -1,6 +1,7 @@
 package Business;
 
-public abstract class User {
+
+public abstract class User implements java.io.Serializable {
 	public int id;
 	public String user_name;
 	protected String password;
@@ -15,3 +16,4 @@ public abstract class User {
 	public abstract String generateCode();
 	public abstract void validateCode();
 }
+
