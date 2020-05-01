@@ -7,7 +7,7 @@ package DataStructures;
 
 
 
-public class DoublyLinkedList<T> implements List<T> implements java.io.Serializable {
+public class DoublyLinkedList<T> implements List<T>{
     
     int size = 0;
     
@@ -105,17 +105,17 @@ public class Node<T> implements java.io.Serializable{
     }
 
     @Override
-    public boolean find(T key) {
+    public int find(T key) {
 	int k = 0;
         Node auxH = this.head;
         Node auxT = this.tail;
         while((auxH != null) && (auxT != null)){
-            if ((auxH.data == key) || (auxT.data == key)) return true;
+            if ((auxH.data == key) || (auxT.data == key)) return k;
             auxH = auxH.next;
             auxT = auxT.prev;
 	    k++;
         }
-        return false;
+        return -1;
     }
 
     @Override

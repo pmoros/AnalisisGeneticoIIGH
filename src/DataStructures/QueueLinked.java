@@ -11,6 +11,11 @@ package DataStructures;
  * @param <T>
  */
 public class QueueLinked<T> implements Queue<T> {
+    
+    /*
+        Implement this classs using the DoublyLinkedList.
+  
+    */    
 
     @Override
     public void enqueue(T item) {

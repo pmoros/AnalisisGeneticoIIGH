@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package analisisgeneticoiigh;
+package Business;
+import Business.EntitySpec;
+import Business.Entity;
 import DataStructures.*;
 /**
  *
@@ -15,6 +17,10 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
     String race;   
     String farm;
     DynamicArray<Entity> sons = new DynamicArray<>();
+    
+    public HorseSpec(){
+        
+    }
     
     public boolean matches(HorseSpec searched){
         if(!((this.name != null) &&(this.name.equals(searched.name)))){

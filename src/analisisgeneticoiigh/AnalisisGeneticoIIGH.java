@@ -1,4 +1,5 @@
 package analisisgeneticoiigh;
+import Business.EntityType;
 import DataStructures.*;
 import DataManagement.*;
 import Business.*;
@@ -47,22 +48,6 @@ public class AnalisisGeneticoIIGH {
         
         
         //PRUEBAS
-        
-        BDStructure BD = new BDStructure("", "");
-        
-        Client user1 = new Client("sito","Paul","Moros");
-        BD.add_user(user1);
-        Client user2 = new Client("acid","Santi","Diaz");
-        BD.add_user(user2);
-        BD.show_users();        
-        DynamicArray<User> usuarios  = BD.get_users();
-        
-        for(int i = 0; i < usuarios.pointer; i++){
-        User aux = usuarios.get(i);
-        System.out.print(aux.name + " " + aux.last_name);
-        System.out.println();
-        }
-                
 
     }
     

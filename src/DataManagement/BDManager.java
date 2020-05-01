@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package DataManagement;
+import Business.EntityType;
 import java.io.*;
 import DataStructures.*;
 /**

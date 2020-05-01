@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package analisisgeneticoiigh;
+package Business;
 
 /**
  *
  * @author pmoro
  */
 public abstract class EntitySpec implements java.io.Serializable{
+    
     
     public boolean matches(EntitySpec searched){
         return false;

@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package DataManagement;
+import Business.EntityType;
+import Business.EntitySpec;
+import Business.Entity;
 import DataStructures.*;
 import Business.*;
-import analisisgeneticoiigh.*;
+
 /**
  *
  * @author pmoro
@@ -23,7 +26,7 @@ public class BDStructure<T> implements java.io.Serializable{
     public EntityType type;
     private DynamicArray<T> elements;
     public String path;
-    public String identifier;
+    public DynamicArray<ID> identifier;
     public BDStructure(String path, String identifier){
         //Implementar luego con otras estructuras
         this.elements = new DynamicArray<>();

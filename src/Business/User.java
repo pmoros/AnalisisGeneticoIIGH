@@ -1,19 +1,26 @@
 package Business;
+import DataStructures.*;
 
+public abstract class User extends Entity {
 
-public abstract class User implements java.io.Serializable {
-	public int id;
-	public String user_name;
-	protected String password;
-	public String first_name;
-	public String last_name;
-	public String email;
+    public Analysis current;
+    public QueueArray<String> messages;  
+    public DynamicArray<Request> out_requests;
+    public QueueArray<Request> in_requests;
+    public UserSpec specs;  
+    public AutorizationLevel privileges;    
+    
+    public User(AutorizationLevel p, UserSpec properties) {
+        super(properties);
+        this.privileges = p;
+    }
 	
-	public void set_password(String s) {
-		this.password = s;
-	}
+    public void set_password(String s) {
+	this.specs.password = s;
+    }
 	
-	public abstract String generateCode();
-	public abstract void validateCode();
+    public abstract String generateCode();
+    public abstract void validateCode();
+
 }
 
