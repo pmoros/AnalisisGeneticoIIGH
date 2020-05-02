@@ -17,8 +17,8 @@ public class UserSpec extends EntitySpec{
 	public String email;    
         public int telephone;
         
-    public UserSpec(String un, String password, String first_name, String last_name, String email){
-            this.user_name = un;
+    public UserSpec(String user_name, String password, String first_name, String last_name, String email){
+            this.user_name = user_name;
             this.password = password;
             this.first_name = first_name;
             this.last_name = last_name;

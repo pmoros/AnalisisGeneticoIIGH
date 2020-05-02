@@ -9,7 +9,7 @@ package Business;
  *
  * @author Rock
  */
-public class ID {
+public class ID implements java.io.Serializable{
     
     private final int value;
     private final EntityType type;    

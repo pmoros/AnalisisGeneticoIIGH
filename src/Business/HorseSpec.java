@@ -22,6 +22,13 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
         
     }
     
+    public HorseSpec(String name, int age, String race, String farm){
+        this.name = name;
+        this.age = age;
+        this.race = race;
+        this.farm = farm;
+    }    
+    
     
     public boolean matches(HorseSpec searched){
             if(((this.name != null) && !(this.name.equals(searched.name)))){

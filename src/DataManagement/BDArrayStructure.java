@@ -58,7 +58,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
         this.type = tipo;
         this.elements = new DynamicArray<>();
         this.identifier = identifier;
-        this.path = path + this.identifier;           
+        this.path = path;        
     }
     
 /**
@@ -67,7 +67,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * @return Retorna el identificador que tiene en la "tabla" el objeto
  */    
     public ID add(Entity obj){ 
-        if(!this.verify_type(obj)) return null;
+        //if(!this.verify_type(obj)) return null;
         index++;
         obj.id = new ID(obj.type, index);
         this.elements.append((T)obj);

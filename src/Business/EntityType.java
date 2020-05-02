@@ -13,8 +13,8 @@ public enum EntityType {
         USER("USER"),
         CLIENT("CLIENT"),
         ADMINISTRATOR ("ADMINISTRATOR"),
-        ENTITY("ENTITY");
-        //HORSE("HORSE");
+        ENTITY("ENTITY"),
+        HORSE("HORSE");
 
         private final String name;
 

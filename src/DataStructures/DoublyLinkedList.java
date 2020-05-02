@@ -67,11 +67,13 @@ public class Node<T> implements java.io.Serializable{
 
 
     
-    public void pop_front() {
+    public T pop_front() {
+        T data_aux = this.head.data;
         Node aux = this.head;
         this.head = aux.next;        
         this.head.prev = null;
         this.size--;
+        return data_aux;
     }
 
     

@@ -13,7 +13,7 @@ import DataStructures.*;
  * @param <T>
  */
 
-//THIS HAS TO BE AN ABSTRACT CLASS
+//CHECK HOW TO MAKE THIS WORK WITH MANY DATASTRUCTURES IMPLEMENTATION BASED
 public class BDManager<T> implements Serializable {
     //PRUEBA
     public int index = 0;
@@ -22,6 +22,7 @@ public class BDManager<T> implements Serializable {
     public String identifier = "\\BDManager";    
     public DynamicArray<String> indices;
     public DynamicArray<String> structures;
+    //Remplazar por una interfaz BDStructure
     public BDArrayStructure current;
     
     public BDManager(){
@@ -36,13 +37,16 @@ public class BDManager<T> implements Serializable {
         String ruta_tabla = this.path + "\\" + id_structure;
         this.indices.append(id_structure);
         this.structures.append(ruta_tabla);
+        //Remplazar por un metodo create_structure(EntityType type,ruta, id_structure)
+        //algo como aux = create_structure(.....);
         BDArrayStructure aux = new BDArrayStructure<>(type, ruta_tabla, id_structure);
-        //this.write_file(ruta_tabla, (T) aux);
+        this.write_file(ruta_tabla, (T) aux);
     }
     
     public void load(EntityType type){
         int indice_aux = this.indices.find(type.name());        
-        String ruta =  this.structures.get(index);
+        String ruta =  this.structures.get(indice_aux);
+        //Cambiar por un generico BDStructure
         this.current = (BDArrayStructure) this.read_file(ruta);
         
     }    
@@ -64,6 +68,7 @@ public class BDManager<T> implements Serializable {
         }
         catch(IOException ex){
             System.out.println("Something went wrong saving.");
+            System.out.println(ex);
         }
     
     }
