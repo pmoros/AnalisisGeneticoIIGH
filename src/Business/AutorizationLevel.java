@@ -10,6 +10,16 @@ package Business;
  * @author Rock
  */
 public enum AutorizationLevel {
-    ADMIN,
-    CLIENT;
+    CLIENT(0),
+    ADMIN(1);
+
+    private int numVal;
+
+    AutorizationLevel(int numVal) {
+        this.numVal = numVal;
+    }
+
+    public int get_val() {
+        return numVal;
+    }    
 }

@@ -18,7 +18,11 @@ public class UserSpec extends EntitySpec{
         public int telephone;
         
     public UserSpec(String un, String password, String first_name, String last_name, String email){
-            
+            this.user_name = un;
+            this.password = password;
+            this.first_name = first_name;
+            this.last_name = last_name;
+            this.email = email;
     }    
         
     public boolean matches(UserSpec searched){

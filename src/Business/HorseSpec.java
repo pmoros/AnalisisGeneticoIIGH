@@ -12,29 +12,30 @@ import DataStructures.*;
  * @author pmoro
  */
 public class HorseSpec extends EntitySpec implements java.io.Serializable{
-    String name;
-    int age;    
-    String race;   
-    String farm;
+    public String name;
+    public int age;    
+    public String race;   
+    public String farm;
     DynamicArray<Entity> sons = new DynamicArray<>();
     
     public HorseSpec(){
         
     }
     
+    
     public boolean matches(HorseSpec searched){
-        if(!((this.name != null) &&(this.name.equals(searched.name)))){
-            return false;
-        }
-        if(!((this.age == searched.age))){
-            return false;
-        }
-        if(!((this.race != null) &&(this.race.equals(searched.race)))){
-            return false;
-        }
-        if(!((this.race != null) &&(this.race.equals(searched.race)))){
-            return false;
-        }  
-        return true;
+            if(((this.name != null) && !(this.name.equals(searched.name)))){
+                return false;
+            }
+            if(!((this.age == searched.age))){
+                return false;
+            }
+            if(((this.race != null) && !(this.race.equals(searched.race)))){
+                return false;
+            }
+            if(((this.farm != null) && !(this.farm.equals(searched.farm)))){
+                return false;
+            }  
+            return true;
     }    
 }

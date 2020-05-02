@@ -11,15 +11,15 @@ package Business;
  */
 public class ID {
     
-    private final String value;
+    private final int value;
     private final EntityType type;    
     
-    public ID(EntityType t, String val){
+    public ID(EntityType t, int val){
         this.type = t;
         this.value = val;
     }
     
-    public String get_value(){
+    public int get_value(){
         return this.value;
     }
     
@@ -29,9 +29,28 @@ public class ID {
     
     public boolean equals(ID other){
         if(other.get_type().equals(other.get_type())){
-            return this.get_value().equals(other.get_value());
+            return (this.value == other.value);
         }
         return false;
     }
+     
+    public int compare_to(ID other){
+        if (this.value == other.value){
+            return 0;
+        }
+        else if(this.value > other.value){
+            return 1;
+        }
+        else{
+            return -1;
+        }
         
+    } 
+    
+    public String get(){
+        String aux = Integer.toString(this.value);
+        return (this.type.name() + aux);
+    
+    }
+    
 }

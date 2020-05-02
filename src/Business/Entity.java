@@ -8,13 +8,23 @@ package Business;
  *
  * @author pmoro
  */
-public abstract class Entity implements java.io.Serializable{
+public class Entity implements java.io.Serializable{
     public ID id;
     public EntityType type;
-    public EntitySpec specs;  
+    private EntitySpec specs;  
         
-    Entity(EntitySpec properties){
+    public Entity(EntityType tipo, EntitySpec properties){
+        this.type = tipo;
         this.specs = properties;
+    }
+    
+    public Entity(EntitySpec properties){
+        this.type = EntityType.ENTITY;
+        this.specs = properties;
+    }    
+    
+    public EntitySpec get_specs(){
+        return this.specs;
     }
     
     

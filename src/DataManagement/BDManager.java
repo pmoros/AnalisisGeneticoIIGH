@@ -18,16 +18,16 @@ public class BDManager<T> implements Serializable {
     //PRUEBA
     public int index = 0;
     public String path = System.getProperty("user.dir");   
-    public String path2;
+    public String self_path;
     public String identifier = "\\BDManager";    
     public DynamicArray<String> indices;
     public DynamicArray<String> structures;
-    public BDStructure current;
+    public BDArrayStructure current;
     
     public BDManager(){
         this.indices = new DynamicArray<>();
         this.structures = new DynamicArray<>();
-        this.path2 = this.path + this.identifier;
+        this.self_path = this.path + this.identifier;
     }
     
     public void add(EntityType type){        
@@ -36,18 +36,19 @@ public class BDManager<T> implements Serializable {
         String ruta_tabla = this.path + "\\" + id_structure;
         this.indices.append(id_structure);
         this.structures.append(ruta_tabla);
-        BDStructure aux = new BDStructure<>(ruta_tabla, id_structure);
+        BDArrayStructure aux = new BDArrayStructure<>(type, ruta_tabla, id_structure);
         //this.write_file(ruta_tabla, (T) aux);
     }
     
     public void load(EntityType type){
         int indice_aux = this.indices.find(type.name());        
         String ruta =  this.structures.get(index);
-        this.current = (BDStructure) this.read_file(ruta);
+        this.current = (BDArrayStructure) this.read_file(ruta);
         
     }    
     
     public void save_changes(){
+        //It saves the changes in the current data base
         this.write_file(this.current.path, (T)this.current);
     }
     
