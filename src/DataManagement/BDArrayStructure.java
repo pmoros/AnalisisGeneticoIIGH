@@ -23,7 +23,7 @@ import Business.*;
  * @author pmoro
  * @param <T>
  */
-public class BDArrayStructure<T> implements java.io.Serializable{
+public class BDArrayStructure<T> extends BDStructure{
     
     /*
     OJO, AQUI HAY QUE REVISAR LOS SIGUIENTES METODOS QUE NO SON
@@ -43,7 +43,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
     */
     int index = 0;
     public EntityType type;
-    private DynamicArray<T> elements;
+    protected DynamicArray<T> elements;
     public String path;
     public String identifier;
     
@@ -61,11 +61,18 @@ public class BDArrayStructure<T> implements java.io.Serializable{
         this.path = path;        
     }
     
+    public BDArrayStructure(){               
+        //Constructor que sirve para usarlo sin guardado
+        //Osea como estructura funcional en el programa
+        this.elements = new DynamicArray<>();  
+    }    
+    
 /**
  * Agrega un nuevo objeto a la "tabla" de la base de datos
  * @param obj Objeto que agrega
  * @return Retorna el identificador que tiene en la "tabla" el objeto
  */    
+    @Override
     public ID add(Entity obj){ 
         //if(!this.verify_type(obj)) return null;
         index++;
@@ -79,6 +86,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * @param obj
  * @return 
  */    
+    @Override
     public boolean verify_type(Entity obj){
         //Metodo voluntario...
         if(!obj.type.equals(this.type)) {
@@ -92,6 +100,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * Removes an element based on it's ID
  * @param id instance of class ID
  */    
+    @Override
     public void remove(ID id){                
         for (int i = 0; i < this.elements.pointer; i++){
             Entity aux = (Entity) this.elements.get(i);
@@ -107,6 +116,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * This removes all the objects in the table that match the specs
  * @param specs contains the pattern of info we are looking for.
  */    
+    @Override
     public void remove_based_on(HorseSpec specs){        
         //Only works with Horses, GOTTA FIX IT
         for(int i = 0; i < this.elements.pointer; i++){
@@ -125,6 +135,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * @return 
  */    
     
+    @Override
     public Entity find(ID id){
        for (int i = 0; i < this.elements.pointer; i++){
            Entity aux = (Entity) this.elements.get(i);
@@ -139,6 +150,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * @param searched it's the specifications pattern that we give
  * @return 
  */    
+    @Override
     public DynamicArray<Entity> match(HorseSpec searched){
         //Only works with horses, GOTTA FIX IT
        DynamicArray<Entity> results = new DynamicArray<>();
@@ -155,6 +167,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
 /**
  * Not implemented yet al all
  */    
+    @Override
     public void order_entities(){
         //CHECK THIS METHOD
         
@@ -175,6 +188,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
  * Returns all that is stored in the "table"
  * @return 
  */    
+    @Override
     public DynamicArray<T> get_elements(){
         return this.elements;
     }
@@ -200,6 +214,26 @@ public class BDArrayStructure<T> implements java.io.Serializable{
             System.out.println(aux2.name);
         }    
         
+    }
+
+    @Override
+    public String get_path() {
+        return this.path;
+    }
+
+    @Override
+    public int get_index() {
+        return this.index;
+    }
+
+    @Override
+    public EntityType get_type() {
+        return this.type;
+    }
+
+    @Override
+    public String get_identifier() {
+        return this.identifier;
     }
     
 }
