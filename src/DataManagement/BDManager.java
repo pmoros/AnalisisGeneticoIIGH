@@ -23,7 +23,7 @@ public class BDManager<T> implements Serializable {
     public DynamicArray<String> indices;
     public DynamicArray<String> structures;
     //Remplazar por una interfaz BDStructure
-    public BDArrayStructure current;
+    public BDStructure current;
     
     public BDManager(){
         this.indices = new DynamicArray<>();
@@ -31,29 +31,35 @@ public class BDManager<T> implements Serializable {
         this.self_path = this.path + this.identifier;
     }
     
-    public void add(EntityType type){        
+    public void add(EntityType type){      
+        //REVISAR CON CUIDADO, CREO QUE VALE BDStructure para el polimorfismo
         String id_structure = type.name();        
         //esto lo guardamos en indices
         String ruta_tabla = this.path + "\\" + id_structure;
         this.indices.append(id_structure);
         this.structures.append(ruta_tabla);
         //Remplazar por un metodo create_structure(EntityType type,ruta, id_structure)
-        //algo como aux = create_structure(.....);
-        BDArrayStructure aux = new BDArrayStructure<>(type, ruta_tabla, id_structure);
+        //if(type.equals(EntityType.USER)): (En el peor de los casos)
+        //Usar BDStructure = create_structure();
+        BDArrayStructure aux = (BDArrayStructure) create_structure(type, ruta_tabla, id_structure);
         this.write_file(ruta_tabla, (T) aux);
+    }
+    
+    public BDStructure create_structure(EntityType type, String ruta_tabla, String id_structure){
+        return new BDArrayStructure<>(type, ruta_tabla, id_structure);
     }
     
     public void load(EntityType type){
         int indice_aux = this.indices.find(type.name());        
         String ruta =  this.structures.get(indice_aux);
         //Cambiar por un generico BDStructure
-        this.current = (BDArrayStructure) this.read_file(ruta);
+        this.current = (BDStructure) this.read_file(ruta);
         
     }    
     
     public void save_changes(){
         //It saves the changes in the current data base
-        this.write_file(this.current.path, (T)this.current);
+        this.write_file(this.current.get_path(), (T)this.current);
     }
     
     public void write_file(String path, T obj){
@@ -89,4 +95,7 @@ public class BDManager<T> implements Serializable {
         return null;
     }
     
+    public String get_path(){
+        return this.path;
+    }
 }
