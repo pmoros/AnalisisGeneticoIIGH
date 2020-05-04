@@ -70,7 +70,7 @@ public class Test {
                         BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv))) {
                     while ((row = csvReader.readLine()) != null) {
                         String[] data = row.split(",");
-                        // ESTE CODIGO TOMA LO QUE ESTÁ EN CADA LINEA DEL ARCHIVO Y AGREGA UN CLIENTE
+                        // ESTE CODIGO TOMA LO QUE ESTÃ� EN CADA LINEA DEL ARCHIVO Y AGREGA UN CLIENTE
                         String user_name = data[0];
                         String password = data[1];
                         String name = data[2];
@@ -84,8 +84,8 @@ public class Test {
                 
             }        
     }
-    this.end_time = System.nanoTime() - this.start_time;
-    System.out.printf("Time adding clients: %d \n",end_time);  
+    this.end_time = (System.nanoTime() - this.start_time)/1000000;
+    System.out.printf("Time adding clients: %d \n", end_time);  
     return this.end_time/1000000;          
         
     }
@@ -103,7 +103,7 @@ public class Test {
                         BufferedReader csvReader = new BufferedReader(new FileReader(pathToCsv))) {
                     while ((row = csvReader.readLine()) != null) {
                         String[] data = row.split(",");
-                        // ESTE CODIGO TOMA LO QUE ESTÁ EN CADA LINEA DEL ARCHIVO Y AGREGA UN CLLIENTE
+                        // ESTE CODIGO TOMA LO QUE ESTÃ� EN CADA LINEA DEL ARCHIVO Y AGREGA UN CLLIENTE
                         String name = data[0];
                         int age = 0;
                          try{
@@ -120,8 +120,8 @@ public class Test {
                 }
             }        
     }
-    this.end_time = System.nanoTime() - this.start_time;
-    System.out.printf("Time adding horses: %d \n",end_time);  
+    this.end_time = (System.nanoTime() - this.start_time)/1000000;
+    System.out.printf("Time adding horses: %d \n", end_time);  
     return this.end_time/1000000;          
         
     }    
@@ -132,7 +132,7 @@ public class Test {
         ID aux = new ID(type, num);    
         Entity user = BD_POINTER.find(aux); 
         UserSpec info = (UserSpec) user.get_specs();
-        System.out.printf("%s : %s    %s    %s", user.id.get(), info.user_name, info.first_name, info.last_name);        
+        System.out.printf("%s: %15s%15s%s\n", user.id.get(), info.user_name, info.first_name, info.last_name);        
                 
         end_time = (System.nanoTime() - start_time)/1000000;
         System.out.printf("Time finding user by ID: %d \n",end_time);  
@@ -146,7 +146,7 @@ public class Test {
         ID aux = new ID(type, num);    
         Entity horse = BD_POINTER.find(aux); 
         HorseSpec info = (HorseSpec) horse.get_specs();
-        System.out.printf("%s : %s    %s", horse.id.get(), info.name, info.race, info.farm);        
+        System.out.printf("%s: %15s%15s%s\n", horse.id.get(), info.name, info.race, info.farm);        
                 
         end_time = (System.nanoTime() - start_time)/1000000;
         System.out.printf("Time finding horse by ID: %d \n",end_time);  
@@ -165,12 +165,11 @@ public class Test {
         System.out.printf("Time finding horse by Specs: %d \n",end_time);  
                 
         //Este bucle quita mucho tiempo, por ahora lo comentamos
-        //No cuenta al tiempo de ejecución.
+        //No cuenta al tiempo de ejecuciÃ³n.
             for(int i = 0; i < horses.pointer; i++){
                 Entity auxiliar = (Entity) horses.get(i);
                 HorseSpec caracteristicas = (HorseSpec) auxiliar.get_specs();
-                System.out.print(auxiliar.id.get() + ": ");
-                System.out.println(caracteristicas.name + "     " + caracteristicas.farm);                            
+                System.out.printf("%s: %15s%15s%15s\n", auxiliar.id.get(), caracteristicas.name, caracteristicas.race, caracteristicas.farm);
             }
             
         return horses;
