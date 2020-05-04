@@ -33,7 +33,7 @@ public class Main {
     /*
     Test test = new Test(EntityType.HORSE);
     test.find_horse(EntityType.HORSE, 40);
-    */ 
+    */
     
        
     //Buscamos un usuario especifico por ID
@@ -45,13 +45,13 @@ public class Main {
         
     //Buscamos todos los caballos de una raza y granja
     
-    
+    /*
     Test test = new Test(EntityType.HORSE);
     HorseSpec specs = new HorseSpec();
     specs.race = "Cuban";
     specs.farm = "Sundance";
     test.find_horse_by_specs(specs); 
-    
+    */
              
     }
     
