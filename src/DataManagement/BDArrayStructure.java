@@ -184,7 +184,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
     public void show_users(){
         for(int i = 0; i < this.elements.pointer; i++){
             User aux = (User) this.elements.get(i);
-            System.out.println("User " + Integer.toString(i) + ":");
+            System.out.println("\nUser " + Integer.toString(i+1) + ":");
             System.out.println(aux.id.get());
             System.out.println(aux.get_specs().user_name);
         }
@@ -195,7 +195,7 @@ public class BDArrayStructure<T> implements java.io.Serializable{
         for(int i = 0; i < this.elements.pointer; i++){
             Entity aux = (Entity) this.elements.get(i);
             HorseSpec aux2 = (HorseSpec) aux.get_specs();
-            System.out.println("Horse " + Integer.toString(i) + ":");
+            System.out.println("\nHorse " + Integer.toString(i+1) + ":");
             System.out.println(aux.id.get());
             System.out.println(aux2.name);
         }    
