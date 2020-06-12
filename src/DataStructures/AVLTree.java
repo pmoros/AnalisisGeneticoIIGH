@@ -48,7 +48,7 @@ public class AVLTree<T extends Comparable<T>>
 	}
         
 	// Buscar 
-	NodoAVL find(T d, NodoAVL r)
+	private NodoAVL find(T d, NodoAVL r)
 	{
 		if (root==null)		
 			return null;		
@@ -60,6 +60,10 @@ public class AVLTree<T extends Comparable<T>>
 			return find(d,r.left);
 	}
 	
+        public T find(T d){
+            return this.find(d, this.root).dato;
+        }
+        
 	// Factor de equilibrio
 	private int getFE(NodoAVL x)
 	{
