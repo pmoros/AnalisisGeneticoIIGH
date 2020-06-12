@@ -8,6 +8,7 @@ package DataStructures;
 
 
 public class DoublyLinkedList<T> implements List<T>{
+
     
     public class Node<T> implements java.io.Serializable{
         public T data;
@@ -78,14 +79,32 @@ public class DoublyLinkedList<T> implements List<T>{
     
     @Override
     public T find(T key) {	
-        Node auxH = this.head;
-        Node auxT = this.tail;
+        Node auxH = this.head;        
         while(auxH != null){
-            if(auxH.equals(key)) return (T)auxH.data;
+            if(auxH.data.equals(key)) return (T)auxH.data;
             
         }
         return null;
     }   
+
+    @Override
+    public T[] matches(T element) {
+        Node auxH = this.head;
+        T[] my_arr = (T[]) new Object[10];
+        int k = 0;
+        while(auxH != null){
+            if(auxH.data.equals(element)){                            
+                if(k > (my_arr.length)){      
+                    T[] aux = (T[]) new Object[10];
+                    System.arraycopy(my_arr, 0, aux, 0, my_arr.length);
+                    my_arr = aux;
+                }
+                my_arr[k] = (T)auxH.data;
+                k++;                      
+            }            
+        }
+        return my_arr;
+    }    
     
     @Override
     public T get(int index){

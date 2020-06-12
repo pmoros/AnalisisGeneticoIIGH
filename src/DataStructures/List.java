@@ -34,6 +34,9 @@ public interface List<T> extends java.io.Serializable{
     //Returns an element by key
     public T find(T element);
         
+    //Returns an array with elements
+    public T[] matches(T element);
+    
     //Deletes an element from the list
     public void delete(T element);
     

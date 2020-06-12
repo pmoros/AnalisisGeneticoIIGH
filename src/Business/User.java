@@ -54,7 +54,9 @@ public class User implements Comparable<User>, java.io.Serializable{
             this.privileges = p;
     }   
     
-    public User(AutorizationLevel p) {
+    public User(AutorizationLevel p, String user_name) {
+        this.id = new ID(EntityType.USER, hashCode(user_name));
+        this.user_name = user_name;
         this.privileges = p;
     }
 
@@ -149,6 +151,9 @@ public class User implements Comparable<User>, java.io.Serializable{
         this.last_name = last_name;
     }
 
+    public void setEmail(String mail) {
+        this.email = mail;
+    }    
     /**
      * @return the email
      */
@@ -182,18 +187,26 @@ public class User implements Comparable<User>, java.io.Serializable{
     public boolean equals(Object other1){
         User other = (User) other1;
         if(this.privileges != other.getPrivileges()) return false;
-        if(!((this.user_name != null) &&(this.user_name.equals(other.getUser_name())))){
-            return false;
-        }
-        if(!((this.password != null) &&(this.password.equals(other.getPassword())))){
-            return false;
-        }      
+        if(this.user_name != null){
+            if(!this.user_name.equals(other.getUser_name())){
+                return false;
+            }            
+        }       
+        if(this.password != null){
+            if(!this.password.equals(other.getPassword())){
+                return false;
+            }            
+        }   
         return true;    
     }    
 
     @Override
     public int compareTo(User o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.user_name.compareTo(o.getUser_name()) < 0) return -1;
+        else if(this.user_name.compareTo(o.getUser_name()) > 0) return 1;
+        else{
+            return 0;
+        }
     }
 
 }

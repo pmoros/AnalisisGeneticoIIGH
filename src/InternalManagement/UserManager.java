@@ -64,10 +64,54 @@ public class UserManager {
     
     
     
+    /**
+     * This method is used to delete the user's account once he has logged in
+     * @param user 
+     */    
     public void delete_account(User user){    
         this.database.connect(DBStructureType.USER);                
         
         this.database.current.remove(user);        
-    }               
+    }   
+    
+    /**
+     * This method is the one that the admins will be using to delete accounts
+     * @param auto_level
+     * @param user_name 
+     */
+    public void delete_account(AutorizationLevel auto_level, String user_name){
+        User my_user = new User(auto_level, user_name);
+        this.database.connect(DBStructureType.USER);
+        this.database.current.remove(my_user);    
+    }
+        
+    
+    /*
+        THE NEXT METHODS ASSOCIATED TO CHANGING USER INFO WILL BE USED BY THE ADMINS
+    */
+    public void change_account_pass_mail(AutorizationLevel auto_level, String user_name, String password, String email){
+        this.database.connect(DBStructureType.USER);
+        User my_user = new User(auto_level, user_name);
+        User aux_user = (User) this.database.current.find(my_user);
+        aux_user.setPassword(password);
+        aux_user.setEmail(email);                        
+    }  
+    
+    public void change_account_pass(AutorizationLevel auto_level, String user_name, String value){
+        this.database.connect(DBStructureType.USER);
+        User my_user = new User(auto_level, user_name);
+        User aux_user = (User) this.database.current.find(my_user);
+        aux_user.setPassword(value);                             
+    }     
+    
+    public void change_account_mail(AutorizationLevel auto_level, String user_name, String value){
+        this.database.connect(DBStructureType.USER);
+        User my_user = new User(auto_level, user_name);
+        User aux_user = (User) this.database.current.find(my_user);
+        aux_user.setEmail(value);
+    }       
+         
+    
+     
     
 }

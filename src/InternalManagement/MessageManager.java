@@ -9,6 +9,6 @@ package InternalManagement;
  *
  * @author pmoro
  */
-public class Listener {
+public class MessageManager {
     
 }

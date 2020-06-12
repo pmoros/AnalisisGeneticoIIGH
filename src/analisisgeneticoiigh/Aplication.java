@@ -79,6 +79,35 @@ public class Aplication {
     }           
     
     /**
+     * This allows the admin to delete an account without login
+     * @param auto_level
+     * @param user_name 
+     */
+    public void delete_account(AutorizationLevel auto_level, String user_name){
+        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.ADMIN) < 0) return;
+        this.user_manager.delete_account(auto_level, user_name);
+    }
+    
+    /**
+     * This allows the admin to change user's info without login
+     * @param auto_level
+     * @param user_name
+     * @param password
+     * @param email 
+     */
+    public void change_account_info(AutorizationLevel auto_level, String user_name, String password, String email){
+        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.ADMIN) < 0) return;        
+        if(!"".equals(password)&& !"".equals(email)){
+            this.user_manager.change_account_pass_mail(auto_level, user_name, password, email);
+        }
+        else if(!"".equals(password)){
+            this.user_manager.change_account_pass(auto_level, user_name, password);
+        }
+        else if(!"".equals(email)){
+            this.user_manager.change_account_mail(auto_level, user_name, email);
+        }        
+    }      
+    /**
      * Adds a single horse to the system.
      * @param register
      * @param name
@@ -92,8 +121,7 @@ public class Aplication {
      * @param mother 
      */
     public void add_horse(int register, String name, String birth_date, String color, String sex,
-            String chip, String genotype, String step, int father, int mother){
-            
+            String chip, String genotype, String step, int father, int mother){            
             this.genetic_manager.add_horse(register, name, birth_date, color, sex, chip, genotype, step, father, mother);
     }
     
@@ -103,10 +131,13 @@ public class Aplication {
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public void add_horses(String path) throws FileNotFoundException, IOException{
+    public void add_horses(String path) throws FileNotFoundException, IOException{  
+        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0) return;
         this.genetic_manager.add_horses(path);
     }
     
+    
+    //APLICATION CONTROLLERS
     
     public void save_changes(){
         this.database.save_changes();

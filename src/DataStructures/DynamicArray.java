@@ -228,4 +228,22 @@ public class DynamicArray<T> implements List<T>{
         return this.length;
     }    
 
+    @Override
+    public T[] matches(T element) {
+        T[] my_arr = (T[]) new Object[10];
+        int k= 0;
+        for(int i = 0; i < this.array.length; i++){
+            if(element.equals(this.array[i])){                
+                if(k > (my_arr.length)){      
+                    T[] aux = (T[]) new Object[10];
+                    System.arraycopy(my_arr, 0, aux, 0, my_arr.length);
+                    my_arr = aux;
+                }
+                my_arr[k] = this.array[i];
+                k++;
+            }
+        }
+        return my_arr;
+    }
+
 }
