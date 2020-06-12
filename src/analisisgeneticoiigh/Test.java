@@ -122,20 +122,20 @@ public class Test {
         System.out.printf("Time deleting single client: %d \n", end_time);         
     }
     
-    public void load_horses(int n) throws IOException{
+    public void load_horses() throws IOException{
         String pathToCsv = this.app.path + "\\data\\" + "Horses" + "1" +"k.csv";                 
         //TIMER STARTED
         this.start_time = 0;
         this.end_time = 0;       
         this.start_time = System.nanoTime();     
         
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < 1; i++){
             this.app.add_horses(pathToCsv);
         }
         
         //TIMER PAUSED
         this.end_time = (System.nanoTime() - this.start_time)/1000;
-        System.out.printf("Time adding  " + Integer.toString(n*1000) + "  horses: %d \n", end_time);      
+        System.out.printf("Time adding  " + Integer.toString(1*1000) + "  horses: %d \n", end_time);      
     }
     
     public void generate_mockup_users(int size) throws FileNotFoundException, IOException{
