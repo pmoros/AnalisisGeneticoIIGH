@@ -17,13 +17,7 @@ public class Main {
         //Test test = new Test(my_app);
         //test.full_user_management(10);               
         //my_app.save_changes();                    
-        
-        Bst<Integer> my_bst = new Bst();
-        my_bst.insert(new Integer(5));
-        my_bst.insert(new Integer(4));
-        my_bst.insert(new Integer(6));
-        my_bst.insert(new Integer(1));
-        System.out.println(Arrays.toString(my_bst.traverse_levelOrder()));
+
     }
     
 }

@@ -53,7 +53,7 @@ public class DynamicArray<T> implements List<T>{
      */
     @Override
     public T get(int index){
-        if (index < this.size){
+        if (index <= this.get_length()){
             return this.array[index];
         }
         else{
@@ -81,13 +81,12 @@ public class DynamicArray<T> implements List<T>{
      */
     @Override
     public void insert(int index, T data){
-        if (index > this.size){
-            if(index > this.length){
+        if (index >= this.size){
+            if(index >= this.length){
                 System.out.println("Index out of range");
                 return;
             }
-            this.append(data);
-            System.out.println("Added at last position.");
+            this.append(data);            
         }
         this.array[index] = data;
     }

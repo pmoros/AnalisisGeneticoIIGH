@@ -261,14 +261,14 @@ public class Bst<T extends Comparable<T>> implements BinaryTree<T> {
         T[] elements; 
         int i = 0;
         elements = (T[]) (new Comparable[this.size]);
-        ArrayDeque<BstNode> cola = new ArrayDeque<>();
-        cola.add(this.root);
-        while(!cola.isEmpty()){
-            BstNode aux = cola.poll();
+        QueueArray<BstNode> cola = new QueueArray<>();
+        cola.enqueue(this.root);
+        while(!cola.is_empty()){
+            BstNode aux = cola.dequeue();
             elements[i] = aux.data;
             i++;
-            if(aux.left != null) cola.add(aux.left);
-            if(aux.right != null) cola.add(aux.right);
+            if(aux.left != null) cola.enqueue(aux.left);
+            if(aux.right != null) cola.enqueue(aux.right);
         }
         return elements;
     }
