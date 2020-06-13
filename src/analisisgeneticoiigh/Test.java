@@ -61,32 +61,26 @@ public class Test {
      * @throws IOException 
      */
     public void sign_up_many(int size, AutorizationLevel auto_level) throws FileNotFoundException, IOException{   
-            String pathToCsv = this.app.path + "\\data\\" + "Clients" + ".csv";
-            String row;       
+            String pathToCsv = this.app.path + "\\data\\" + "Clients" + Integer.toString(size) + "k.csv";            
         //TIMER STARTED
         this.start_time = 0;
         this.end_time = 0;       
         this.start_time = System.nanoTime();                
             
-            CSVLoader reader;
-            for(int i = 0; i < size; i++){
-                reader = new CSVLoader(pathToCsv);                
-                while(reader.has_next()){
+            CSVLoader reader;            
+                reader = new CSVLoader(pathToCsv, 5);
+                String[] data;
+                while((data = reader.read_line_unrestricted()) != null){                                        
                     
-                    String[] data = reader.read_line_unrestricted();                    
-                    if(!(null != data)){
-                        continue;
-                    }
-                    
-                        String user_name = data[0]  + Integer.toString(i);
-                        String password = data[1] + Integer.toString(i);
-                        String name = data[2] + Integer.toString(i);
-                        String last_name = data[3] + Integer.toString(i);
-                        String email = data[4] + Integer.toString(i);
+                        String user_name = data[0];
+                        String password = data[1];
+                        String name = data[2];
+                        String last_name = data[3];
+                        String email = data[4];
                             
                     this.app.sign_up(auto_level, user_name, password, last_name, last_name, email);
                 }            
-            }
+            
                 
     //TIMER PAUSED
     this.end_time = (System.nanoTime() - this.start_time)/1000;
@@ -140,7 +134,7 @@ public class Test {
     
     public void generate_mockup_users(int size) throws FileNotFoundException, IOException{
         String pathToCsv = this.app.path + "\\data\\" + "Clients" + ".csv";
-        CSVLoader csv_loader = new CSVLoader(pathToCsv);
+        CSVLoader csv_loader = new CSVLoader(pathToCsv, 5);
         csv_loader.create_mockup(size);
     }
     

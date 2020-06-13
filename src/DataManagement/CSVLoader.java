@@ -21,12 +21,16 @@ import java.util.logging.Logger;
  * @author pmoro
  */
 public class CSVLoader {
+    String[] data;
     String path;
     String row;
     File csv_file;
     BufferedReader csv_reader;
+    int fields;
     
-    public CSVLoader(String path) throws FileNotFoundException{
+    public CSVLoader(String path, int fields) throws FileNotFoundException{
+        this.fields = fields;
+        this.data = new String[fields];
         this.path = path;
         this.csv_file = new File(path); 
         try ( // create BufferedReader and read data from csv
@@ -39,13 +43,27 @@ public class CSVLoader {
             }   
     }
 
-    public String[] read_line_unrestricted(){                    
-            String[] data = this.row.split(",");
-            return data;
+    public String[] read_line_unrestricted() throws IOException{     
+            this.row = this.csv_reader.readLine();                
+            if(this.row == null) return null;
+            String x = this.row + ",";
+            int iPos = 0;
+            int iStr = 0; 
+            int iNext = -1;
+            while( (iNext = x.indexOf( ',', iPos )) != -1 && iStr < this.fields ){
+                if( iNext == iPos ){
+                    this.data[iStr++] = "NA";
+                } else {
+                     this.data[iStr++] = x.substring( iPos, iNext );
+                }
+                iPos = iNext + 1;
+            }            
+            return this.data;
     }
     
-    public String[] read_line(){                    
-            String[] data = this.row.split(",");            
+    public String[] read_line() throws IOException{      
+            this.row = this.csv_reader.readLine();
+            this.data = this.row.split(",");            
             for(int i = 0; i < (data.length - 1); i++){
                 if(", ".equals(data[i]) || "".equals(data[i])) return null;
             }            
