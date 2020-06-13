@@ -9,6 +9,18 @@ package DataStructures;
 
 public class DoublyLinkedList<T> implements List<T>{
 
+    @Override
+    public T[] get_content() {
+        T[] aux_arr = (T[]) new Object[this.size];
+        int k = 0;
+        Node auxH = this.head;        
+        while(auxH != null){
+            aux_arr[k] = (T) auxH.data;
+            k++;
+        }        
+        return aux_arr;
+    }
+
     
     public class Node<T> implements java.io.Serializable{
         public T data;

@@ -16,12 +16,20 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
     public Entity(EntityType tipo, EntitySpec properties){
         this.type = tipo;
         this.specs = properties;
+        this.id = new ID(tipo, properties.register);
     }
     
     public Entity(EntitySpec properties){
         this.type = EntityType.ENTITY;
         this.specs = properties;
     }    
+    
+    public Entity(EntityType tipo, int register){
+        this.type = EntityType.ENTITY;
+        this.id = new ID(tipo, register);
+        this.specs = null;
+    }     
+    
     
     public EntitySpec get_specs(){
         return this.specs;

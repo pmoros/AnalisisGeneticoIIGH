@@ -49,7 +49,7 @@ public class UserStructure extends DBStructure{
     }
 
     @Override
-    public Object matches(Object obj) {
+    public Object[] matches(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -74,11 +74,6 @@ public class UserStructure extends DBStructure{
     }
     
     
-    //METODOS DE PRUEBA   
-    @Override
-    public DynamicArray get_content(){
-        return this.users;
-    }
     
     @Override
     public void show_content(){
@@ -95,5 +90,10 @@ public class UserStructure extends DBStructure{
     @Override
     public User get_last(){
         return (User) this.users.get(this.users.get_size());
+    }
+
+    @Override
+    public Object[] get_content() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

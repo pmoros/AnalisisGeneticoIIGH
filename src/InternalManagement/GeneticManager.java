@@ -12,6 +12,7 @@ import Business.HorseSpec;
 import DataManagement.CSVLoader;
 import DataManagement.DBPointer;
 import DataManagement.DBStructureType;
+import DataStructures.AVLTree;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -112,5 +113,31 @@ public class GeneticManager {
                 }                
     }
     
+    public Entity find_animal(EntityType type, int register){
+        this.database.connect(DBStructureType.ENTITY);                        
+        Entity my_entity = new Entity(type, register);
+        return (Entity) this.database.current.find(my_entity);        
+    }
     
+    public void delete_animal(EntityType type, int register){
+        this.database.connect(DBStructureType.ENTITY);
+        Entity my_entity = new Entity(type, register);
+        this.database.current.remove(my_entity);
+    }    
+    
+    public Entity[] matches(EntityType type, EntitySpec specs){
+        this.database.connect(DBStructureType.ENTITY);                        
+        Entity my_entity = new Entity(type, specs);
+        return (Entity[]) this.database.current.matches(my_entity);
+    }
+    
+    public void delete_by_specs(EntityType type, EntitySpec specs){
+        this.database.connect(DBStructureType.ENTITY);
+        Entity my_entity = new Entity(type, specs);
+        this.database.current.remove_based_on(my_entity);
+    }
+    public Entity[] get_all_animals(){
+        this.database.connect(DBStructureType.ENTITY);                        
+        return (Entity[]) this.database.current.get_content();
+    }
 }

@@ -29,22 +29,25 @@ public class EntityStructure extends DBStructure{
 
     @Override
     public void remove(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.elements.delete((Entity) obj);
     }
 
     @Override
     public void remove_based_on(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Entity[] matched = this.elements.matches((Entity)obj);
+        for (Entity matched1 : matched) {
+            this.remove(matched1);
+        }
     }
 
     @Override
     public Object find(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.elements.find((Entity) obj);
     }
 
     @Override
-    public Object matches(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object[] matches(Object obj) {
+        return (Entity[]) this.elements.matches((Entity) obj);
     }
 
     @Override
@@ -77,8 +80,8 @@ public class EntityStructure extends DBStructure{
     }
 
     @Override
-    public List get_content() {
-        return this.elements;
+    public Entity[] get_content() {
+        return (Entity[]) this.elements.get_content();
     }
 
     @Override

@@ -48,4 +48,6 @@ public interface List<T> extends java.io.Serializable{
     
     //Returns the capacity of the list
     public int get_length();
+    
+    public Object[] get_content();
 }

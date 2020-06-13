@@ -116,7 +116,7 @@ public class Test {
         System.out.printf("Time deleting single client: %d \n", end_time);         
     }
     
-    private void load_horses() throws IOException{
+    private void load_horses() throws IOException, FileNotFoundException, ClassNotFoundException{
         String pathToCsv = this.app.path + "\\data\\" + "Horses" + "1" +"k.csv";                 
         //TIMER STARTED
         this.start_time = 0;

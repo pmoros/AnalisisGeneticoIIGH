@@ -10,10 +10,6 @@ import InternalManagement.GeneticManager;
 import InternalManagement.UserManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -121,7 +117,11 @@ public class Aplication {
      * @param mother 
      */
     public void add_horse(int register, String name, String birth_date, String color, String sex,
-            String chip, String genotype, String step, int father, int mother){            
+            String chip, String genotype, String step, int father, int mother) throws ClassNotFoundException{    
+                if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
             this.genetic_manager.add_horse(register, name, birth_date, color, sex, chip, genotype, step, father, mother);
     }
     
@@ -131,12 +131,62 @@ public class Aplication {
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public void add_horses(String path) throws FileNotFoundException, IOException{  
-        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0) return;
+    public void add_horses(String path) throws FileNotFoundException, IOException, ClassNotFoundException{  
+        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
         this.genetic_manager.add_horses(path);
     }
     
     
+    /**
+     * Finds an animal based in the register
+     * @param type
+     * @param register
+     * @return 
+     */
+    public Entity find_animal(EntityType type, int register) throws ClassNotFoundException{
+        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
+        return this.genetic_manager.find_animal(type, register);        
+    }
+      
+    public Entity[] matches(EntityType type, EntitySpec specs) throws ClassNotFoundException{
+                if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
+        return this.genetic_manager.matches(type, specs);
+    }    
+    
+    public void delete_animal(EntityType type, int register) throws ClassNotFoundException{
+        if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
+        this.genetic_manager.delete_animal(type, register);
+    }    
+    
+    public void delete_by_specs(EntityType type, EntitySpec specs) throws ClassNotFoundException{
+                if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
+                
+        this.genetic_manager.delete_by_specs(type, specs);
+    }    
+    
+    public Entity[] get_all_animals() throws ClassNotFoundException{
+                if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
+            System.out.println();
+            throw new ClassNotFoundException("Not allowed here!");
+        } 
+                
+        return this.genetic_manager.get_all_animals();
+    }    
     //APLICATION CONTROLLERS
     
     public void save_changes(){
@@ -159,4 +209,5 @@ public class Aplication {
         this.database.connect(DBStructureType.USER);        
         return (User) this.database.current.get_last();
     }    
+    
 }

@@ -5,6 +5,8 @@
  */
 package DataStructures;
 
+import Business.Entity;
+
 /**
  *
  * @author pmoro
@@ -244,6 +246,11 @@ public class DynamicArray<T> implements List<T>{
             }
         }
         return my_arr;
+    }
+
+    @Override
+    public Object[] get_content() {
+        return (Entity[]) this.array;
     }
 
 }
