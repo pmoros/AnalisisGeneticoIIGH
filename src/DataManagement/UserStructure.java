@@ -8,38 +8,41 @@ package DataManagement;
 import Business.EntityType;
 import Business.ID;
 import Business.User;
+import DataStructures.AVLTree;
 import DataStructures.DynamicArray;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author pmoro
  */
 public class UserStructure extends DBStructure{    
-    public DynamicArray<User> users;
+    public AVLTree<User> users;
     public String self_path;        
     
     public UserStructure(String path, String identifier){        
         this.self_path = path + "\\" + identifier;
-        this.users = new DynamicArray();        
+        this.users = new AVLTree();       
     }        
     
     @Override
     public void add(Object obj) {
-        User my_user = (User) obj;        
-        if(this.users.contains(my_user)){
-            System.out.println("The user" + my_user.getUser_name() +" has already been created.");
-            return;
-        }        
-        this.users.append(my_user);        
+        User my_user = (User) obj;             
+        try {        
+            this.users.insert(my_user);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserStructure.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void remove(Object obj) {
-        this.users.delete((User)obj);
+        this.users.remove((User) obj);
     }
 
     @Override
     public void remove_based_on(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //this.users.           //ADD THIS TO THE AVL
     }
 
     @Override
@@ -77,23 +80,21 @@ public class UserStructure extends DBStructure{
     
     @Override
     public void show_content(){
-        for(int i = 0; i < this.users.get_size(); i++){
-            System.out.println(this.users.get(i).getUser_name()+ "        "  + this.users.get(i).getPassword());
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int get_size() {
-        return this.users.get_size();
+        return this.users.size;
     }
     
     @Override
     public User get_last(){
-        return (User) this.users.get(this.users.get_size());
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object[] get_content() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.users.traverse_inOrder();
     }
 }

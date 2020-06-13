@@ -123,9 +123,7 @@ public class Test {
         this.end_time = 0;       
         this.start_time = System.nanoTime();     
         
-        for(int i = 0; i < 1; i++){
-            this.app.add_horses(pathToCsv);
-        }
+            this.app.add_horses(pathToCsv);        
         
         //TIMER PAUSED
         this.end_time = (System.nanoTime() - this.start_time)/1000;

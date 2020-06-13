@@ -31,9 +31,10 @@ public class UserManager {
      * @param first_name
      * @param last_name
      * @param email
+     * @throws java.lang.ClassNotFoundException
      */    
     public void sign_up(AutorizationLevel autolevel, String user_name,
-                        String password, String first_name,String last_name, String email){                       
+                        String password, String first_name,String last_name, String email) throws ClassNotFoundException{                       
        
        this.database.connect(DBStructureType.USER);         
         

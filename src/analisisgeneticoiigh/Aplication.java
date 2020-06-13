@@ -48,8 +48,12 @@ public class Aplication {
      */
     public void sign_up(AutorizationLevel autolevel, String user_name,
                         String password, String first_name,String last_name, String email){
-                
+        try{       
         this.user_manager.sign_up(autolevel, user_name, password, first_name, last_name, email);
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("The user has already been added.");
+        }
     }  
     
     /**

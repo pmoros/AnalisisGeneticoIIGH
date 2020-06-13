@@ -72,4 +72,9 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
     public void show_attributes(){
         System.out.println(Integer.toString(this.register) + "  " + this.name);
     }
+    
+    @Override
+        public Integer GetRegister(){
+        return this.register;
+    }
 }

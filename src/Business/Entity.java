@@ -14,14 +14,16 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
     private final EntitySpec specs;  
         
     public Entity(EntityType tipo, EntitySpec properties){
+        Integer aux = 0;
         this.type = tipo;
         this.specs = properties;
-        this.id = new ID(tipo, properties.register);
+        aux = properties.GetRegister();
+        this.id = new ID(tipo, aux);
     }
     
     public Entity(EntitySpec properties){
         this.type = EntityType.ENTITY;
-        this.specs = properties;
+        this.specs = properties;        
     }    
     
     public Entity(EntityType tipo, int register){
@@ -51,7 +53,11 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
      */
     @Override
     public int compareTo(Entity o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.id.compareTo(o.id) < 0) return -1;
+        else if(this.id.compareTo(o.id) > 0) return 1;
+        else{
+            return 0;
+        }
     }
 
 

@@ -10,15 +10,15 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {        
         //Aplication.reset();
-        Aplication my_app =  new Aplication();        
-        Test test = new Test(my_app);                      
+        Aplication my_app =  new Aplication();                
+        Test test = new Test(my_app);                         
         test.horse_loading();       
-        Entity finded_animal = my_app.find_animal(EntityType.HORSE, 62245);
-        finded_animal.get_specs().show_attributes();
-        //test.full_user_management(1);               
+        Entity finded_animal = my_app.find_animal(EntityType.HORSE, 297478);
+        System.out.println("My animal is:");
+        finded_animal.get_specs().show_attributes();        
+        //test.full_user_management(100);                       
         //my_app.save_changes();
-        // TODO code application logic here
-     
+        // TODO code application logic here        
     }
     
 }

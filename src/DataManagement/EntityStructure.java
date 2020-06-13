@@ -7,37 +7,49 @@ package DataManagement;
 
 import Business.ID;
 import Business.Entity;
+import DataStructures.AVLTree;
 import DataStructures.DynamicArray;
 import DataStructures.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author pmoro
  */
 public class EntityStructure extends DBStructure{
-    public DynamicArray<Entity> elements;
+    public AVLTree<Entity> elements;
     public String self_path;
     
     public EntityStructure(String path, String identifier){
         this.self_path = path + "\\" + identifier;
-        this.elements = new DynamicArray();
+        this.elements = new AVLTree();
     }    
     
     @Override
     public void add(Object obj) {
-        this.elements.append( (Entity) obj);
+        try {
+            this.elements.insert((Entity) obj);
+        } catch (ClassNotFoundException ex) {
+            Entity aux = (Entity) obj;
+            System.out.println("This horse has already been added: ");
+            aux.get_specs().show_attributes();
+        }
     }
 
     @Override
     public void remove(Object obj) {
-        this.elements.delete((Entity) obj);
+        this.elements.remove((Entity) obj);
     }
 
     @Override
     public void remove_based_on(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*
         Entity[] matched = this.elements.matches((Entity)obj);
         for (Entity matched1 : matched) {
             this.remove(matched1);
         }
+                */
     }
 
     @Override
@@ -47,7 +59,10 @@ public class EntityStructure extends DBStructure{
 
     @Override
     public Object[] matches(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*
         return (Entity[]) this.elements.matches((Entity) obj);
+               */
     }
 
     @Override
@@ -73,25 +88,22 @@ public class EntityStructure extends DBStructure{
     //METODO DE PRUEBA
     @Override
     public void show_content() {
-        for(int i = 0; i <= this.elements.get_size(); i++){
-            System.out.println(this.elements.get(i).type);
-            this.elements.get(i).get_specs().show_attributes();
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Entity[] get_content() {
-        return (Entity[]) this.elements.get_content();
+        return (Entity[]) this.elements.traverse_inOrder();
     }
 
     @Override
     public int get_size() {
-        return this.elements.get_size();
+        return this.elements.size;
     }
 
     @Override
     public Object get_last() {
-        return this.elements.get(this.elements.get_size());
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

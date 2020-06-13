@@ -5,16 +5,18 @@
  */
 package Business;
 
+import java.util.Objects;
+
 /**
  *
  * @author Rock
  */
-public class ID implements java.io.Serializable{
+public class ID implements Comparable, java.io.Serializable{
     
-    private final int value;
-    private final EntityType type;    
+    private Integer value;
+    private EntityType type;    
     
-    public ID(EntityType t, int val){
+    public ID(EntityType t, Integer val){
         this.type = t;
         this.value = val;
     }
@@ -29,13 +31,13 @@ public class ID implements java.io.Serializable{
     
     public boolean equals(ID other){
         if(other.get_type().equals(other.get_type())){
-            return (this.value == other.value);
+            return (Objects.equals(this.value, other.value));
         }
         return false;
     }
      
-    public int compare_to(ID other){
-        if (this.value == other.value){
+    private int compare_to(ID other){
+        if (Objects.equals(this.value, other.value)){
             return 0;
         }
         else if(this.value > other.value){
@@ -51,6 +53,13 @@ public class ID implements java.io.Serializable{
         String aux = Integer.toString(this.value);
         return (this.type.name() + aux);
     
+    }
+
+
+
+    @Override
+    public int compareTo(Object o) {
+        return this.compare_to((ID) o);
     }
     
 }

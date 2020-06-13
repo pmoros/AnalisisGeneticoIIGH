@@ -10,8 +10,7 @@ package Business;
  * @author pmoro
  */
 public class EntitySpec implements java.io.Serializable{
-    
-    protected int register;
+        
     public boolean equals(EntitySpec searched){
         return false;
     }
@@ -19,5 +18,8 @@ public class EntitySpec implements java.io.Serializable{
     public void show_attributes(){
     
     }
-       
+      
+    public Integer GetRegister(){
+        return 0;
+    }    
 }

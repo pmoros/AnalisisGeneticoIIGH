@@ -5,6 +5,7 @@
  */
 package DataStructures;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,10 +14,10 @@ import java.util.logging.Logger;
  * @author Juan David Gonzales
  * @param <T>
  */
-public class AVLTree<T extends Comparable<T>>
+public class AVLTree<T extends Comparable<T>> implements Serializable
 {
     
-    private class NodoAVL
+    private class NodoAVL implements Serializable
     {
             T dato;
             int fe; // Factor de equilibrio
@@ -52,7 +53,7 @@ public class AVLTree<T extends Comparable<T>>
 	{
 		if (root==null)		
 			return null;		
-		else if (r.dato.equals(d))		
+		else if (r.dato.compareTo(d) == 0)		
 			return r;		
 		else if ((r.dato.compareTo(d) < 0))		
 			return find(d,r.right);		
@@ -160,8 +161,8 @@ public class AVLTree<T extends Comparable<T>>
 			}
 		}
 		else
-		{
-                        throw  new Class­Not­Found­Exception("The value already exist.");			
+		{                        
+                    throw  new Class­Not­Found­Exception("The value already exist.");			
 		}
 		// Update FE
 		if((subtree.left==null)&&(subtree.right!=null))
@@ -182,18 +183,14 @@ public class AVLTree<T extends Comparable<T>>
 	// Insertar
         
     
-	public void insert(T d)
+	public void insert(T d) throws ClassNotFoundException
 	{
 		NodoAVL nuevo=new NodoAVL(d);
 		if (root==null)		
 			root=nuevo;
-		else
-			try {
+		else	
                             root=inserteq(nuevo, root);
                             this.size++;
-                } catch (ClassNotFoundException ex) {
-                    
-                }
 	}
         
    
