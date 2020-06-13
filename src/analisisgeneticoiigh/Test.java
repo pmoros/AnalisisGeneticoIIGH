@@ -116,7 +116,7 @@ public class Test {
         System.out.printf("Time deleting single client: %d \n", end_time);         
     }
     
-    public void load_horses() throws IOException{
+    private void load_horses() throws IOException{
         String pathToCsv = this.app.path + "\\data\\" + "Horses" + "1" +"k.csv";                 
         //TIMER STARTED
         this.start_time = 0;
@@ -147,6 +147,11 @@ public class Test {
         this.delete_user(AutorizationLevel.ADMIN, "sitovive", "696wq");
     }
     
+    public void horse_loading() throws ClassNotFoundException, IOException{
+        this.sign_up(AutorizationLevel.WORKER, "sito", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");
+        this.login_user(AutorizationLevel.WORKER, "sito", "696wq");
+        this.load_horses();
+    }
     public void show_users(int i) throws IOException{
         this.sign_up_many(i, AutorizationLevel.CLIENT);
         this.app.show_content(EntityType.USER);        

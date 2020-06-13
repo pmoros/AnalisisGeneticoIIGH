@@ -71,26 +71,21 @@ public class GeneticManager {
      */
     public void add_horses(String path) throws FileNotFoundException, IOException{        
         String[] data;
-        CSVLoader reader = new CSVLoader(path);                
-        reader.has_next();
-        reader.has_next();
-        data = reader.read_line_unrestricted();
+        CSVLoader reader = new CSVLoader(path, 9);                
+        reader.has_next();        
+        reader.has_next();                               
+        data = reader.read_line_only_parse();
         Integer father_code = Integer.valueOf(data[2]);
         reader.has_next();
         reader.has_next();
         
-                while(reader.has_next()){                    
-                    data = reader.read_line(); 
+                while(reader.has_next()){ 
                     
-                    if(!(null != data)){                                                
-                        data = reader.read_line_unrestricted();                                                                                                                        
-                        if("".equals(data[0]) || ", ".equals(data[0])) continue;
-                        System.out.println("Trouble adding horse:");                        
-                        System.out.println(data[0] + "  " + data[1]);
-                    }                        
+                    data = reader.read_line_only_parse();                    
                     Pattern p = Pattern.compile("([0-9])");
                     Matcher m1 = p.matcher(data[0]);
                     Matcher m2 = p.matcher(data[2]);
+                    if("".equals(data[0])) continue;
                     if(!m1.find()){ 
                         if("REGISTRO".equals(data[0])) continue;
                         System.out.println("Trouble adding horse: ");
@@ -114,7 +109,7 @@ public class GeneticManager {
                         Integer mother = Integer.valueOf(data[8]);
                     this.add_horse(registro, name, date_nto, color, sexo, chip, geno, andar,
                     father_code, mother);
-                }        
+                }                
     }
     
     

@@ -43,6 +43,10 @@ public class CSVLoader {
             }   
     }
 
+    public String[] read_line_only_parse() throws IOException{        
+        return this.row.split(",");
+    }
+    
     public String[] read_line_unrestricted() throws IOException{     
             this.row = this.csv_reader.readLine();                
             if(this.row == null) return null;
@@ -52,7 +56,7 @@ public class CSVLoader {
             int iNext = -1;
             while( (iNext = x.indexOf( ',', iPos )) != -1 && iStr < this.fields ){
                 if( iNext == iPos ){
-                    this.data[iStr++] = "NA";
+                    return null;
                 } else {
                      this.data[iStr++] = x.substring( iPos, iNext );
                 }

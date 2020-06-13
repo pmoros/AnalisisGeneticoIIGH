@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {        
         //Aplication.reset();
         Aplication my_app =  new Aplication();        
-        //Test test = new Test(my_app);
-        //test.load_horses();
+        Test test = new Test(my_app);
+        test.horse_loading();
         //test.full_user_management(10);               
         //my_app.save_changes();
         
