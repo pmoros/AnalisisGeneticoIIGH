@@ -21,6 +21,11 @@ public class ID implements Comparable, java.io.Serializable{
         this.value = val;
     }
     
+    public ID(Long val){
+        this.type = EntityType.ENTITY;
+        this.value = val;
+    }    
+    
     public Long get_value(){
         return this.value;
     }
@@ -30,7 +35,7 @@ public class ID implements Comparable, java.io.Serializable{
     }
     
     public boolean equals(ID other){
-        if(other.get_type().equals(other.get_type())){
+        if(this.get_type().equals(other.get_type())){
             return (Objects.equals(this.value, other.value));
         }
         return false;

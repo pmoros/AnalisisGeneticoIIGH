@@ -16,6 +16,7 @@ public class DoublyLinkedList<T> implements List<T>{
         Node auxH = this.head;        
         while(auxH != null){
             aux_arr[k] = (T) auxH.data;
+            auxH = auxH.next;
             k++;
         }        
         return aux_arr;
@@ -34,8 +35,8 @@ public class DoublyLinkedList<T> implements List<T>{
         }
     }
 
-    int size = 0;
-    Node<T> head;
+    public int size = 0;
+    public Node<T> head;
     Node<T> tail;
     
     public void DoubleLinkedList(){
@@ -66,6 +67,7 @@ public class DoublyLinkedList<T> implements List<T>{
            this.head = node;
            this.tail = node;
            this.size++;
+           return;
        }
        Node aux = this.tail;       
        this.tail = node;
@@ -131,13 +133,10 @@ public class DoublyLinkedList<T> implements List<T>{
         return this.head.data;
     }    
     
-    public T pop_front() {
-        T data_aux = this.head.data;
+    public void pop_front() {        
         Node aux = this.head;
-        this.head = aux.next;        
-        this.head.prev = null;
-        this.size--;
-        return data_aux;
+        this.head = aux.next;                
+        this.size--;        
     }
     
     @Override
@@ -211,8 +210,7 @@ public class DoublyLinkedList<T> implements List<T>{
         //Fix later 
         if (this.head == null) return 0;
         return this.size+ 1;
-    }
-    
+    }    
     
 
      

@@ -13,7 +13,7 @@ import Business.Entity;
  * @param <T>
  */
 public class DynamicArray<T> implements List<T>{
-    T []array;
+    public T []array;
     private int length = 10;
     private int size = 0;
     
@@ -250,7 +250,14 @@ public class DynamicArray<T> implements List<T>{
 
     @Override
     public Object[] get_content() {
-        return (Entity[]) this.array;
+        Object[] copy = new Object[this.size]; 
+        int k = 0;
+        for(int i = 0; i < this.length; i++){
+            if(this.array[i] == null) continue;
+            copy[k] = this.array[i];
+            k++;
+        }
+        return copy;
     }
 
 }

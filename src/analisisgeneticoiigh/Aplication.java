@@ -6,6 +6,8 @@
 package analisisgeneticoiigh;
 import Business.*;
 import DataManagement.*;
+import InternalManagement.AnalysisManager;
+import InternalManagement.BusinessManager;
 import InternalManagement.GeneticManager;
 import InternalManagement.Listener;
 import InternalManagement.UserManager;
@@ -19,12 +21,13 @@ import java.io.IOException;
 public class Aplication {  
     //Modify later to make all attributes static
     public String path;
-    private DBPointer database;
-    public Listener listener; //Revisar si puede ser static
+    private DBPointer database;   
     private UserManager user_manager;
     private GeneticManager genetic_manager;
-    
-    
+    public AnalysisManager analisis_manager;
+    public  BusinessManager business_manager;
+    public Listener listener; //Revisar si puede ser static
+            
     public User current_user;       
     
     public Aplication(){        
@@ -33,11 +36,13 @@ public class Aplication {
         //CADA UNO SE CONSTRUYE CON EL DBPointer
         this.user_manager = new UserManager(this.database);
         this.genetic_manager = new GeneticManager(this.database);
+        this.analisis_manager = new AnalysisManager(this.database);
+        this.business_manager = new BusinessManager(this.analisis_manager, this.database);
         this.path = this.database.path;
     }
     
     
-    
+//######- FUNCIONES DE CONTROL DE CUENTAS-#############    
     /**
      * Adds and stores an user
      * @param autolevel autorization level
@@ -55,6 +60,7 @@ public class Aplication {
         catch(ClassNotFoundException e){
             System.out.println("The user has already been added.");
         }
+                
     }  
     
     /**
@@ -76,7 +82,7 @@ public class Aplication {
      */
     public void delete_account(){        
         this.user_manager.delete_account(this.current_user);
-        this.current_user = null;
+        this.current_user = null;        
     }           
     
     /**
@@ -86,7 +92,7 @@ public class Aplication {
      */
     public void delete_account(AutorizationLevel auto_level, String user_name){
         if(this.current_user.getPrivileges().compareTo(AutorizationLevel.ADMIN) < 0) return;
-        this.user_manager.delete_account(auto_level, user_name);
+        this.user_manager.delete_account(auto_level, user_name);        
     }
     
     /**
@@ -106,8 +112,11 @@ public class Aplication {
         }
         else if(!"".equals(email)){
             this.user_manager.change_account_mail(auto_level, user_name, email);
-        }        
-    }      
+        }          
+    }     
+    
+    
+//#######-FUNCIONES DE GENETICA-#########
     /**
      * Adds a single horse to the system.
      * @param register
@@ -127,7 +136,7 @@ public class Aplication {
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
         } 
-            this.genetic_manager.add_horse(register, name, birth_date, color, sex, chip, genotype, step, father, mother);
+            this.genetic_manager.add_horse(register, name, birth_date, color, sex, chip, genotype, step, father, mother);            
     }
     
     /**
@@ -141,7 +150,7 @@ public class Aplication {
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
         } 
-        this.genetic_manager.add_horses(path);
+        this.genetic_manager.add_horses(path);        
     }
     
     
@@ -157,7 +166,7 @@ public class Aplication {
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
         } 
-        return this.genetic_manager.find_animal(type, register);        
+        return this.genetic_manager.find_animal(type, register);                
     }
       
     public Entity[] matches(EntityType type, EntitySpec specs) throws ClassNotFoundException{
@@ -173,7 +182,7 @@ public class Aplication {
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
         } 
-        this.genetic_manager.delete_animal(type, register);
+        this.genetic_manager.delete_animal(type, register);        
     }    
     
     public void delete_by_specs(EntityType type, EntitySpec specs) throws ClassNotFoundException{
@@ -182,30 +191,75 @@ public class Aplication {
             throw new ClassNotFoundException("Not allowed here!");
         } 
                 
-        this.genetic_manager.delete_by_specs(type, specs);
+        this.genetic_manager.delete_by_specs(type, specs);        
     }    
     
     public Entity[] get_all_animals() throws ClassNotFoundException{
                 if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
-        } 
-                
+        }                 
         return this.genetic_manager.get_all_animals();
     }    
     //APLICATION CONTROLLERS
     
     public void save_changes(){
         this.database.save_changes();
+        this.analisis_manager.save_changes();
     }
     
     public static void reset(){
         DBPointer my_del = new DBPointer("DATABASE");
-        my_del.reset();
+        AnalysisManager anl = new AnalysisManager(my_del);
+        anl.reset();
+        my_del.reset();        
+    }
+
+//##################-FUNCIONES DE MANEJO DE ANALISIS-###################
+    public Long create_analysis(String username_client, String[] usernames_employees, String description) throws ClassNotFoundException{
+        ID aux = this.business_manager.create_analysis(username_client, usernames_employees, description);
+        Long val = aux.get_value();
+        System.out.println("Added analysis: " + val);        
+        return val;
     }
     
+    public void delete_analysis(Long id){        
+        this.business_manager.delete_analysis(id);        
+    }    
     
-    //#########################################################################
+    public void add_employee(Long id_analysis, String user_employee){
+        this.business_manager.add_employee(id_analysis, user_employee);
+    }    
+    
+    public void delete_employee(Long id_analysis, String user_employee){
+        this.business_manager.delete_employee(id_analysis, user_employee);
+    } 
+    
+    
+//###################-FUNCIONES INTERNAS DE LOS ANALISIS-###############  
+    
+    public void load_analysis(Long id){        
+        this.analisis_manager.load_analysis(id);
+    }    
+    
+    public void add_entity(EntityType type, Long register){
+        this.analisis_manager.add_entity(type, register);
+    }  
+    
+    public void remove_entity(EntityType type, Long register){
+        this.analisis_manager.remove_entity(type, register);
+    }
+    
+    public void add_many_entity(EntityType type, HorseSpec specs){
+        this.analisis_manager.add_many_entity(type, specs);
+    }    
+    
+    public void remove_many_entity(EntityType type, HorseSpec specs){
+        this.analisis_manager.remove_many_entity(type, specs);
+    }    
+    
+//###################-FUNCIONES PROPIAS DE LA APLICACIÓN-################
+    
     //METODO DE PRUEBA
     public void show_content(EntityType type){
         this.database.show_content(type);
