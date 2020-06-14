@@ -10,5 +10,11 @@ package InternalManagement;
  * @author pmoro
  */
 public class Listener {
+    private MessageManager message_manager;
+    private RequestManager request_manager;
+    private AnalysisManager analysis_manager; //TEMPORAL, TOCA REVISAR ESTO
     
+    public Listener(){
+    
+    }
 }
