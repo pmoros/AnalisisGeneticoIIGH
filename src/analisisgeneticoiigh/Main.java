@@ -13,24 +13,22 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {        
         //Aplication.reset();
-        /*
+        
         Aplication my_app =  new Aplication();                
+        
         
         my_app.sign_up(AutorizationLevel.WORKER, "sito", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");
         my_app.login(AutorizationLevel.WORKER, "sito", "696wq");
-        HorseSpec specs = new HorseSpec();
-        specs.sex = "MACHO";
+        Entity my_horse = my_app.find_animal(EntityType.HORSE, 62245L);
+        my_horse.get_specs().show_attributes();
         
-        Entity[] result = my_app.matches(EntityType.HORSE, specs);
-        my_app.delete_by_specs(EntityType.HORSE, specs);
-        result = my_app.matches(EntityType.HORSE, specs);  
-                */
+            
         
-        //Test test = new Test(my_app);                              
+        //Test test = new Test(my_app);                                      
         //test.horse_loading();
         //test.full_user_management(1);                       
         //my_app.save_changes();        
-        System.out.println(IDGenerator.full());
+
     }
     
 }

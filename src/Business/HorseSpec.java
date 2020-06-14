@@ -13,11 +13,11 @@ import DataStructures.*;
  */
 public class HorseSpec extends EntitySpec implements java.io.Serializable{
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private Integer register = null;
+    private Long register = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private Integer register_father = null;
+    private Long register_father = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private Integer register_mother = null;
+    private Long register_mother = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
     private String name = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
@@ -28,8 +28,8 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
         
     }
     
-    public HorseSpec(int register, String name, String birth_date, String color, String sex,
-            String chip, String genotype, String step, int father, int mother){
+    public HorseSpec(Long register, String name, String birth_date, String color, String sex,
+            String chip, String genotype, String step, Long father, Long mother){
         this.register = register;
         this.name = name;
         this.birth_date = birth_date;
@@ -46,7 +46,7 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
     @Override
     public boolean equals(EntitySpec s){
             HorseSpec searched = (HorseSpec) s;
-            if(((this.getRegister() != null) && !(this.register.equals(searched.register)))){
+            if(((this.GetRegister() != null) && !(this.register.equals(searched.register)))){
                 return false;
             }
             if(((this.getName() != null) && !(this.name.equals(searched.name)))){
@@ -81,53 +81,50 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
     
     @Override
     public void show_attributes(){
-        System.out.println(Integer.toString(this.getRegister()) + "  " + this.getName());
+        System.out.println(Long.toString(this.GetRegister()) + "  " + this.getName());
     }
     
     @Override
-        public Integer GetRegister(){
-        return this.getRegister();
+        public Long GetRegister(){
+        return this.register;
     }
 
     /**
      * @return the register
      */
-    public Integer getRegister() {
-        return register;
-    }
 
     /**
      * @param register the register to set
      */
-    public void setRegister(Integer register) {
+    public void setRegister(Long register) {
         this.register = register;
     }
 
     /**
      * @return the register_father
      */
-    public Integer getRegister_father() {
+    public Long getRegister_father() {
         return register_father;
     }
 
     /**
      * @param register_father the register_father to set
      */
-    public void setRegister_father(Integer register_father) {
+    public void setRegister_father(Long register_father) {
         this.register_father = register_father;
     }
 
     /**
      * @return the register_mother
      */
-    public Integer getRegister_mother() {
+    public Long getRegister_mother() {
         return register_mother;
     }
 
     /**
      * @param register_mother the register_mother to set
      */
-    public void setRegister_mother(Integer register_mother) {
+    public void setRegister_mother(Long register_mother) {
         this.register_mother = register_mother;
     }
 

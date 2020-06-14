@@ -121,8 +121,8 @@ public class Aplication {
      * @param father
      * @param mother 
      */
-    public void add_horse(int register, String name, String birth_date, String color, String sex,
-            String chip, String genotype, String step, int father, int mother) throws ClassNotFoundException{    
+    public void add_horse(Long register, String name, String birth_date, String color, String sex,
+            String chip, String genotype, String step, Long father, Long mother) throws ClassNotFoundException{    
                 if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
@@ -150,8 +150,9 @@ public class Aplication {
      * @param type
      * @param register
      * @return 
+     * @throws java.lang.ClassNotFoundException 
      */
-    public Entity find_animal(EntityType type, int register) throws ClassNotFoundException{
+    public Entity find_animal(EntityType type, Long register) throws ClassNotFoundException{
         if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");
@@ -167,7 +168,7 @@ public class Aplication {
         return this.genetic_manager.matches(type, specs);
     }    
     
-    public void delete_animal(EntityType type, int register) throws ClassNotFoundException{
+    public void delete_animal(EntityType type, Long register) throws ClassNotFoundException{
         if(this.current_user.getPrivileges().compareTo(AutorizationLevel.WORKER) < 0){
             System.out.println();
             throw new ClassNotFoundException("Not allowed here!");

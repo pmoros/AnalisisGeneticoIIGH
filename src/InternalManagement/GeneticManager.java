@@ -55,8 +55,8 @@ public class GeneticManager {
      * @param father
      * @param mother 
      */
-    public void add_horse(int register, String name, String birth_date, String color, String sex,
-            String chip, String genotype, String step, int father, int mother){        
+    public void add_horse(Long register, String name, String birth_date, String color, String sex,
+            String chip, String genotype, String step, Long father, Long mother){        
         
         HorseSpec specs = new HorseSpec(register, name, birth_date, color, sex,
             chip, genotype, step, father, mother);        
@@ -76,7 +76,7 @@ public class GeneticManager {
         reader.has_next();        
         reader.has_next();                               
         data = reader.read_line_only_parse();
-        Integer father_code = Integer.valueOf(data[2]);
+        Long father_code = Long.valueOf(data[2]);
         reader.has_next();
         reader.has_next();
         
@@ -99,7 +99,7 @@ public class GeneticManager {
                         System.out.println(data[0] +"  " + data[1]);                        
                         continue;
                     }                    
-                        Integer registro = Integer.valueOf(data[0]);
+                        Long registro = Long.valueOf(data[0]);
                         String name = data[1];
                         String date_nto = data[2];
                         String color = data[3];
@@ -107,19 +107,19 @@ public class GeneticManager {
                         String chip = data[5];
                         String geno = data[6];
                         String andar = data[7];                                                
-                        Integer mother = Integer.valueOf(data[8]);
+                        Long mother = Long.valueOf(data[8]);
                     this.add_horse(registro, name, date_nto, color, sexo, chip, geno, andar,
                     father_code, mother);
                 }                
     }
     
-    public Entity find_animal(EntityType type, int register){
+    public Entity find_animal(EntityType type, Long register){
         this.database.connect(DBStructureType.ENTITY);                        
         Entity my_entity = new Entity(type, register);
         return (Entity) this.database.current.find(my_entity);        
     }
     
-    public void delete_animal(EntityType type, int register){
+    public void delete_animal(EntityType type, Long register){
         this.database.connect(DBStructureType.ENTITY);
         Entity my_entity = new Entity(type, register);
         this.database.current.remove(my_entity);

@@ -19,7 +19,7 @@ public class EntitySpec implements java.io.Serializable{
     
     }
       
-    public Integer GetRegister(){
-        return 0;
+    public Long GetRegister(){
+        return 0L;
     }    
 }

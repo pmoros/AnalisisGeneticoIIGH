@@ -30,9 +30,9 @@ public class User implements Comparable<User>, java.io.Serializable{
         private Analysis current_analysis;                
         
         
-    private static int hashCode(String string) {
+    private static Long hashCode(String string) {
         final int PRIME = 31;
-        return string != null ? string.hashCode() * PRIME : 0;  // PRIME = 31 or another prime number.
+        return string != null ? Long.valueOf(string.hashCode()) * PRIME : 0;  // PRIME = 31 or another prime number.
     }
     
     public User(AutorizationLevel p, String user_name, String password, String first_name, String last_name, String email){

@@ -13,15 +13,15 @@ import java.util.Objects;
  */
 public class ID implements Comparable, java.io.Serializable{
     
-    private Integer value;
+    private Long value;
     private EntityType type;    
     
-    public ID(EntityType t, Integer val){
+    public ID(EntityType t, Long val){
         this.type = t;
         this.value = val;
     }
     
-    public int get_value(){
+    public Long get_value(){
         return this.value;
     }
     
@@ -50,7 +50,7 @@ public class ID implements Comparable, java.io.Serializable{
     } 
     
     public String get(){
-        String aux = Integer.toString(this.value);
+        String aux = Long.toString(this.value);
         return (this.type.name() + aux);
     
     }

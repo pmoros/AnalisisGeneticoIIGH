@@ -14,7 +14,7 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
     private final EntitySpec specs;  
         
     public Entity(EntityType tipo, EntitySpec properties){
-        Integer aux = 0;
+        Long aux;
         this.type = tipo;
         this.specs = properties;
         aux = properties.GetRegister();
@@ -26,7 +26,7 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
         this.specs = properties;        
     }    
     
-    public Entity(EntityType tipo, int register){
+    public Entity(EntityType tipo, Long register){
         this.type = EntityType.ENTITY;
         this.id = new ID(tipo, register);
         this.specs = null;
