@@ -45,12 +45,19 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
     public boolean equals(Entity x){
         return (this.specs.equals(x.specs));
     }
+    
+    @Override
+    public boolean equals(Object x){
+        Entity aux = (Entity) x;
+        return (this.specs.equals(aux.specs));
+    }    
 
     /**
      * Compara la etiqueta
      * @param o
      * @return 
      */
+
     @Override
     public int compareTo(Entity o) {
         if(this.id.compareTo(o.id) < 0) return -1;
@@ -59,6 +66,7 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
             return 0;
         }
     }
+
 
 
     

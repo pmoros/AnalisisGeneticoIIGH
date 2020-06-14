@@ -43,13 +43,14 @@ public class EntityStructure extends DBStructure{
 
     @Override
     public void remove_based_on(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        /*
-        Entity[] matched = this.elements.matches((Entity)obj);
-        for (Entity matched1 : matched) {
-            this.remove(matched1);
+        Object[] aux =  this.elements.matches((Entity) obj);
+        Entity my_entity;
+        for(int i = 0; i < aux.length - 1; i++){
+            if(aux[i] == null) break;
+            my_entity = (Entity) aux[i];
+            this.elements.remove(my_entity);
         }
-                */
+         
     }
 
     @Override
@@ -58,11 +59,13 @@ public class EntityStructure extends DBStructure{
     }
 
     @Override
-    public Object[] matches(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        /*
-        return (Entity[]) this.elements.matches((Entity) obj);
-               */
+    public Object[] matches(Object obj) {                
+        Object[] aux =  this.elements.matches((Entity) obj);
+        Entity[] salida = new Entity[aux.length];
+        for(int i = 0; i < aux.length; i++){
+            salida[i] = (Entity) aux[i];
+        }
+        return salida;          
     }
 
     @Override
@@ -93,7 +96,12 @@ public class EntityStructure extends DBStructure{
 
     @Override
     public Entity[] get_content() {
-        return (Entity[]) this.elements.traverse_inOrder();
+        Object[] aux =  this.elements.traverse_inOrder();
+        Entity[] salida = new Entity[aux.length];
+        for(int i = 0; i < aux.length; i++){
+            salida[i] = (Entity) aux[i];
+        }
+        return salida;
     }
 
     @Override

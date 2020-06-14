@@ -128,7 +128,20 @@ public class GeneticManager {
     public Entity[] matches(EntityType type, EntitySpec specs){
         this.database.connect(DBStructureType.ENTITY);                        
         Entity my_entity = new Entity(type, specs);
-        return (Entity[]) this.database.current.matches(my_entity);
+        Entity[] resultados = (Entity[]) this.database.current.matches(my_entity);        
+        int r = 0;
+        for(int i = 0; i < resultados.length; i++){
+            if(resultados[i] == null) break;
+            else{
+                r++;
+            }
+        }
+        
+        Entity[] salida = new Entity[r];
+        for(int i = 0; i < r; i++){
+            salida[i] = resultados[i];
+        }        
+        return salida;
     }
     
     public void delete_by_specs(EntityType type, EntitySpec specs){

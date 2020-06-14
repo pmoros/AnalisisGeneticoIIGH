@@ -213,5 +213,6 @@ public class Aplication {
         this.database.connect(DBStructureType.USER);        
         return (User) this.database.current.get_last();
     }    
+
     
 }

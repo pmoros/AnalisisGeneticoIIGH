@@ -265,11 +265,31 @@ public class AVLTree<T extends Comparable<T>> implements Serializable
     }    
 
     
-    public Object[] traverse_inOrder() {
+    public T[] traverse_inOrder() {
         this.traverse_k = -1;
         T[] elements; 
         elements = (T[]) (new Comparable[this.size]);
         inOrder(this.root, elements);      
        return elements; 
     }
+    
+    
+    private void matches(NodoAVL root, T[] elements, T looking){        
+        if(root == null) {
+        } else{                                  
+            matches(root.left, elements, looking);
+            if(looking.equals(root.dato)) elements[++this.traverse_k] = root.dato;                                     
+            matches(root.right, elements, looking);                                                
+        }
+                                     
+    }       
+    public T[] matches(T looking){
+        this.traverse_k = -1;
+        T[] elements; 
+        elements = (T[]) (new Comparable[this.size]);
+        matches(this.root, elements, looking);      
+       return elements;         
+       
+    }    
+    
 }
