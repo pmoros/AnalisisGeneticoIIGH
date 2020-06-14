@@ -7,6 +7,7 @@ package analisisgeneticoiigh;
 import Business.*;
 import DataManagement.*;
 import InternalManagement.GeneticManager;
+import InternalManagement.Listener;
 import InternalManagement.UserManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Aplication {
     //Modify later to make all attributes static
     public String path;
     private DBPointer database;
-    //public static final Listener listener;
+    public Listener listener; //Revisar si puede ser static
     private UserManager user_manager;
     private GeneticManager genetic_manager;
     
