@@ -153,13 +153,13 @@ public class Heap<T extends Comparable<T>> implements java.io.Serializable {
     }    
     
     public T peek(){
-        if(this.size == 0) throw new IndexOutOfBoundsException();
+        if(this.size == 0) return null;
         T tmp = this.heap[0];
         return tmp;
     }    
     
     public T poll(){
-        if(this.size == 0) throw new IndexOutOfBoundsException();
+        if(this.size == 0) return null;
         T tmp = this.heap[0];
         this.heap[0] = this.heap[this.size - 1]; //-1 because we added 1 for the next
         this.size-=1;

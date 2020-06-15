@@ -29,6 +29,7 @@ public class Aplication {
     public  BusinessManager business_manager;    
     public Listener listener; //Revisar si puede ser static
     private DBStructureType last;
+    public Request current_request;
     
     public User current_user;       
     
@@ -231,6 +232,18 @@ public class Aplication {
     
 //###################-FUNCIONES ASOCIADAS CON LAS PETICIONES-###########
     
+    public void send_request(RequestPriority priority, String description) throws ClassNotFoundException{
+        this.listener.send_request(this.current_user, priority, description);
+    }
+    
+    public void load_request(){
+        this.current_user.requests.top_front();
+        this.current_request = this.current_user.requests.top_front();
+    }
+    
+    public void close_request() throws ClassNotFoundException{
+        this.listener.close_request(this.current_request);
+    }
     
 //###################-FUNCIONES INTERNAS DE LOS ANALISIS-###############  
     

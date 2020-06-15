@@ -38,8 +38,8 @@ public class Listener {
         System.out.println("Sended request: " + Long.toString(my_request.id.get_value()));        
     }
     
-    public void close_request(Long id){
-        this.request_manager.close(id);
+    public void close_request(Request r) throws ClassNotFoundException{
+        this.request_manager.close(r);
     }
     
     public void save_changes(){            

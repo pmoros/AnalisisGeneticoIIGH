@@ -24,7 +24,7 @@ public class Request implements java.io.Serializable, Comparable<Request>{
     public int compareTo(Request o) {
         if(this.id.compareTo(o.id) == 0) return 0;
         else{
-            int val_prio = this.type.compareTo(o.type);
+            int val_prio = this.type.compare_to(o.type);
             switch(val_prio){
                 case -1:
                     return -1;                

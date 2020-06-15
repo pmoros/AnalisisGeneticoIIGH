@@ -27,7 +27,7 @@ public class User implements Comparable<User>, java.io.Serializable{
         
         
         private Stack<Message> register_closed; //Stores the register of all finished requests        
-        public DoublyLinkedList<ID> requests; //Check DataStructure using DynArray
+        public DoublyLinkedList<Request> requests; //Check DataStructure using DynArray
         public DynamicArray<ID> analyses;    //Check DataStructure, using DynArray                
         public Queue<Message> messages;    //Check DataStructure, using QueueArray                       
         

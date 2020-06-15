@@ -51,7 +51,7 @@ public class AVLTree<T extends Comparable<T>> implements Serializable
 	// Buscar 
 	private NodoAVL find(T d, NodoAVL r)
 	{
-		if (root==null)		
+		if (r==null)		
 			return null;		
 		else if (r.dato.compareTo(d) == 0)		
 			return r;		
@@ -63,7 +63,7 @@ public class AVLTree<T extends Comparable<T>> implements Serializable
 	
         public T find(T d){
             return this.find(d, this.root).dato;
-        }
+        }        
         
 	// Factor de equilibrio
 	private int getFE(NodoAVL x)
