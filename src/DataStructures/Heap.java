@@ -5,7 +5,7 @@ package DataStructures;
  * @author Rock
  * @param <T>
  */
-public class Heap<T extends Comparable<T>> {
+public class Heap<T extends Comparable<T>> implements java.io.Serializable {
     private boolean min;
     private T[] heap;
     private int size;
@@ -170,8 +170,11 @@ public class Heap<T extends Comparable<T>> {
     private void resize(){
         int aux = this.max_size;
         this.max_size*=2;
-        T[] array2 = (T[]) new Object[this.max_size];
-        System.arraycopy(this.heap, 0, array2, 0, aux);        
+        T[] array2 = (T[]) new Comparable[this.max_size];
+        //System.arraycopy(this.heap, 0, array2, 0, aux);        
+        for(int i = 0; i < this.heap.length; i++){
+            array2[i] = (T) this.heap[i];
+        }
         this.heap = array2;        
     }
     

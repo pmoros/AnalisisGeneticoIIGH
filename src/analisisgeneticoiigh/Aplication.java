@@ -10,6 +10,7 @@ import InternalManagement.AnalysisManager;
 import InternalManagement.BusinessManager;
 import InternalManagement.GeneticManager;
 import InternalManagement.Listener;
+import InternalManagement.RequestManager;
 import InternalManagement.UserManager;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,9 +26,10 @@ public class Aplication {
     private UserManager user_manager;
     private GeneticManager genetic_manager;
     public AnalysisManager analisis_manager;
-    public  BusinessManager business_manager;
+    public  BusinessManager business_manager;    
     public Listener listener; //Revisar si puede ser static
-            
+    private DBStructureType last;
+    
     public User current_user;       
     
     public Aplication(){        
@@ -36,8 +38,10 @@ public class Aplication {
         //CADA UNO SE CONSTRUYE CON EL DBPointer
         this.user_manager = new UserManager(this.database);
         this.genetic_manager = new GeneticManager(this.database);
-        this.analisis_manager = new AnalysisManager(this.database);
-        this.business_manager = new BusinessManager(this.analisis_manager, this.database);
+        this.analisis_manager = new AnalysisManager(this.database);         
+        this.listener = new Listener(this.database);
+        
+        this.business_manager = new BusinessManager(this.analisis_manager, this.database);                
         this.path = this.database.path;
     }
     
@@ -59,8 +63,7 @@ public class Aplication {
         }
         catch(ClassNotFoundException e){
             System.out.println("The user has already been added.");
-        }
-                
+        }            
     }  
     
     /**
@@ -72,6 +75,7 @@ public class Aplication {
      */
     public void login(AutorizationLevel auto_level, String user_name, String password) throws ClassNotFoundException{   
         this.current_user = this.user_manager.login(auto_level, user_name, password);
+        this.last = DBStructureType.USER;       
     }
     
     
@@ -83,6 +87,7 @@ public class Aplication {
     public void delete_account(){        
         this.user_manager.delete_account(this.current_user);
         this.current_user = null;        
+        this.last = DBStructureType.USER;       
     }           
     
     /**
@@ -92,7 +97,7 @@ public class Aplication {
      */
     public void delete_account(AutorizationLevel auto_level, String user_name){
         if(this.current_user.getPrivileges().compareTo(AutorizationLevel.ADMIN) < 0) return;
-        this.user_manager.delete_account(auto_level, user_name);        
+        this.user_manager.delete_account(auto_level, user_name);                
     }
     
     /**
@@ -201,30 +206,19 @@ public class Aplication {
         }                 
         return this.genetic_manager.get_all_animals();
     }    
-    //APLICATION CONTROLLERS
-    
-    public void save_changes(){
-        this.database.save_changes();
-        this.analisis_manager.save_changes();
-    }
-    
-    public static void reset(){
-        DBPointer my_del = new DBPointer("DATABASE");
-        AnalysisManager anl = new AnalysisManager(my_del);
-        anl.reset();
-        my_del.reset();        
-    }
 
 //##################-FUNCIONES DE MANEJO DE ANALISIS-###################
     public Long create_analysis(String username_client, String[] usernames_employees, String description) throws ClassNotFoundException{
-        ID aux = this.business_manager.create_analysis(username_client, usernames_employees, description);
+        ID aux = this.business_manager.create_analysis(username_client, usernames_employees, description);        
         Long val = aux.get_value();
+        this.current_user.analyses.append(aux);
         System.out.println("Added analysis: " + val);        
         return val;
     }
     
     public void delete_analysis(Long id){        
         this.business_manager.delete_analysis(id);        
+        this.current_user.analyses.delete(new ID(id));
     }    
     
     public void add_employee(Long id_analysis, String user_employee){
@@ -234,6 +228,8 @@ public class Aplication {
     public void delete_employee(Long id_analysis, String user_employee){
         this.business_manager.delete_employee(id_analysis, user_employee);
     } 
+    
+//###################-FUNCIONES ASOCIADAS CON LAS PETICIONES-###########
     
     
 //###################-FUNCIONES INTERNAS DE LOS ANALISIS-###############  
@@ -258,6 +254,8 @@ public class Aplication {
         this.analisis_manager.remove_many_entity(type, specs);
     }    
     
+    
+    
 //###################-FUNCIONES PROPIAS DE LA APLICACIÓN-################
     
     //METODO DE PRUEBA
@@ -270,5 +268,22 @@ public class Aplication {
         return (User) this.database.current.get_last();
     }    
 
+    //APLICATION CONTROLLERS
+    
+    public void save_changes(){
+        this.database.save_changes();
+        this.listener.save_changes();
+        this.analisis_manager.save_changes();
+    }
+    
+    public static void reset(){
+        DBPointer my_del = new DBPointer("DATABASE");
+        AnalysisManager anl = new AnalysisManager(my_del);
+        anl.reset();
+        my_del.reset();        
+        Listener my_lis = new Listener(my_del);
+        my_lis.reset();        
+    }
+    
     
 }

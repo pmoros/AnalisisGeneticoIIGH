@@ -101,7 +101,7 @@ public class AnalysisManager {
     }        
     
     public void save_changes(){
-        this.current.save();
+        if(this.current != null) this.current.save();
         this.file_stream.write_file(this.path, this.content);
     }
     

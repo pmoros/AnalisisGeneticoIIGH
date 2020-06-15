@@ -5,6 +5,7 @@ import Business.EntityType;
 import Business.HorseSpec;
 import Business.ID;
 import Business.IDGenerator;
+import Business.RequestPriority;
 import Business.User;
 import DataStructures.DoublyLinkedList;
 import java.io.FileNotFoundException;
@@ -17,25 +18,15 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {        
         //Aplication.reset();
         
-        Aplication my_app =  new Aplication();                
+        Aplication my_app =  new Aplication();                        
         
-        
-        //my_app.sign_up(AutorizationLevel.WORKER, "sito", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");
-        my_app.login(AutorizationLevel.WORKER, "sito", "696wq");
-        //String[] workers = {"sito"};
-        
-        //ID id = my_app.business_manager.create_analysis("sito", workers, "Analisis de prueba 2");
-        //System.out.println(id.get_value());
-        
-        my_app.analisis_manager.load_analysis(14607935L);         
-        my_app.analisis_manager.add_entity(EntityType.HORSE, 62517L);            
-        
-        Object[] temp_horses = my_app.analisis_manager.current.data.get_content();
-        for(int i = 0; i < temp_horses.length; i++){            
-            Entity aux = (Entity) temp_horses[i];
-            aux.get_specs().show_attributes();
-        }        
-                       
+        my_app.login(AutorizationLevel.CLIENT, "sito", "696wq");
+        //System.out.println(my_app.current_user.getUser_name());
+        for(int i = 0; i < 30; i++) my_app.listener.send_request(my_app.current_user, RequestPriority.COMMON, "I need my animals in my analysis.");                         
+        my_app.login(AutorizationLevel.ADMIN, "acid", "696wq");        
+        my_app.login(AutorizationLevel.CLIENT, "sito", "696wq");
+        my_app.listener.send_request(my_app.current_user, RequestPriority.COMMON, "I need my animals in my analysis.");                         
+             
         
         //Test test = new Test(my_app);                                      
         //test.horse_loading();

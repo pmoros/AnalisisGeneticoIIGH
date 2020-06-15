@@ -56,11 +56,14 @@ public class UserManager {
         User usuario = new User(auto_level, user_name, password);
                     User aux = (User) this.database.current.find(usuario);
                     if ( aux != null){
-                        return aux;
+                        if(usuario.getPassword().equals(aux.getPassword())) return aux;   
+                        else{
+                        throw  new Class­Not­Found­Exception("Invalid password");
+                        } 
                     }
                     else{
                         throw  new Class­Not­Found­Exception("Not founded");
-                    }                       
+                    }                               
     }    
     
     

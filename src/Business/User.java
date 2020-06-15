@@ -1,8 +1,12 @@
 package Business;
 
+import DataStructures.DoublyLinkedList;
+import DataStructures.DynamicArray;
 import DataStructures.List;
 import DataStructures.Queue;
+import DataStructures.QueueArray;
 import DataStructures.Stack;
+import DataStructures.StackArray;
 
 /**
  *
@@ -23,11 +27,9 @@ public class User implements Comparable<User>, java.io.Serializable{
         
         
         private Stack<Message> register_closed; //Stores the register of all finished requests        
-        private List<Request> requests; //Check DataStructure using DynArray
-        private List<Analysis> analyses;    //Check DataStructure, using DynArray                
-        private Queue<Message> messages;    //Check DataStructure, using QueueArray            
-        private Request current_request;          
-        private Analysis current_analysis;                
+        public DoublyLinkedList<ID> requests; //Check DataStructure using DynArray
+        public DynamicArray<ID> analyses;    //Check DataStructure, using DynArray                
+        public Queue<Message> messages;    //Check DataStructure, using QueueArray                       
         
         
     private static Long hashCode(String string) {
@@ -37,6 +39,11 @@ public class User implements Comparable<User>, java.io.Serializable{
     
     public User(AutorizationLevel p, String user_name, String password, String first_name, String last_name, String email){
             //this.status = false;
+            this.register_closed = new StackArray<>();
+            this.messages = new QueueArray<>();
+            this.analyses = new DynamicArray<>();
+            this.requests = new DoublyLinkedList<>();
+            
             this.id = new ID(EntityType.USER, hashCode(user_name));
             this.user_name = user_name;
             this.password = password;

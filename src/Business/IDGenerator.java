@@ -42,8 +42,8 @@ public class IDGenerator {
             }
         }  
         
-        String aux = date + time;
-        return Long.parseLong(aux);
+        String aux = date + time;        
+        return Long.parseLong(aux) + System.nanoTime()/10000;
     }
     
     public static String get_date(){
