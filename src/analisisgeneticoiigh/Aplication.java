@@ -208,6 +208,10 @@ public class Aplication {
         return this.genetic_manager.get_all_animals();
     }    
 
+        public void generate_family_tree(Long register){
+            System.out.println("The generations before horse " + Long.toString(register) + " are:");
+            this.genetic_manager.generate_family_tree(register);
+        }  
 //##################-FUNCIONES DE MANEJO DE ANALISIS-###################
     public Long create_analysis(String username_client, String[] usernames_employees, String description) throws ClassNotFoundException{
         ID aux = this.business_manager.create_analysis(username_client, usernames_employees, description);        

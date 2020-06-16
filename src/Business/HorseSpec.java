@@ -13,16 +13,20 @@ import DataStructures.*;
  */
 public class HorseSpec extends EntitySpec implements java.io.Serializable{
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private Long register = null;
+    public Long register = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private Long register_father = null;
+    public Long register_father = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private Long register_mother = null;
+    public Long register_mother = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private String name = null;
+    public String name = null;
     //DynamicArray<Entity> sons = new DynamicArray<>();
-    private String birth_date = null;
-    public String  color, sex, chip, genotype, step;        
+    public String birth_date = null;
+    public String color;        
+    public String sex;        
+    public String chip;        
+    public String genotype;        
+    public String step;        
     
     public HorseSpec(){
         
@@ -55,16 +59,16 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
             if(((this.getBirth_date() != null) && !(this.birth_date.equals(searched.birth_date)))){
                 return false;
             } 
-            if(((this.color != null) && !(this.color.equals(searched.color)))){
+            if(((this.getColor() != null) && !(this.color.equals(searched.color)))){
                 return false;
             } 
-            if(((this.sex != null) && !(this.sex.equals(searched.sex)))){
+            if(((this.getSex() != null) && !(this.sex.equals(searched.sex)))){
                 return false;
             }             
-            if(((this.chip != null) && !(this.chip.equals(searched.chip)))){
+            if(((this.getChip() != null) && !(this.chip.equals(searched.chip)))){
                 return false;
             }             
-            if(((this.genotype != null) && !(this.genotype.equals(searched.genotype)))){
+            if(((this.getGenotype() != null) && !(this.genotype.equals(searched.genotype)))){
                 return false;
             } 
             if(((this.step != null) && !(this.step.equals(searched.step)))){
@@ -86,7 +90,7 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
     
     @Override
         public Long GetRegister(){
-        return this.register;
+        return this.getRegister();
     }
 
     /**
@@ -140,5 +144,40 @@ public class HorseSpec extends EntitySpec implements java.io.Serializable{
      */
     public String getBirth_date() {
         return birth_date;
+    }
+
+    /**
+     * @return the register
+     */
+    public Long getRegister() {
+        return register;
+    }
+
+    /**
+     * @return the color
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * @return the sex
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * @return the chip
+     */
+    public String getChip() {
+        return chip;
+    }
+
+    /**
+     * @return the genotype
+     */
+    public String getGenotype() {
+        return genotype;
     }
 }

@@ -51,7 +51,7 @@ public class AVLTree<T extends Comparable<T>> implements Serializable
 	// Buscar 
 	private NodoAVL find(T d, NodoAVL r)
 	{
-		if (r==null)		
+		if (root==null)		
 			return null;		
 		else if (r.dato.compareTo(d) == 0)		
 			return r;		

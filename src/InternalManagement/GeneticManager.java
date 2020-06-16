@@ -13,6 +13,7 @@ import DataManagement.CSVLoader;
 import DataManagement.DBPointer;
 import DataManagement.DBStructureType;
 import DataStructures.AVLTree;
+import DataStructures.BinTree;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -106,8 +107,14 @@ public class GeneticManager {
                         String sexo = data[4];
                         String chip = data[5];
                         String geno = data[6];
-                        String andar = data[7];                                                
-                        Long mother = Long.valueOf(data[8]);
+                        String andar = data[7];    
+                        Long mother;
+                        try{
+                            mother = Long.valueOf(data[8]);
+                        }
+                        catch(NumberFormatException e){
+                            continue;
+                        }
                     this.add_horse(registro, name, date_nto, color, sexo, chip, geno, andar,
                     father_code, mother);
                 }                
@@ -118,6 +125,26 @@ public class GeneticManager {
         Entity my_entity = new Entity(type, register);
         return (Entity) this.database.current.find(my_entity);        
     }
+    
+    //SDFSDFSDFSDFSD
+    public void generate_family_tree(Long register){
+            BinTree<Entity> my_bin = new BinTree<>();
+            while(true){
+                Entity animal = find_animal(EntityType.HORSE, register);
+                HorseSpec specs = (HorseSpec) animal.get_specs();
+                if(specs.getRegister_father() != null){
+                    register = specs.getRegister_father();
+                    if((animal = find_animal(EntityType.HORSE, register)) == null) break;
+                    animal = find_animal(EntityType.HORSE, register);
+                    specs = (HorseSpec) animal.get_specs();
+                    my_bin.insert(animal);                                        
+                }
+                else{
+                    break;
+                }            
+            }
+            my_bin.traverse_levelOrder();
+    }    
     
     public void delete_animal(EntityType type, Long register){
         this.database.connect(DBStructureType.ENTITY);

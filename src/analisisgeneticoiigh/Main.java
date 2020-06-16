@@ -8,6 +8,7 @@ import Business.IDGenerator;
 import Business.Request;
 import Business.RequestPriority;
 import Business.User;
+import DataStructures.BinTree;
 import DataStructures.DoublyLinkedList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,16 +22,12 @@ public class Main {
         
         Aplication my_app =  new Aplication();                        
         
-        
-        
-        //my_app.sign_up(AutorizationLevel.ADMIN, "sitovive", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");
-        //my_app.sign_up(AutorizationLevel.CLIENT, "joker", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");        
-
-        //Test test = new Test(my_app);                                      
-        //test.horse_loading();
-        //test.full_user_management(1);                       
-        //my_app.save_changes();        
-
+        Test test = new Test(my_app);                                      
+        //test.full_user_management(1000);
+        //test.full_horse_management();
+        //test.full_analysis_manager();
+        test.full_request_manager();                 
+        //my_app.save_changes();               
     }
     
 }
