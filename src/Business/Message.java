@@ -14,10 +14,12 @@ public class Message implements java.io.Serializable{
     public ID id_administrator;
     public ID id_worker;
     public String content;
+    public String topic;
     
     
-    public Message(String content){
+    public Message(String topic, String content){
         this.content = content;
+        this.topic = topic;
     }
     
     public String get(){        

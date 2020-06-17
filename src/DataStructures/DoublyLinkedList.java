@@ -8,6 +8,20 @@ package DataStructures;
 
 
 public class DoublyLinkedList<T> implements List<T>{
+
+    @Override
+    public T[] get_content() {
+        T[] aux_arr = (T[]) new Object[this.size];
+        int k = 0;
+        Node auxH = this.head;        
+        while(auxH != null){
+            aux_arr[k] = (T) auxH.data;
+            auxH = auxH.next;
+            k++;
+        }        
+        return aux_arr;
+    }
+
     
     public class Node<T> implements java.io.Serializable{
         public T data;
@@ -21,8 +35,8 @@ public class DoublyLinkedList<T> implements List<T>{
         }
     }
 
-    int size = 0;
-    Node<T> head;
+    public int size = 0;
+    public Node<T> head;
     Node<T> tail;
     
     public void DoubleLinkedList(){
@@ -53,6 +67,7 @@ public class DoublyLinkedList<T> implements List<T>{
            this.head = node;
            this.tail = node;
            this.size++;
+           return;
        }
        Node aux = this.tail;       
        this.tail = node;
@@ -78,14 +93,32 @@ public class DoublyLinkedList<T> implements List<T>{
     
     @Override
     public T find(T key) {	
-        Node auxH = this.head;
-        Node auxT = this.tail;
+        Node auxH = this.head;        
         while(auxH != null){
-            if(auxH.equals(key)) return (T)auxH.data;
+            if(auxH.data.equals(key)) return (T)auxH.data;
             
         }
         return null;
     }   
+
+    @Override
+    public T[] matches(T element) {
+        Node auxH = this.head;
+        T[] my_arr = (T[]) new Object[10];
+        int k = 0;
+        while(auxH != null){
+            if(auxH.data.equals(element)){                            
+                if(k > (my_arr.length)){      
+                    T[] aux = (T[]) new Object[10];
+                    System.arraycopy(my_arr, 0, aux, 0, my_arr.length);
+                    my_arr = aux;
+                }
+                my_arr[k] = (T)auxH.data;
+                k++;                      
+            }            
+        }
+        return my_arr;
+    }    
     
     @Override
     public T get(int index){
@@ -100,13 +133,10 @@ public class DoublyLinkedList<T> implements List<T>{
         return this.head.data;
     }    
     
-    public T pop_front() {
-        T data_aux = this.head.data;
+    public void pop_front() {        
         Node aux = this.head;
-        this.head = aux.next;        
-        this.head.prev = null;
-        this.size--;
-        return data_aux;
+        this.head = aux.next;                
+        this.size--;        
     }
     
     @Override
@@ -180,8 +210,7 @@ public class DoublyLinkedList<T> implements List<T>{
         //Fix later 
         if (this.head == null) return 0;
         return this.size+ 1;
-    }
-    
+    }    
     
 
      

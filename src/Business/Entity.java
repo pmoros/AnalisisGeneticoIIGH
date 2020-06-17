@@ -14,14 +14,24 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
     private final EntitySpec specs;  
         
     public Entity(EntityType tipo, EntitySpec properties){
+        Long aux;
         this.type = tipo;
         this.specs = properties;
+        aux = properties.GetRegister();
+        this.id = new ID(tipo, aux);
     }
     
     public Entity(EntitySpec properties){
         this.type = EntityType.ENTITY;
-        this.specs = properties;
+        this.specs = properties;        
     }    
+    
+    public Entity(EntityType tipo, Long register){
+        this.type = EntityType.ENTITY;
+        this.id = new ID(tipo, register);
+        this.specs = null;
+    }     
+    
     
     public EntitySpec get_specs(){
         return this.specs;
@@ -35,17 +45,32 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
     public boolean equals(Entity x){
         return (this.specs.equals(x.specs));
     }
+    
+    @Override
+    public boolean equals(Object x){
+        Entity aux = (Entity) x;
+        return (this.specs.equals(aux.specs));
+    }    
 
     /**
      * Compara la etiqueta
      * @param o
      * @return 
      */
+
     @Override
     public int compareTo(Entity o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.id.compareTo(o.id) < 0) return -1;
+        else if(this.id.compareTo(o.id) > 0) return 1;
+        else{
+            return 0;
+        }
     }
 
+    @Override
+    public String toString(){
+        return Long.toString(this.id.get_value());
+    }
 
     
 }

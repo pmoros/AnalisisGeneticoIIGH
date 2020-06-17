@@ -31,7 +31,7 @@ public class QueueArray<T> implements Queue<T> {
     
     //FUNCION DE TESTEO
     public void show_elements(){
-        for(int i = 0; i < this.arr.get_size(); i++){
+        for(int i = 0; i < this.arr.get_length(); i++){
             System.out.print(Integer.toString( (Integer)this.arr.get(i)));
         }
         System.out.println();
@@ -40,32 +40,28 @@ public class QueueArray<T> implements Queue<T> {
     
     @Override
     public void enqueue(T item) {          
-        
+        if((this.tail + 1)%this.arr.get_length() == this.head) return;
         if(this.is_empty()){
             this.head = 0;
-            this.tail = 0;
-        }
-        else{            
-            this.tail = ((this.tail + 1)%this.arr.get_length());
-        }            
-        this.arr.insert(this.tail, item);
+            this.tail = 0;                                   
+        }                  
+        this.arr.insert(this.tail, item);        
+        this.tail = ((this.tail + 1)%this.arr.get_length());                                            
     }
 
     @Override
-    public T dequeue() {
+    public T dequeue() {        
         if (this.is_empty() ){            
             System.out.println("Empty queue.");
             return null;
+        }                                   
+        T aux = this.arr.get(this.head);        
+        this.head = ((this.head + 1)%this.arr.get_length());   
+        if (this.head == this.tail){
+                    this.head = -1;
+                    this.tail = -1; 
         }
-        else if (this.head == this.tail){
-            this.head = -1;
-            this.tail = -1;
-            return null;
-        }        
-        else{            
-            this.head = ((this.head + 1)%this.arr.get_length());
-        }        
-        return this.arr.get(this.head);        
+        return aux;
     }
 
     @Override

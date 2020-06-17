@@ -13,12 +13,12 @@ import java.io.FileNotFoundException;
  *
  * @author pmoro
  */
-public class DBPointer {
+public class DBPointer implements java.io.Serializable {
     public final String path;       
     private final String database_path;
     private final String database_identifier;     
     private final FileStream<Database> file_stream;
-    private Database database;
+    public Database database;
     public DBStructure current;
             
     public DBPointer(String identifier){        

@@ -1,8 +1,12 @@
 package Business;
 
+import DataStructures.DoublyLinkedList;
+import DataStructures.DynamicArray;
 import DataStructures.List;
 import DataStructures.Queue;
+import DataStructures.QueueArray;
 import DataStructures.Stack;
+import DataStructures.StackArray;
 
 /**
  *
@@ -23,20 +27,23 @@ public class User implements Comparable<User>, java.io.Serializable{
         
         
         private Stack<Message> register_closed; //Stores the register of all finished requests        
-        private List<Request> requests; //Check DataStructure using DynArray
-        private List<Analysis> analyses;    //Check DataStructure, using DynArray                
-        private Queue<Message> messages;    //Check DataStructure, using QueueArray            
-        private Request current_request;          
-        private Analysis current_analysis;                
+        public DoublyLinkedList<Request> requests; //Check DataStructure using DynArray
+        public DynamicArray<ID> analyses;    //Check DataStructure, using DynArray                
+        public Queue<Message> messages;    //Check DataStructure, using QueueArray                       
         
         
-    private static int hashCode(String string) {
+    private static Long hashCode(String string) {
         final int PRIME = 31;
-        return string != null ? string.hashCode() * PRIME : 0;  // PRIME = 31 or another prime number.
+        return string != null ? Long.valueOf(string.hashCode()) * PRIME : 0;  // PRIME = 31 or another prime number.
     }
     
     public User(AutorizationLevel p, String user_name, String password, String first_name, String last_name, String email){
             //this.status = false;
+            this.register_closed = new StackArray<>();
+            this.messages = new QueueArray<>();
+            this.analyses = new DynamicArray<>();
+            this.requests = new DoublyLinkedList<>();
+            
             this.id = new ID(EntityType.USER, hashCode(user_name));
             this.user_name = user_name;
             this.password = password;
@@ -54,7 +61,9 @@ public class User implements Comparable<User>, java.io.Serializable{
             this.privileges = p;
     }   
     
-    public User(AutorizationLevel p) {
+    public User(AutorizationLevel p, String user_name) {
+        this.id = new ID(EntityType.USER, hashCode(user_name));
+        this.user_name = user_name;
         this.privileges = p;
     }
 
@@ -149,6 +158,9 @@ public class User implements Comparable<User>, java.io.Serializable{
         this.last_name = last_name;
     }
 
+    public void setEmail(String mail) {
+        this.email = mail;
+    }    
     /**
      * @return the email
      */
@@ -182,18 +194,26 @@ public class User implements Comparable<User>, java.io.Serializable{
     public boolean equals(Object other1){
         User other = (User) other1;
         if(this.privileges != other.getPrivileges()) return false;
-        if(!((this.user_name != null) &&(this.user_name.equals(other.getUser_name())))){
-            return false;
-        }
-        if(!((this.password != null) &&(this.password.equals(other.getPassword())))){
-            return false;
-        }      
+        if(this.user_name != null){
+            if(!this.user_name.equals(other.getUser_name())){
+                return false;
+            }            
+        }       
+        if(this.password != null){
+            if(!this.password.equals(other.getPassword())){
+                return false;
+            }            
+        }   
         return true;    
     }    
 
     @Override
     public int compareTo(User o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.user_name.compareTo(o.getUser_name()) < 0) return -1;
+        else if(this.user_name.compareTo(o.getUser_name()) > 0) return 1;
+        else{
+            return 0;
+        }
     }
 
 }

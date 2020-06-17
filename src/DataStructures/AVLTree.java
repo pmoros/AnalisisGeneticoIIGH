@@ -5,34 +5,42 @@
  */
 package DataStructures;
 
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Juan David Gonzales
  * @param <T>
  */
-public class AVLTree<T extends Comparable> 
+public class AVLTree<T extends Comparable<T>> implements Serializable
 {
     
-    class NodoAVL<T extends Comparable> 
+    private class NodoAVL implements Serializable
     {
             T dato;
             int fe; // Factor de equilibrio
             NodoAVL left;
             NodoAVL right;
 
-            public NodoAVL(T d)
-            {
+            NodoAVL(T d)
+            {                    
                     this.dato = d;
                     this.fe = 0;
                     this.left = null;
                     this.right = null;
             }
     }
+        
 	public NodoAVL root;
+        public int size;
+        private int traverse_k;
 	
 	public AVLTree()
 	{
-		root=null;
+                this.size = 1;
+		this.root=null;
 	}
         
         NodoAVL getRoot()
@@ -41,11 +49,11 @@ public class AVLTree<T extends Comparable>
 	}
         
 	// Buscar 
-	NodoAVL find(T d, NodoAVL r)
+	private NodoAVL find(T d, NodoAVL r)
 	{
 		if (root==null)		
 			return null;		
-		else if (r.dato.equals(d))		
+		else if (r.dato.compareTo(d) == 0)		
 			return r;		
 		else if ((r.dato.compareTo(d) < 0))		
 			return find(d,r.right);		
@@ -53,6 +61,10 @@ public class AVLTree<T extends Comparable>
 			return find(d,r.left);
 	}
 	
+        public T find(T d){
+            return this.find(d, this.root).dato;
+        }        
+        
 	// Factor de equilibrio
 	private int getFE(NodoAVL x)
 	{
@@ -103,7 +115,7 @@ public class AVLTree<T extends Comparable>
 	}
 	
 	// Equilibrar al insertar
-	private NodoAVL inserteq(NodoAVL nuevo, NodoAVL subtree)
+	private NodoAVL inserteq(NodoAVL nuevo, NodoAVL subtree) throws ClassNotFoundException
 	{
 		NodoAVL newparent=subtree;
 		if((nuevo.dato.compareTo(subtree.dato)) < 0)
@@ -149,8 +161,8 @@ public class AVLTree<T extends Comparable>
 			}
 		}
 		else
-		{
-			System.out.println("The node already exists");
+		{                        
+                    throw  new Class­Not­Found­Exception("The value already exist.");			
 		}
 		// Update FE
 		if((subtree.left==null)&&(subtree.right!=null))
@@ -169,63 +181,115 @@ public class AVLTree<T extends Comparable>
 	}
 	
 	// Insertar
-	public void insert(T d)
+        
+    
+	public void insert(T d) throws ClassNotFoundException
 	{
 		NodoAVL nuevo=new NodoAVL(d);
 		if (root==null)		
 			root=nuevo;
-		else
-			root=inserteq(nuevo, root);
+		else	
+                            root=inserteq(nuevo, root);
+                            this.size++;
 	}
-	
-	// Borrar
-	public void delete(T d)
-	{
-		// *********************************************************************
-	}
-	
         
-        //CHECK
-        public T find_min(){
-            return null;
+   
+    public T find_min() {
+        NodoAVL aux = this.root;
+        while(aux.left != null){
+            aux = aux.left;
         }
-        
-        //CHECK
-        public T find_max(){
-            return null;
+        return aux.dato;
+    }
+
+    /**
+     * Traverse the right branch till it's null
+     * @return the max value in the tree
+     */            
+    public T find_max() {
+        NodoAVL aux = this.root;
+        while(aux.right != null){
+            aux = aux.right;
         }
+        return aux.dato;
+    }
         
-        
-	// Recorrer
+    private NodoAVL find_min(NodoAVL root){
+
+            NodoAVL aux = root;
+            while(aux.left != null){
+                aux = aux.left;
+            }
+            return aux;   
+        }
+
+    private  NodoAVL delete(NodoAVL root, T data){
+        if(root == null) return root;         
+        else if(data.compareTo(root.dato) < 0) root.left = delete(root.left, data);
+        else if(data.compareTo(root.dato) > 0 ) root.right = delete(root.right, data);                
+        else{
+            if(root.left == null && root.right == null){    //leaf node
+                root = null;                
+            }
+            else if(root.left != null && root.right == null){   //only left son
+                root = root.left;
+            }
+            else if(root.right != null && root.left == null){   //only right son
+                root = root.right;
+            }            
+            else{
+            T aux = this.find_min(root.right).dato;                
+                root.right = delete(root.right, aux);
+                root.dato = aux;                            
+            }            
+        }
+        return root;
+    }
+    
+    
+    public void remove(T element) {
+        this.root = this.delete(this.root, element);
+        this.size--; //If it is successfull        
+    }        
+      
+    
 	
-	//1. In Order
-	public void inOrder(NodoAVL a)
-	{
-		if (a!=null)
-		{
-			inOrder(a.left);
-			System.out.print(a.dato+", ");
-			inOrder(a.right);
-		}
-	}	
-	//2. Pre Order
-	public void preOrder(NodoAVL a)
-	{
-		if(a!=null)
-		{
-			System.out.print(a.dato+", ");
-			preOrder(a.left);
-			preOrder(a.right);
-		}
-	}
-	//3. Post Order
-	public void postOrder(NodoAVL a)
-	{
-		if(a!=null)
-		{			
-			postOrder(a.left);
-			postOrder(a.right);
-			System.out.print(a.dato+", ");
-		}
-	}
+    private void inOrder(NodoAVL root, T[] elements){        
+        if(root == null) {
+        } else{                                  
+            inOrder(root.left, elements);
+            elements[++this.traverse_k] = root.dato;                         
+            inOrder(root.right, elements);                                                
+        }
+                                     
+    }    
+
+    
+    public T[] traverse_inOrder() {
+        this.traverse_k = -1;
+        T[] elements; 
+        elements = (T[]) (new Comparable[this.size]);
+        inOrder(this.root, elements);      
+       return elements; 
+    }
+    
+    
+    private void matches(NodoAVL root, T[] elements, T looking){        
+        if(root == null) {
+        } else{                                  
+            matches(root.left, elements, looking);
+            if(looking.equals(root.dato)) elements[++this.traverse_k] = root.dato;                                     
+            matches(root.right, elements, looking);                                                
+        }
+                                     
+    }       
+    public T[] matches(T looking){
+        this.traverse_k = -1;
+        T[] elements; 
+        elements = (T[]) (new Comparable[this.size]);
+        matches(this.root, elements, looking);      
+       return elements;         
+       
+    }    
+    
 }

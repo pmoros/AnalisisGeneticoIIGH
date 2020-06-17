@@ -16,13 +16,13 @@ public class StackArray<T> implements Stack<T> {
     private int size;
     private int end;
     
-    StackArray(int size){
+    public StackArray(int size){
         this.arr = (T[]) new Object[size];
         this.size = size;
         this.end = -1;
     }
     
-    StackArray(){
+    public StackArray(){
         this.size = 10;
         this.arr = (T[]) new Object[this.size];
         this.end = -1;

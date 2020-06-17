@@ -1,31 +1,46 @@
 package Business;
 
 public class Request implements java.io.Serializable, Comparable<Request>{
-        public ID admin;
-	public ID client;
-	public RequestType type;
+        public ID id;
+        public String user_admin;
+	public String user_client;
+	public RequestPriority type;
 	public String description;
-        public String business_answer;
-	public RequestState state;    
+        public String answer;	
         
 	
-        public Request(ID client, RequestType type, String description){
-            this.client = client;
+        public Request(String user_client, RequestPriority type, String description){
+            this.user_client = user_client;
             this.type = type;
-            this.description = description;
-            this.state = RequestState.SENDED;
+            this.description = description;            
+            this.id = new ID(IDGenerator.full());
         }
-	public void answer(String s) {
-                //TODO
-                this.business_answer = s;
-                this.state = RequestState.FINISHED;
-                
-            
-	}
-
+        
+        public Request(ID id){
+            this.id = id;
+        }
+        
     @Override
     public int compareTo(Request o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.id.compareTo(o.id) == 0) return 0;
+        else{
+            int val_prio = this.type.compare_to(o.type);
+            switch(val_prio){
+                case -1:
+                    return -1;                
+                case 0:
+                    if(this.id.compareTo(o.id) < 0){
+                        return 1;
+                    }
+                    else{
+                        return -1;
+                    }
+                case 1:
+                    return 1;
+                default:
+                    return 1;           
+            }                                                     
+        }
     }
 
 }
