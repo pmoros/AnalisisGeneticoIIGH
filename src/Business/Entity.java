@@ -72,6 +72,10 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
         return Long.toString(this.id.get_value());
     }
 
+    @Override
+    public int hashCode(){
+        return this.id.hashCode();
+    }
     
 }
                                                                                                                                                                                                                                                                                                                                                                                                          

@@ -82,7 +82,7 @@ public class RequestManager implements java.io.Serializable{
             client = (User) this.database.current.find(client);
             client.requests.delete(my_pq);
             Message message = new Message("REQUEST #" + Long.toString(aux.id.get_value()), "The request has been archived.");
-            message.id_administrator = admin.id;            
+            message.id_administrator = admin.getUser_name();            
             client.messages.enqueue(message);
             this.process_request.remove(aux);
             //this.distribute();

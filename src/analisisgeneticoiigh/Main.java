@@ -17,16 +17,16 @@ import java.util.logging.Logger;
 public class Main {
   
     
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {        
-        //Aplication.reset();
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {                
+        Aplication.reset();
         
         Aplication my_app =  new Aplication();                        
         
-        Test test = new Test(my_app);                                      
+        Test test = new Test(my_app);                                                      
         //test.full_user_management(1000);
-        //test.full_horse_management();
+        test.full_horse_management(1000);
         //test.full_analysis_manager();
-        test.full_request_manager();                 
+        //test.full_request_management(1000);                 
         //my_app.save_changes();               
     }
     

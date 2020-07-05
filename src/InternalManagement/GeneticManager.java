@@ -99,8 +99,14 @@ public class GeneticManager {
                         System.out.println("Trouble adding horse: ");
                         System.out.println(data[0] +"  " + data[1]);                        
                         continue;
-                    }                    
-                        Long registro = Long.valueOf(data[0]);
+                    } 
+                    Long registro;
+                    try{
+                        registro = Long.valueOf(data[0]);
+                    }
+                    catch(NumberFormatException e){
+                            continue;
+                        }                    
                         String name = data[1];
                         String date_nto = data[2];
                         String color = data[3];

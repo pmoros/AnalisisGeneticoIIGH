@@ -43,4 +43,7 @@ public class Request implements java.io.Serializable, Comparable<Request>{
         }
     }
 
+    public int hashCode(){
+        return this.id.hashCode();
+    }
 }

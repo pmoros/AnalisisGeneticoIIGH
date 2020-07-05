@@ -67,4 +67,9 @@ public class ID implements Comparable, java.io.Serializable{
         return this.compare_to((ID) o);
     }
     
+        @Override
+    public int hashCode() {
+        return 31*this.get_value().hashCode();
+    }
+        
 }

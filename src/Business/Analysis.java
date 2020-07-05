@@ -108,5 +108,9 @@ public class Analysis implements java.io.Serializable, Comparable<Analysis>{
         return this.id.equals(other.id);
     }
         
-
+        @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+    
 }

@@ -7,17 +7,25 @@ import DataStructures.Queue;
 import DataStructures.QueueArray;
 import DataStructures.Stack;
 import DataStructures.StackArray;
+import java.util.Objects;
 
 /**
  *
  * @author pmoro
  */
 public class User implements Comparable<User>, java.io.Serializable{
-
-        public ID id;
+        
        // protected boolean status = false; // Status of login
         protected int valid_code; //Code in case of missing password
 	protected String user_name;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.user_name);
+        hash = 73 * hash + Objects.hashCode(this.privileges.get_value());
+        return hash;
+    }
 	protected String password;
 	protected String first_name;
 	protected String last_name;
@@ -30,21 +38,14 @@ public class User implements Comparable<User>, java.io.Serializable{
         public DoublyLinkedList<Request> requests; //Check DataStructure using DynArray
         public DynamicArray<ID> analyses;    //Check DataStructure, using DynArray                
         public Queue<Message> messages;    //Check DataStructure, using QueueArray                       
-        
-        
-    private static Long hashCode(String string) {
-        final int PRIME = 31;
-        return string != null ? Long.valueOf(string.hashCode()) * PRIME : 0;  // PRIME = 31 or another prime number.
-    }
+               
     
     public User(AutorizationLevel p, String user_name, String password, String first_name, String last_name, String email){
             //this.status = false;
             this.register_closed = new StackArray<>();
             this.messages = new QueueArray<>();
             this.analyses = new DynamicArray<>();
-            this.requests = new DoublyLinkedList<>();
-            
-            this.id = new ID(EntityType.USER, hashCode(user_name));
+            this.requests = new DoublyLinkedList<>();            
             this.user_name = user_name;
             this.password = password;
             this.first_name = first_name;
@@ -54,15 +55,13 @@ public class User implements Comparable<User>, java.io.Serializable{
     }    
     
     public User(AutorizationLevel p, String user_name, String password){
-            //this.status = false;
-            this.id = new ID(EntityType.USER, hashCode(user_name));
+            //this.status = false;            
             this.user_name = user_name;
             this.password = password;
             this.privileges = p;
     }   
     
-    public User(AutorizationLevel p, String user_name) {
-        this.id = new ID(EntityType.USER, hashCode(user_name));
+    public User(AutorizationLevel p, String user_name) {        
         this.user_name = user_name;
         this.privileges = p;
     }
@@ -209,12 +208,22 @@ public class User implements Comparable<User>, java.io.Serializable{
 
     @Override
     public int compareTo(User o) {
-        if(this.user_name.compareTo(o.getUser_name()) < 0) return -1;
-        else if(this.user_name.compareTo(o.getUser_name()) > 0) return 1;
-        else{
-            return 0;
-        }
+        User other = (User) o;
+        if(this.privileges != other.getPrivileges()) return -1;
+        if(this.user_name != null){
+            if(!this.user_name.equals(other.getUser_name())){
+                return -1;
+            }            
+        }       
+        if(this.password != null){
+            if(!this.password.equals(other.getPassword())){
+                return -1;
+            }            
+        }   
+        return 0;  
     }
+    
+    
 
 }
 

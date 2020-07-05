@@ -119,13 +119,15 @@ public class Test {
         System.out.printf("Time deleting single client: %d \n", end_time);         
     }
     
-    private Long load_horses() throws IOException, FileNotFoundException, ClassNotFoundException{                
+    private Long load_horses(int size) throws IOException, FileNotFoundException, ClassNotFoundException{                
         this.login_user(AutorizationLevel.WORKER, "sito", "696wq");
         //TIMER STARTED
         this.start_time = 0;
         this.end_time = 0;       
         this.start_time = System.nanoTime();     
         
+        //REALISTIC DATA BLOCK
+        /*
         String pathToCsv = this.app.path + "\\data\\" + "Horses" + "1" +"k.csv";                 
             this.app.add_horses(pathToCsv);        
         pathToCsv = this.app.path + "\\data\\" + "Horses" + "2" +"k.csv";                 
@@ -134,10 +136,15 @@ public class Test {
            this.app.add_horses(pathToCsv);                               
         pathToCsv = this.app.path + "\\data\\" + "Horses" + "4" +"k.csv";                 
            this.app.add_horses(pathToCsv);                                          
+        */
+        //TEST DATA BLOCKS
+        
+        String pathToCsv = this.app.path + "\\data\\" + "Horses" + Integer.toString(size) +"k.csv";                 
+            this.app.add_horses(pathToCsv);         
         
         //TIMER PAUSED
         this.end_time = (System.nanoTime() - this.start_time)/1000;
-        System.out.printf("Time adding  " + Integer.toString(1*1000) + "  horses: %d \n", end_time);      
+        System.out.printf("Time adding  " + Integer.toString(size*1000) + "  horses: %d \n", end_time);      
         return this.end_time;
     }
     
@@ -146,6 +153,12 @@ public class Test {
         CSVLoader csv_loader = new CSVLoader(pathToCsv, 5);
         csv_loader.create_mockup(size);
     }
+    
+    public void generate_mockup_horses(int size) throws FileNotFoundException, IOException{
+        String pathToCsv = this.app.path + "\\data\\" + "Horses" + ".csv";
+        CSVLoader csv_loader = new CSVLoader(pathToCsv, 9);
+        csv_loader.mockup_horses(size);
+    }    
     
     public void full_user_management(int i) throws IOException, ClassNotFoundException{
         this.sign_up_many(i, AutorizationLevel.CLIENT);
@@ -156,10 +169,10 @@ public class Test {
         this.delete_user(AutorizationLevel.ADMIN, "sitovive", "696wq");
     }
     
-    public void horse_loading() throws ClassNotFoundException, IOException{
+    public void horse_loading(int size) throws ClassNotFoundException, IOException{
         this.sign_up(AutorizationLevel.WORKER, "sito", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");
         this.login_user(AutorizationLevel.WORKER, "sito", "696wq");
-        this.load_horses();
+        this.load_horses(size);
     }
     
     
@@ -169,7 +182,7 @@ public class Test {
         this.end_time = 0;       
         this.start_time = System.nanoTime();     
         
-        Entity find_animal = this.app.find_animal(EntityType.USER, 212199L);
+        Entity find_animal = this.app.find_animal(EntityType.USER, 3750440L);
         find_animal.get_specs().show_attributes();
         
         //TIMER PAUSED
@@ -192,11 +205,24 @@ public class Test {
             matches[i].get_specs().show_attributes();
         }
         //TIMER PAUSED
-        this.end_time = (System.nanoTime() - this.start_time)/1000;        
-        System.out.printf("Time finding a horse by specs: %d \n", end_time);           
+        this.end_time = (System.nanoTime() - this.start_time)/1000;                
         return this.end_time;
     }
     
+    public Long delete_horse_by_specs() throws ClassNotFoundException{
+        //TIMER STARTED
+        this.start_time = 0;
+        this.end_time = 0;       
+        this.start_time = System.nanoTime(); 
+        
+        HorseSpec spec = new HorseSpec();
+        spec.color = "CASTAÑO";
+        spec.sex = "HEMBRA";        
+        this.app.delete_by_specs(EntityType.HORSE, spec);
+        //TIMER PAUSED
+        this.end_time = (System.nanoTime() - this.start_time)/1000;                
+        return this.end_time;
+    }    
     
     public Long generate_family_tree() throws ClassNotFoundException{
         //TIMER STARTED
@@ -204,7 +230,8 @@ public class Test {
         this.end_time = 0;       
         this.start_time = System.nanoTime();     
         
-        this.app.add_horse(33L, "H", "H", "H", "H", "H", "H", "H", null, null);
+        this.app.add_horse(55L, "H", "H", "H", "H", "H", "H", "H", null, null);
+        this.app.add_horse(33L, "H", "H", "H", "H", "H", "H", "H", 55L, 14873L);        
         this.app.add_horse(22L, "H", "H", "H", "H", "H", "H", "H", 33L, 14873L);
         this.app.add_horse(11L, "H", "H", "H", "H", "H", "H", "H", 22L, 14873L);
         this.app.generate_family_tree(11L);
@@ -215,19 +242,21 @@ public class Test {
         return this.end_time;
     }
     
-    public void full_horse_management() throws ClassNotFoundException, IOException{
+    public void full_horse_management(int size) throws ClassNotFoundException, IOException{
         this.sign_up(AutorizationLevel.WORKER, "sito", "696wq", "Jupiter", "Olivela", "kkk@gmail.com");
         this.login_user(AutorizationLevel.WORKER, "sito", "696wq");
-        Long x1, x2 , x3, x4;
-        x1 = this.load_horses();
+        Long x1, x2 , x3, x4, x5;
+        x1 = this.load_horses(size);
+        System.out.printf("Time loading horses: %d \n", x1);                   
         x2 = this.find_horse_by_id();
-        x3 = this.find_horse_by_specs();   
+        x3 = this.find_horse_by_specs();           
+        x5 = this.delete_horse_by_specs();           
         x4 = this.generate_family_tree();
         System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.printf("Time loading horses: %d \n", x1);           
+        System.out.flush();        
         System.out.printf("Time finding horse by id: %d \n", x2);           
-        System.out.printf("Time finding horse by specs: %d \n", x3);                   
+        System.out.printf("Time finding horse with ZAINO hair (by specs): %d \n", x3);                   
+        System.out.printf("Time deleting horses with CASTAÑO hair and HEMBRA(by specs): %d \n", x5);                   
     }
     
     
@@ -284,7 +313,7 @@ public class Test {
     }
     
     
-    public void full_request_manager() throws ClassNotFoundException{
+    public void full_request_management(int size) throws ClassNotFoundException{
         
         for(int i = 0; i < 1000; i++){
             String a = "admin";
@@ -304,13 +333,13 @@ public class Test {
         this.end_time = 0;       
         this.start_time = System.nanoTime(); 
         
-        for(int i = 0; i < 1000; i++){
+        for(int i = 0; i < size*1000; i++){
             this.app.send_request(RequestPriority.COMMON, "My test request");
         }
         
         //TIMER PAUSED        
         this.end_time = (System.nanoTime() - this.start_time)/1000;        
-        System.out.printf("Time sending 1000 request and  distributing them among 100  using a PQ: %d \n", end_time);         
+        System.out.printf("Time sending " + Integer.toString(size*1000 )+ " request and  distributing them among 100  using a PQ: %d \n", end_time);         
     }
     
     
