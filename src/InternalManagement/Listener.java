@@ -53,13 +53,23 @@ public class Listener {
            if(this.request_manager == null){
                throw new FileNotFoundException();
            }                    
-           this.request_manager.load_admins();
+            try{
+            this.request_manager.load_admins();
+            }
+            catch(Exception e){
+                
+            }
         }        
         catch(FileNotFoundException | NullPointerException | IllegalArgumentException e1){
             System.out.println(e1);
             System.out.println("Creating the new request manager...");            
-            this.request_manager = new RequestManager(this.database);       
+            this.request_manager = new RequestManager(this.database); 
+            try{
             this.request_manager.load_admins();
+            }
+            catch(Exception e){
+                
+            }
             //this.file_stream.write_file(this.database_path, this.database);
         }          
     }  

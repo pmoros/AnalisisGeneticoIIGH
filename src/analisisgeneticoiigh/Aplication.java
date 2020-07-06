@@ -85,7 +85,7 @@ public class Aplication {
      * when we call this method, we logout, so we got
      * to handle it in the interface.
      */
-    public void delete_account(){        
+    public void delete_account() throws ClassNotFoundException{        
         this.user_manager.delete_account(this.current_user);
         this.current_user = null;        
         this.last = DBStructureType.USER;       
@@ -96,7 +96,7 @@ public class Aplication {
      * @param auto_level
      * @param user_name 
      */
-    public void delete_account(AutorizationLevel auto_level, String user_name){
+    public void delete_account(AutorizationLevel auto_level, String user_name) throws ClassNotFoundException{
         if(this.current_user.getPrivileges().compareTo(AutorizationLevel.ADMIN) < 0) return;
         this.user_manager.delete_account(auto_level, user_name);                
     }
@@ -108,7 +108,7 @@ public class Aplication {
      * @param password
      * @param email 
      */
-    public void change_account_info(AutorizationLevel auto_level, String user_name, String password, String email){
+    public void change_account_info(AutorizationLevel auto_level, String user_name, String password, String email) throws ClassNotFoundException{
         if(this.current_user.getPrivileges().compareTo(AutorizationLevel.ADMIN) < 0) return;        
         if(!"".equals(password)&& !"".equals(email)){
             this.user_manager.change_account_pass_mail(auto_level, user_name, password, email);
@@ -208,7 +208,7 @@ public class Aplication {
         return this.genetic_manager.get_all_animals();
     }    
 
-        public void generate_family_tree(Long register){
+        public void generate_family_tree(Long register) throws ClassNotFoundException{
             System.out.println("The generations before horse " + Long.toString(register) + " are:");
             this.genetic_manager.generate_family_tree(register);
         }  
@@ -226,11 +226,11 @@ public class Aplication {
         this.current_user.analyses.delete(new ID(id));
     }    
     
-    public void add_employee(Long id_analysis, String user_employee){
+    public void add_employee(Long id_analysis, String user_employee) throws ClassNotFoundException{
         this.business_manager.add_employee(id_analysis, user_employee);
     }    
     
-    public void delete_employee(Long id_analysis, String user_employee){
+    public void delete_employee(Long id_analysis, String user_employee) throws ClassNotFoundException{
         this.business_manager.delete_employee(id_analysis, user_employee);
     } 
     
@@ -255,11 +255,11 @@ public class Aplication {
         this.analisis_manager.load_analysis(id);
     }    
     
-    public void add_entity(EntityType type, Long register){
+    public void add_entity(EntityType type, Long register) throws ClassNotFoundException{
         this.analisis_manager.add_entity(type, register);
     }  
     
-    public void remove_entity(EntityType type, Long register){
+    public void remove_entity(EntityType type, Long register) throws ClassNotFoundException{
         this.analisis_manager.remove_entity(type, register);
     }
     
@@ -276,6 +276,10 @@ public class Aplication {
 //###################-FUNCIONES PROPIAS DE LA APLICACIÓN-################
     
     //METODO DE PRUEBA
+    public User[] get_content() {
+        return this.user_manager.get_content();
+    }
+    
     public void show_content(EntityType type){
         this.database.show_content(type);
     } 

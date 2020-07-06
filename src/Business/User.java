@@ -24,7 +24,7 @@ public class User implements Comparable<User>, java.io.Serializable{
         int hash = 3;
         hash = 73 * hash + Objects.hashCode(this.user_name);
         hash = 73 * hash + Objects.hashCode(this.privileges.get_value());
-        return hash;
+        return Math.abs(hash);
     }
 	protected String password;
 	protected String first_name;

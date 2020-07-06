@@ -9,6 +9,7 @@ import Business.Request;
 import Business.RequestPriority;
 import Business.User;
 import DataStructures.BinTree;
+import DataStructures.DoubleHashSet;
 import DataStructures.DoublyLinkedList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,12 +19,12 @@ public class Main {
   
     
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {                
-        //Aplication.reset();
+        Aplication.reset();
         
-        //Aplication my_app =  new Aplication();                        
-   
-        //Test test = new Test(my_app);                                                      
-        //test.full_user_management(1000);
+        Aplication my_app =  new Aplication();                                
+
+        Test test = new Test(my_app);                                                      
+        test.full_user_management(100);
         //test.full_horse_management(1000);
         //test.full_analysis_manager();
         //test.full_request_management(1000);                 

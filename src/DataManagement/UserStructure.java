@@ -9,7 +9,8 @@ import Business.EntityType;
 import Business.ID;
 import Business.User;
 import DataStructures.AVLTree;
-import DataStructures.DynamicArray;
+import DataStructures.CloseHashTable;
+import DataStructures.DoubleHashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -17,38 +18,34 @@ import java.util.logging.Logger;
  * @author pmoro
  */
 public class UserStructure extends DBStructure{    
-    public AVLTree<User> users;
+    public CloseHashTable<User> users;
     public String self_path;        
     
     public UserStructure(String path, String identifier){        
         this.self_path = path + "\\" + identifier;
-        this.users = new AVLTree();       
+        this.users = new CloseHashTable();       
     }        
     
     @Override
-    public void add(Object obj) {
-        User my_user = (User) obj;             
-        try {        
-            this.users.insert(my_user);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UserStructure.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void add(Object obj) throws ClassNotFoundException {
+        User my_user = (User) obj;                   
+            this.users.add(my_user);
     }
 
     @Override
-    public void remove(Object obj) {
+    public void remove(Object obj) throws ClassNotFoundException{
         this.users.remove((User) obj);
     }
 
     @Override
     public void remove_based_on(Object obj) {
-        //this.users.           //ADD THIS TO THE AVL
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object find(Object obj) {
+    public Object find(Object obj) throws ClassNotFoundException {
         User my_user = (User) obj;
-        return (User) this.users.find(my_user);        
+        return (User) this.users.get(my_user);        
     }
 
     @Override
@@ -85,7 +82,7 @@ public class UserStructure extends DBStructure{
 
     @Override
     public int get_size() {
-        return this.users.size;
+        return this.users.size();
     }
     
     @Override
@@ -95,6 +92,7 @@ public class UserStructure extends DBStructure{
 
     @Override
     public Object[] get_content() {
-        return this.users.traverse_inOrder();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //return this.users.get_content();
     }
 }

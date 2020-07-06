@@ -15,10 +15,10 @@ import DataStructures.List;
 public abstract class DBStructure<T> implements java.io.Serializable{
     public DBStructureType current_type;    
     
-    public abstract void add(T obj);    
-    public abstract void remove(T obj);
+    public abstract void add(T obj) throws ClassNotFoundException;    
+    public abstract void remove(T obj) throws ClassNotFoundException;
     public abstract void remove_based_on(T obj);
-    public abstract T find(T obj);
+    public abstract T find(T obj) throws ClassNotFoundException;
     public abstract T[] matches(T obj);
     public abstract void order();
     public abstract void order(boolean reverse);    

@@ -1,11 +1,13 @@
 package DataStructures;
 
+import java.lang.reflect.Array;
+
 
 /**
  *
  * @author Fabian Torres
  */
-public class DoubleHashSet<T extends Comparable<T>> {
+public class DoubleHashSet<T extends Comparable<T>> implements java.io.Serializable{
 
 	public class HashObject {
 		public T key;
@@ -21,14 +23,14 @@ public class DoubleHashSet<T extends Comparable<T>> {
 	private int tableSize;
 	private int size;
 	private int pSize;
-	private float loadFactor;
+	private double loadFactor;
 	
 	// Falta establecer un primo menor para hash2()
 	public DoubleHashSet(int ts) {
 		this.tableSize = ts;
 		this.size = 0;
-		
-		this.arr = (DoubleHashSet<T>.HashObject[]) new Object[this.tableSize];
+		this.pSize = 13;
+		this.arr = (DoubleHashSet<T>.HashObject[]) Array.newInstance(HashObject.class, this.tableSize);
 		for(int i = 0; i < this.tableSize; i++) {
 			arr[i] = null;
 		}	
@@ -43,66 +45,78 @@ public class DoubleHashSet<T extends Comparable<T>> {
 	}
 	
 	private boolean isLoaded() {
-		this.loadFactor = this.size/this.tableSize;
-		return this.loadFactor > 0.9;
+		this.loadFactor = ((double)this.size/this.tableSize) ;                
+		return this.loadFactor >= 0.75;
 	}
 	
 	private int hash(T key) {
-		return key.hashCode() % this.tableSize;
+		return Math.abs(key.hashCode() % this.tableSize);
 	}
 	
 	private int hash2(T key) {
-		return pSize - (key.hashCode() % pSize);
+		return Math.abs(pSize - (key.hashCode() % pSize));
 	}
 	
 	//
 	private int hash(T key, int size) {
-		return key.hashCode() % size;
+		return Math.abs(key.hashCode() % size);
 	}
 	
 	private void rehash() {
 		int newSize = 2*tableSize + 1;
-		HashObject[] aux = (DoubleHashSet<T>.HashObject[]) new Object[newSize];
+		HashObject[] aux = (DoubleHashSet<T>.HashObject[]) Array.newInstance(HashObject.class, newSize);
 		
-		for(int i = 0; i < this.tableSize; i++) {
+		for(int i = 0; i < newSize; i++) {
 			if(arr[i] != null) {
-				int index = hash(arr[i].key, newSize);
+				int index = Math.abs(hash(arr[i].key, newSize));
 				aux[index] = arr[i];
 			}
+                        else{
+                            aux[i] = null;
+                        }
 		}
 		
 		this.arr = aux;
 		this.tableSize = newSize;
 		this.pSize = 2*pSize + 1;	// Se puede crear un arreglo de primos para escoger
+                this.arr = aux;
 	}
 	
-	public void insert(T key) {
+	public void insert(T key) throws ClassNotFoundException {
+                if(this.find(key) != null) throw new ClassNotFoundException("It already exist");
 		HashObject entry = new HashObject(key, key.hashCode());
 		
 		if(isLoaded()) rehash();
 		
-		int index = hash(entry.key);
-		int index2 = hash2(entry.key);
+		int index = Math.abs(hash(entry.key));
+		int index2 = Math.abs(hash2(entry.key));
 		int i = 0;
-		
+		//Tester                
 		while(this.arr[index] != null && this.arr[index].value != -1) { // Est� ocupada la posici�n
-			i++;
-			index = (index + i * index2) % this.tableSize;
+                    /*
+                        if(i == 4) {
+                            System.out.println("Gotta be serious with your inputs.");
+                            return;
+                        }         
+                            */
+			i++;                        
+			index = (index + i * index2) % this.tableSize;                        
 		}
 		
 		this.arr[index] = entry;
 		this.size++;
 	}
 
-	public void delete(T key) {
-		int index = hash(key);
-		int index2 = hash2(key);
+	public void delete(T key) throws ClassNotFoundException {
+                if(this.find(key) == null) throw new ClassNotFoundException("It does not exist");
+		int index = Math.abs(hash(key));
+		int index2 = Math.abs(hash2(key));
 		int i = 0;
 		
 		// Posible bucle indefinido?
 		while(this.arr[index] != null && this.arr[index].key.compareTo(key) != 0) {
 			i++;
-			index = (index + i * index2) % this.tableSize;
+			index = (index + (i * index2)) % this.tableSize;
 		}
 		
 		this.arr[index].key = null;
@@ -110,17 +124,18 @@ public class DoubleHashSet<T extends Comparable<T>> {
 		this.size--;
 	}
 	
-	public int find(T key) {
-		int index = hash(key);
-		int index2 = hash2(key);
+	public T find(T key) throws ClassNotFoundException {
+		int index = Math.abs(hash(key));
+		int index2 = Math.abs(hash2(key));
 		int i = 0;
-		
-		while(this.arr[index] != null && this.arr[index].key.compareTo(key) != 0) {
+
+		while(this.arr[index] != null && this.arr[index].key.compareTo(key) != 0) {                    
+                    if(i == 4)return null;
 			i++;
 			index = (index + i * index2) % this.tableSize;
-		}
-		
-		return this.arr[index].value;
+		}		
+                if(this.arr[index] == null)return null;
+		return this.arr[index].key;
 	}
 	
 	// Para testear
@@ -131,4 +146,13 @@ public class DoubleHashSet<T extends Comparable<T>> {
 				System.out.println(arr[i].key + " " + arr[i].value);
 		}
 	}
+        
+        public Object[] get_content(){        
+            Object[] aux_arr = new Object[this.getSize()];
+            for(int i = 0; i < this.arr.length; i++){
+                if(this.arr[i] != null) aux_arr[i] = this.arr[i].key;                    
+            }
+            return aux_arr;
+        }
+        
 }

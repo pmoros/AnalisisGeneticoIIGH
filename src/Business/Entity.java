@@ -74,7 +74,7 @@ public class Entity implements java.io.Serializable, Comparable<Entity>{
 
     @Override
     public int hashCode(){
-        return this.id.hashCode();
+        return Math.abs(this.id.hashCode());
     }
     
 }

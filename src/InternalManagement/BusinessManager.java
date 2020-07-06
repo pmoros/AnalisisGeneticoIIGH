@@ -38,7 +38,7 @@ public class BusinessManager {
         this.analysis_manager.delete_analysis(id);
     }
     
-    public void add_employee(Long id_analysis, String user_employee){
+    public void add_employee(Long id_analysis, String user_employee) throws ClassNotFoundException{
         this.database.connect(DBStructureType.USER);
         User aux = new User(AutorizationLevel.WORKER, user_employee);
         User employee = (User) this.database.current.find(aux);
@@ -46,7 +46,7 @@ public class BusinessManager {
         this.analysis_manager.add_worker(employee);        
     }
     
-    public void delete_employee(Long id_analysis, String user_employee){
+    public void delete_employee(Long id_analysis, String user_employee) throws ClassNotFoundException{
         this.database.connect(DBStructureType.USER);
         User aux = new User(AutorizationLevel.WORKER, user_employee);
         User employee = (User) this.database.current.find(aux);

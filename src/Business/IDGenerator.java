@@ -22,7 +22,7 @@ public class IDGenerator {
         return Integer.parseInt(aux);
     }    
 
-    public static Long full(){
+public static Long full(){
         String my_time = get_time();
         String time = "";
         for(int i = 0; i < my_time.length(); i++){
@@ -32,18 +32,20 @@ public class IDGenerator {
                 time+= my_time.charAt(i);
             }
         }
-        
+       
         String my_date = get_date();
         String date = "";
-        for(int i = 0; i < 4; i++){            
+        /*for(int i = 0; i < 4; i++){            
             if(my_date.charAt(i) == ' ') continue;
             else{
                 date+= my_date.charAt(i);
             }
-        }  
-        
+        }  */
+        date+= my_date.charAt(0);
+        date+= my_date.charAt(1);
+       
         String aux = date + time;        
-        return Long.parseLong(aux) + System.nanoTime()/10000;
+        return Long.parseLong(aux) + System.nanoTime()/100000;        
     }
     
     public static String get_date(){

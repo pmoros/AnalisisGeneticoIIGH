@@ -56,7 +56,7 @@ public class UserManager {
         User usuario = new User(auto_level, user_name, password);
                     User aux = (User) this.database.current.find(usuario);
                     if ( aux != null){
-                        if(usuario.getPassword().equals(aux.getPassword())) return aux;   
+                        if(usuario.compareTo(aux) == 0) return aux;   
                         else{
                         throw  new Class­Not­Found­Exception("Invalid password");
                         } 
@@ -72,7 +72,7 @@ public class UserManager {
      * This method is used to delete the user's account once he has logged in
      * @param user 
      */    
-    public void delete_account(User user){    
+    public void delete_account(User user) throws ClassNotFoundException{    
         this.database.connect(DBStructureType.USER);                
         
         this.database.current.remove(user);        
@@ -83,7 +83,7 @@ public class UserManager {
      * @param auto_level
      * @param user_name 
      */
-    public void delete_account(AutorizationLevel auto_level, String user_name){
+    public void delete_account(AutorizationLevel auto_level, String user_name) throws ClassNotFoundException{
         User my_user = new User(auto_level, user_name);
         this.database.connect(DBStructureType.USER);
         this.database.current.remove(my_user);    
@@ -93,7 +93,7 @@ public class UserManager {
     /*
         THE NEXT METHODS ASSOCIATED TO CHANGING USER INFO WILL BE USED BY THE ADMINS
     */
-    public void change_account_pass_mail(AutorizationLevel auto_level, String user_name, String password, String email){
+    public void change_account_pass_mail(AutorizationLevel auto_level, String user_name, String password, String email) throws ClassNotFoundException{
         this.database.connect(DBStructureType.USER);
         User my_user = new User(auto_level, user_name);
         User aux_user = (User) this.database.current.find(my_user);
@@ -101,21 +101,24 @@ public class UserManager {
         aux_user.setEmail(email);                        
     }  
     
-    public void change_account_pass(AutorizationLevel auto_level, String user_name, String value){
+    public void change_account_pass(AutorizationLevel auto_level, String user_name, String value) throws ClassNotFoundException{
         this.database.connect(DBStructureType.USER);
         User my_user = new User(auto_level, user_name);
         User aux_user = (User) this.database.current.find(my_user);
         aux_user.setPassword(value);                             
     }     
     
-    public void change_account_mail(AutorizationLevel auto_level, String user_name, String value){
+    public void change_account_mail(AutorizationLevel auto_level, String user_name, String value) throws ClassNotFoundException{
         this.database.connect(DBStructureType.USER);
         User my_user = new User(auto_level, user_name);
         User aux_user = (User) this.database.current.find(my_user);
         aux_user.setEmail(value);
     }       
          
-    
+    public User[] get_content() {
+        this.database.connect(DBStructureType.USER);
+        return (User[])this.database.current.get_content();
+    }    
      
     
 }

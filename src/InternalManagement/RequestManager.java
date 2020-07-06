@@ -41,7 +41,7 @@ public class RequestManager implements java.io.Serializable{
             this.distribute(client,  admin , req);
         }
         
-        private int get_allowed(){
+        private int get_allowed() throws ClassNotFoundException{
             for(int i = 0; i < this.admins.size; i++){                
                 User aux_user = new User(AutorizationLevel.ADMIN, this.admins.get(i));            
                 User aux2_user = (User) this.database.current.find(aux_user);

@@ -37,7 +37,7 @@ public class GeneticManager {
      * @param type
      * @param specs 
      */   
-    private void add_entity(EntityType type, EntitySpec specs){  
+    private void add_entity(EntityType type, EntitySpec specs) throws ClassNotFoundException{  
         this.database.connect(DBStructureType.ENTITY);                
         Entity my_entity = new Entity(type, specs);
         this.database.current.add(my_entity);
@@ -57,7 +57,7 @@ public class GeneticManager {
      * @param mother 
      */
     public void add_horse(Long register, String name, String birth_date, String color, String sex,
-            String chip, String genotype, String step, Long father, Long mother){        
+            String chip, String genotype, String step, Long father, Long mother) throws ClassNotFoundException{        
         
         HorseSpec specs = new HorseSpec(register, name, birth_date, color, sex,
             chip, genotype, step, father, mother);        
@@ -71,7 +71,7 @@ public class GeneticManager {
      * @throws FileNotFoundException
      * @throws IOException 
      */
-    public void add_horses(String path) throws FileNotFoundException, IOException{        
+    public void add_horses(String path) throws FileNotFoundException, IOException, ClassNotFoundException{        
         String[] data;
         CSVLoader reader = new CSVLoader(path, 9);                
         reader.has_next();        
@@ -126,14 +126,14 @@ public class GeneticManager {
                 }                
     }
     
-    public Entity find_animal(EntityType type, Long register){
+    public Entity find_animal(EntityType type, Long register) throws ClassNotFoundException{
         this.database.connect(DBStructureType.ENTITY);                        
         Entity my_entity = new Entity(type, register);
         return (Entity) this.database.current.find(my_entity);        
     }
     
     //SDFSDFSDFSDFSD
-    public void generate_family_tree(Long register){
+    public void generate_family_tree(Long register) throws ClassNotFoundException{
             BinTree<Entity> my_bin = new BinTree<>();
             while(true){
                 Entity animal = find_animal(EntityType.HORSE, register);
@@ -152,7 +152,7 @@ public class GeneticManager {
             my_bin.traverse_levelOrder();
     }    
     
-    public void delete_animal(EntityType type, Long register){
+    public void delete_animal(EntityType type, Long register) throws ClassNotFoundException{
         this.database.connect(DBStructureType.ENTITY);
         Entity my_entity = new Entity(type, register);
         this.database.current.remove(my_entity);

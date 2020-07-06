@@ -56,12 +56,12 @@ public class AnalysisManager {
         this.current = this.content.find(my_aux);
     }
     
-    public void add_entity(EntityType type, Long register){
+    public void add_entity(EntityType type, Long register) throws ClassNotFoundException{
         Entity aux = this.genetic_manager.find_animal(type, register);
         this.current.add_entity(aux);
     }    
     
-    public void remove_entity(EntityType type, Long register){
+    public void remove_entity(EntityType type, Long register) throws ClassNotFoundException{
         Entity aux = this.genetic_manager.find_animal(type, register);
         this.current.delete_entity(aux);
     }    

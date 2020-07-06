@@ -73,14 +73,20 @@ public class Test {
             CSVLoader reader;            
                 reader = new CSVLoader(pathToCsv, 5);
                 String[] data;
+                //AUXILIAR
+                //int auxiliar = 1;
                 while((data = reader.read_line_unrestricted()) != null){                                        
                     
                         String user_name = data[0];
                         String password = data[1];
                         String name = data[2];
                         String last_name = data[3];
-                        String email = data[4];
-                            
+                        String email = data[4];                    
+                        //Prueba
+                        //if(auxiliar > 45){
+//                            System.out.println();
+  //                      }
+                        //auxiliar++;
                     this.app.sign_up(auto_level, user_name, password, last_name, last_name, email);
                 }            
             

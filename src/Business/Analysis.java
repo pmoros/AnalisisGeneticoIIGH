@@ -110,7 +110,7 @@ public class Analysis implements java.io.Serializable, Comparable<Analysis>{
         
         @Override
     public int hashCode() {
-        return id.hashCode();
+        return Math.abs(id.hashCode());
     }
     
 }
