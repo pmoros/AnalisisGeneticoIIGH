@@ -28,12 +28,15 @@ public class UserStructure extends DBStructure{
     
     @Override
     public void add(Object obj) throws ClassNotFoundException {
-        User my_user = (User) obj;                   
+        User my_user = (User) obj;  
+            if(this.users.get(my_user) != null ) throw new ClassNotFoundException();
             this.users.add(my_user);
     }
 
     @Override
     public void remove(Object obj) throws ClassNotFoundException{
+        User my_user = (User) obj;  
+        if(this.users.get(my_user) == null ) throw new ClassNotFoundException();
         this.users.remove((User) obj);
     }
 

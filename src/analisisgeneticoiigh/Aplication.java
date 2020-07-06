@@ -56,15 +56,13 @@ public class Aplication {
      * @param first_name
      * @param last_name
      * @param email
+     * @throws java.lang.ClassNotFoundException
      */
     public void sign_up(AutorizationLevel autolevel, String user_name,
-                        String password, String first_name,String last_name, String email){
-        try{       
+                        String password, String first_name,String last_name, String email) throws ClassNotFoundException{
+        
         this.user_manager.sign_up(autolevel, user_name, password, first_name, last_name, email);
-        }
-        catch(ClassNotFoundException e){
-            System.out.println("The user has already been added.");
-        }            
+         
     }  
     
     /**

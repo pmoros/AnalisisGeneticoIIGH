@@ -46,7 +46,11 @@ public class Test {
         this.end_time = 0;       
         this.start_time = System.nanoTime(); 
         
-        this.app.sign_up(autolevel, user_name, password, first_name, last_name, email);
+        try {
+            this.app.sign_up(autolevel, user_name, password, first_name, last_name, email);
+        } catch (ClassNotFoundException ex) {
+            System.out.printf("User already added.");  
+        }
         
         //TIMER PAUSED
         this.end_time = (System.nanoTime() - this.start_time)/1000;
@@ -82,12 +86,16 @@ public class Test {
                         String name = data[2];
                         String last_name = data[3];
                         String email = data[4];                    
-                        //Prueba
-                        //if(auxiliar > 45){
+                try {
+                    //Prueba
+                    //if(auxiliar > 45){
 //                            System.out.println();
-  //                      }
-                        //auxiliar++;
+                    //                      }
+                    //auxiliar++;
                     this.app.sign_up(auto_level, user_name, password, last_name, last_name, email);
+                } catch (ClassNotFoundException ex) {
+                    System.out.println("User already added");
+                }
                 }            
             
                 

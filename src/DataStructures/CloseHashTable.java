@@ -9,7 +9,7 @@ package DataStructures;
 
 public class CloseHashTable <T extends Comparable <T>> implements java.io.Serializable{
 	
-	public static class HashNode <T>{
+	public static class HashNode <T> implements java.io.Serializable{
 		T value;
 		Integer key;
 		HashNode<T> next;
