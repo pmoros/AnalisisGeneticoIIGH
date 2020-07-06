@@ -67,7 +67,12 @@ public class UserManager {
     }    
     
     
-    
+    public User find_user(AutorizationLevel auto_level, String username) throws ClassNotFoundException{
+        this.database.connect(DBStructureType.USER);        
+        User usuario = new User(auto_level, username,"");
+        User aux = (User) this.database.current.find(usuario);
+        return aux;        
+    }
     /**
      * This method is used to delete the user's account once he has logged in
      * @param user 

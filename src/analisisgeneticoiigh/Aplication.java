@@ -77,7 +77,12 @@ public class Aplication {
     public void login(AutorizationLevel auto_level, String user_name, String password) throws ClassNotFoundException{   
         this.current_user = this.user_manager.login(auto_level, user_name, password);
         this.last = DBStructureType.USER;       
+    }  
+    
+    public User find_user(AutorizationLevel auto_level, String user_name) throws ClassNotFoundException{   
+        return this.user_manager.find_user(auto_level, user_name);        
     }        
+    
     
     /**
      * This allows the users to delete their accounts
