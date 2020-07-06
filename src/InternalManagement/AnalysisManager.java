@@ -66,12 +66,12 @@ public class AnalysisManager {
         this.current.delete_entity(aux);
     }    
     
-    public void add_many_entity(EntityType type, HorseSpec specs){
+    public void add_many_entity(EntityType type, HorseSpec specs) throws ClassNotFoundException{
         Entity[] aux = this.genetic_manager.matches(type, specs);
         this.current.add_many_entity(aux);
     }
     
-    public void remove_many_entity(EntityType type, HorseSpec specs){
+    public void remove_many_entity(EntityType type, HorseSpec specs)throws ClassNotFoundException{
         Entity[] aux = this.genetic_manager.matches(type, specs);
         this.current.delete_by_specs(aux);
     }

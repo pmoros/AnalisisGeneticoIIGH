@@ -8,6 +8,8 @@ package DataManagement;
 import Business.ID;
 import Business.Entity;
 import DataStructures.AVLTree;
+import DataStructures.CloseHashTable;
+import DataStructures.DoubleHashSet;
 import DataStructures.DynamicArray;
 import DataStructures.List;
 import java.util.logging.Level;
@@ -17,32 +19,28 @@ import java.util.logging.Logger;
  * @author pmoro
  */
 public class EntityStructure extends DBStructure{
-    public AVLTree<Entity> elements;
+    public CloseHashTable<Entity> elements;
     public String self_path;
     
     public EntityStructure(String path, String identifier){
         this.self_path = path + "\\" + identifier;
-        this.elements = new AVLTree();
+        this.elements = new CloseHashTable();
     }    
     
     @Override
-    public void add(Object obj) {
-        try {
-            this.elements.insert((Entity) obj);
-        } catch (ClassNotFoundException ex) {
-            Entity aux = (Entity) obj;
-            System.out.println("This horse has already been added: ");
-            aux.get_specs().show_attributes();
-        }
+    public void add(Object obj) throws ClassNotFoundException {
+            //if(this.elements.get((Entity) obj) == null) throw new ClassNotFoundException("Already added");
+            this.elements.add((Entity) obj);
     }
 
     @Override
-    public void remove(Object obj) {
+    public void remove(Object obj) throws ClassNotFoundException {
+        //if(this.elements.get((Entity) obj) == null) throw new ClassNotFoundException("Has not been added");
         this.elements.remove((Entity) obj);
     }
 
     @Override
-    public void remove_based_on(Object obj) {
+    public void remove_based_on(Object obj) throws ClassNotFoundException {
         Object[] aux =  this.elements.matches((Entity) obj);
         Entity my_entity;
         for(int i = 0; i < aux.length - 1; i++){
@@ -54,8 +52,9 @@ public class EntityStructure extends DBStructure{
     }
 
     @Override
-    public Object find(Object obj) {
-        return this.elements.find((Entity) obj);
+    public Object find(Object obj) throws ClassNotFoundException {
+        //if(this.elements.get((Entity) obj) == null) throw new ClassNotFoundException("Not finded added");
+        return this.elements.get((Entity) obj);
     }
 
     @Override
@@ -96,17 +95,13 @@ public class EntityStructure extends DBStructure{
 
     @Override
     public Entity[] get_content() {
-        Object[] aux =  this.elements.traverse_inOrder();
-        Entity[] salida = new Entity[aux.length];
-        for(int i = 0; i < aux.length; i++){
-            salida[i] = (Entity) aux[i];
-        }
-        return salida;
+        Object[] aux =  this.elements.get_content();
+        return (Entity[]) aux;
     }
 
     @Override
     public int get_size() {
-        return this.elements.size;
+        return this.elements.size();
     }
 
     @Override

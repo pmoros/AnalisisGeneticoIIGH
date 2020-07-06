@@ -17,9 +17,9 @@ public abstract class DBStructure<T> implements java.io.Serializable{
     
     public abstract void add(T obj) throws ClassNotFoundException;    
     public abstract void remove(T obj) throws ClassNotFoundException;
-    public abstract void remove_based_on(T obj);
+    public abstract void remove_based_on(T obj) throws ClassNotFoundException;
     public abstract T find(T obj) throws ClassNotFoundException;
-    public abstract T[] matches(T obj);
+    public abstract T[] matches(T obj) throws ClassNotFoundException;
     public abstract void order();
     public abstract void order(boolean reverse);    
     public abstract String get_path();        

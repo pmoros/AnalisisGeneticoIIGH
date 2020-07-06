@@ -31,7 +31,7 @@ public class User implements Comparable<User>, java.io.Serializable{
 	protected String last_name;
 	protected String email;    
         protected int telephone;
-        protected final AutorizationLevel privileges;
+        public final AutorizationLevel privileges;
         
         
         private Stack<Message> register_closed; //Stores the register of all finished requests        

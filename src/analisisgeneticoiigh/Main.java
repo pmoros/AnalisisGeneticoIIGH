@@ -24,8 +24,8 @@ public class Main {
         Aplication my_app =  new Aplication();                                
 
         Test test = new Test(my_app);                                                      
-        test.full_user_management(100);
-        //test.full_horse_management(1000);
+        //test.full_user_management(10);
+        test.full_horse_management(1);
         //test.full_analysis_manager();
         //test.full_request_management(1000);                 
         //my_app.save_changes();               

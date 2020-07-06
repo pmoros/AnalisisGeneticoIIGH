@@ -29,7 +29,7 @@ public class DoubleHashSet<T extends Comparable<T>> implements java.io.Serializa
 	public DoubleHashSet(int ts) {
 		this.tableSize = ts;
 		this.size = 0;
-		this.pSize = 13;
+		this.pSize = 7;
 		this.arr = (DoubleHashSet<T>.HashObject[]) Array.newInstance(HashObject.class, this.tableSize);
 		for(int i = 0; i < this.tableSize; i++) {
 			arr[i] = null;
@@ -45,8 +45,8 @@ public class DoubleHashSet<T extends Comparable<T>> implements java.io.Serializa
 	}
 	
 	private boolean isLoaded() {
-		this.loadFactor = ((double)this.size/this.tableSize) ;                
-		return this.loadFactor >= 0.75;
+		this.loadFactor = (1.0*this.size/this.tableSize) + 0.1;                
+		return this.loadFactor > 0.5;
 	}
 	
 	private int hash(T key) {
@@ -61,19 +61,18 @@ public class DoubleHashSet<T extends Comparable<T>> implements java.io.Serializa
 	private int hash(T key, int size) {
 		return Math.abs(key.hashCode() % size);
 	}
+        
 	
 	private void rehash() {
 		int newSize = 2*tableSize + 1;
 		HashObject[] aux = (DoubleHashSet<T>.HashObject[]) Array.newInstance(HashObject.class, newSize);
 		
-		for(int i = 0; i < newSize; i++) {
+		for(int i = 0; i < tableSize; i++) {
 			if(arr[i] != null) {
 				int index = Math.abs(hash(arr[i].key, newSize));
 				aux[index] = arr[i];
 			}
-                        else{
-                            aux[i] = null;
-                        }
+
 		}
 		
 		this.arr = aux;
@@ -81,6 +80,7 @@ public class DoubleHashSet<T extends Comparable<T>> implements java.io.Serializa
 		this.pSize = 2*pSize + 1;	// Se puede crear un arreglo de primos para escoger
                 this.arr = aux;
 	}
+        
 	
 	public void insert(T key) throws ClassNotFoundException {
                 if(this.find(key) != null) throw new ClassNotFoundException("It already exist");
@@ -154,5 +154,19 @@ public class DoubleHashSet<T extends Comparable<T>> implements java.io.Serializa
             }
             return aux_arr;
         }
+        
+        public Object[] matches(Object o){        
+            Object[] aux_arr = new Object[this.size];
+            int j = 0;
+            for(int i = 0; i < this.arr.length; i++){
+                if(this.arr[i] != null) {  
+                    if(o.equals(this.arr[i])){
+                        aux_arr[j] = this.arr[i].key;                 
+                        j++;                        
+                    }
+                }                   
+            }
+            return aux_arr;
+        }        
         
 }

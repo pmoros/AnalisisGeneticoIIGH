@@ -77,8 +77,7 @@ public class Aplication {
     public void login(AutorizationLevel auto_level, String user_name, String password) throws ClassNotFoundException{   
         this.current_user = this.user_manager.login(auto_level, user_name, password);
         this.last = DBStructureType.USER;       
-    }
-    
+    }        
     
     /**
      * This allows the users to delete their accounts
@@ -263,11 +262,11 @@ public class Aplication {
         this.analisis_manager.remove_entity(type, register);
     }
     
-    public void add_many_entity(EntityType type, HorseSpec specs){
+    public void add_many_entity(EntityType type, HorseSpec specs) throws ClassNotFoundException{
         this.analisis_manager.add_many_entity(type, specs);
     }    
     
-    public void remove_many_entity(EntityType type, HorseSpec specs){
+    public void remove_many_entity(EntityType type, HorseSpec specs) throws ClassNotFoundException{
         this.analisis_manager.remove_many_entity(type, specs);
     }    
     

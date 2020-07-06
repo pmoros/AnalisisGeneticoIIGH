@@ -188,7 +188,7 @@ public class Test {
         this.end_time = 0;       
         this.start_time = System.nanoTime();     
         
-        Entity find_animal = this.app.find_animal(EntityType.USER, 3750440L);
+        Entity find_animal = this.app.find_animal(EntityType.HORSE, 623710L);
         find_animal.get_specs().show_attributes();
         
         //TIMER PAUSED
@@ -253,16 +253,17 @@ public class Test {
         this.login_user(AutorizationLevel.WORKER, "sito", "696wq");
         Long x1, x2 , x3, x4, x5;
         x1 = this.load_horses(size);
-        System.out.printf("Time loading horses: %d \n", x1);                   
-        x2 = this.find_horse_by_id();
         x3 = this.find_horse_by_specs();           
-        x5 = this.delete_horse_by_specs();           
+        System.out.printf("Time loading horses: %d \n", x1);                   
+        x2 = this.find_horse_by_id();        
+        //x5 = this.delete_horse_by_specs();           
         x4 = this.generate_family_tree();
+        
         System.out.print("\033[H\033[2J");
         System.out.flush();        
         System.out.printf("Time finding horse by id: %d \n", x2);           
         System.out.printf("Time finding horse with ZAINO hair (by specs): %d \n", x3);                   
-        System.out.printf("Time deleting horses with CASTAÑO hair and HEMBRA(by specs): %d \n", x5);                   
+        //System.out.printf("Time deleting horses with CASTAÑO hair and HEMBRA(by specs): %d \n", x5);                   
     }
     
     

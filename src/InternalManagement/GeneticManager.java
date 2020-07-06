@@ -158,7 +158,7 @@ public class GeneticManager {
         this.database.current.remove(my_entity);
     }    
     
-    public Entity[] matches(EntityType type, EntitySpec specs){
+    public Entity[] matches(EntityType type, EntitySpec specs) throws ClassNotFoundException{
         this.database.connect(DBStructureType.ENTITY);                        
         Entity my_entity = new Entity(type, specs);
         Entity[] resultados = (Entity[]) this.database.current.matches(my_entity);        
@@ -177,7 +177,7 @@ public class GeneticManager {
         return salida;
     }
     
-    public void delete_by_specs(EntityType type, EntitySpec specs){
+    public void delete_by_specs(EntityType type, EntitySpec specs) throws ClassNotFoundException{
         this.database.connect(DBStructureType.ENTITY);
         Entity my_entity = new Entity(type, specs);
         this.database.current.remove_based_on(my_entity);
